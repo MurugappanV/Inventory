@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import LoginUI from "./LoginUI";
-import { LoginApi, setCookie } from "../../service";
+import { LoginApi } from "../../service";
 // import { AlertComp } from "../../components";
 import { setUserIdStorage } from "../../storage";
 import { Actions } from "../../redux";
