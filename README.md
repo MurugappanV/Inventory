@@ -1,0 +1,2 @@
+# Inventory
+Basic Inventory functionalities
