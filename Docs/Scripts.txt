@@ -1,0 +1,76 @@
+STQ-n6t-ZGq-fKH
+sGQ-8ar-Lm9-AEv
+
+mysqldump -u Murugappan -h Murugappan.mysql.pythonanywhere-services.com 'Murugappan$Stationery' > Stationery.sql
+
+mysql -u Murugappan -h Murugappan.mysql.pythonanywhere-services.com 'Murugappan$Stationery' < Stationery.sql
+
+
+CREATE TABLE tbl_user (
+id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+user_name VARCHAR(30) NOT NULL,
+password VARCHAR(30) NOT NULL,
+type INT(6)DEFAULT 1
+);
+
+INSERT INTO `tbl_user` (`user_name`, `password`) VALUES (‘admin’,'abcd123');
+
+CREATE TABLE tbl_group (
+id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(128) NOT NULL
+);
+
+INSERT INTO `tbl_group ` (`name`) VALUES (“RANGE OF GLUE STICK”);
+
+CREATE TABLE tbl_sub_group (
+id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(128) NOT NULL,
+group_id INT(6) UNSIGNED,
+FOREIGN KEY (group_id) REFERENCES tbl_group(id)
+);
+
+INSERT INTO `tbl_sub_group ` (`name`) VALUES (“RANGE OF GLUE STICK”);
+
+CREATE TABLE tbl_item (
+id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(128) NOT NULL,
+sub_group_id INT(6) UNSIGNED,
+available INT(9) UNSIGNED,
+ordered INT(9) UNSIGNED,
+sold INT(9) UNSIGNED,
+misc INT(9) UNSIGNED,
+FOREIGN KEY (sub_group_id) REFERENCES tbl_sub_group(id)
+);
+
+
+
+
+
+
+
+CREATE TABLE tbl_order (
+id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(128) NOT NULL,
+address VARCHAR(255),
+phoneNo VARCHAR(64),
+other_detail VARCHAR(255)
+);
+
+CREATE TABLE tbl_order_item (
+id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+order_id INT(6) UNSIGNED,
+item_id INT(6) UNSIGNED,
+qty INT(9) UNSIGNED,
+FOREIGN KEY (order_id) REFERENCES tbl_order(id),
+FOREIGN KEY (item_id) REFERENCES tbl_item(id)
+);
+
+CREATE TABLE tbl_order_log (
+id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+order_id INT(6) UNSIGNED,
+user_id INT(6) UNSIGNED,
+action INT(6) DEFAULT 1,
+date TIMESTAMP,
+FOREIGN KEY (order_id) REFERENCES tbl_order(id),
+FOREIGN KEY (user_id) REFERENCES tbl_user(id)
+);
