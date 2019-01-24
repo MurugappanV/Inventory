@@ -5,6 +5,7 @@ mysqldump -u Murugappan -h Murugappan.mysql.pythonanywhere-services.com 'Murugap
 
 mysql -u Murugappan -h Murugappan.mysql.pythonanywhere-services.com 'Murugappan$Stationery' < Stationery.sql
 
+https://www.getpostman.com/collections/638a92d3c34d073825aa
 
 CREATE TABLE tbl_user (
 id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
