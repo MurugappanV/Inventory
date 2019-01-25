@@ -2,8 +2,8 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import LoginUI from "./LoginUI";
-import { LoginApi } from "../../service";
-// import { AlertComp } from "../../components";
+import { LoginApi, setGlobalHeader } from "../../service";
+import { AlertComp } from "../../components";
 import { setUserIdStorage } from "../../storage";
 import { Actions } from "../../redux";
 
@@ -16,16 +16,14 @@ class LoginContainer extends PureComponent<Props> {
 	constructor(props: Props) {
 		super(props);
 		this.state = {
-			employeeId: "",
+			name: "",
 			password: "",
 			loading: false,
-			alertTitle: null,
-			alertMsg: null,
 		};
 	}
 
-	onIdInputChange = (employeeId: string) => {
-		this.setState({ employeeId });
+	onIdInputChange = (name: string) => {
+		this.setState({ name });
 	};
 
 	onPasswordInputChange = (password: string) => {
@@ -33,68 +31,44 @@ class LoginContainer extends PureComponent<Props> {
 	};
 
 	onLogin = () => {
-		// const { employeeId, password } = this.state;
-		// this.setState({ loading: true });
-		// LoginApi(
-		// 	employeeId,
-		// 	password,
-		// 	this.onLoginSuccess,
-		// 	this.onLoginFailure,
-		// 	this.onLoginError,
-		// );
-		const { navigation } = this.props;
-		navigation.navigate("Home");
+		const { name, password } = this.state;
+		this.setState({ loading: true });
+		LoginApi(name, password, this.onLoginSuccess, this.onLoginFailure, this.onLoginError);
 	};
 
-	onLoginSuccess = (userId: Object) => {
+	onLoginSuccess = (token: string, userId: number) => {
 		const { navigation, setUserIdAction } = this.props;
 		this.setState({ loading: false });
-		setCookie(userId);
+		setGlobalHeader(token, userId);
 		setUserIdStorage(userId);
 		setUserIdAction(userId);
 		navigation.navigate("Home");
 	};
 
 	onLoginFailure = (message: string) => {
-		if (message === "Failure") {
-			message = "Please check your employee ID and password";
-		}
-		this.setState({ loading: false, alertTitle: "Login Failed", alertMsg: message });
-		// AlertComp("Login Failed", message);
+		this.setState({ loading: false });
+		AlertComp("Login Failed", message, () => {});
 	};
 
 	onLoginError = (error: any) => {
-		this.setState({
-			loading: false,
-			alertTitle: "Login error",
-			alertMsg: error.toString().includes("Network Error")
-				? "Please check your internet connection"
-				: "Some error occured, please try again later",
-		});
-		// AlertComp("Login error", "Some error occured, Please try again");
-	};
-
-	onAlertClose = () => {
-		this.setState({
-			alertTitle: null,
-			alertMsg: null,
-		});
+		const message = error.toString().includes("Network Error")
+			? "Please check your internet connection"
+			: "Some error occured, please try again later";
+		this.setState({ loading: false });
+		AlertComp("Login Error", message, () => {});
 	};
 
 	render() {
-		const { employeeId, password, loading, alertMsg, alertTitle } = this.state;
+		const { name, password, loading } = this.state;
 		return (
 			<LoginUI
 				{...this.props}
 				onIdInputChange={this.onIdInputChange}
 				onPasswordInputChange={this.onPasswordInputChange}
 				onLogin={this.onLogin}
-				employeeId={employeeId}
+				name={name}
 				password={password}
 				loading={loading}
-				alertMsg={alertMsg}
-				alertTitle={alertTitle}
-				onAlertClose={this.onAlertClose}
 			/>
 		);
 	}

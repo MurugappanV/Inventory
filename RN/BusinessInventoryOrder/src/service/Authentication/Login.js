@@ -1,15 +1,15 @@
 import { BaseAxiosInstance } from "../axios";
 
 const LoginApi = (userName, password, onSuccess, onFailure, onError) => {
-	const url = "CrewMemberServices.svc/ValidateCrewUser";
+	const url = "login";
 	// login='robodiego'
 	// password='Buddy6jar!'
-	BaseAxiosInstance.post(url, { UserName: userName, Password: password })
+	BaseAxiosInstance.post(url, { name: userName, password })
 		.then((response: any) => {
-			if (response.data.s === 1) {
-				onSuccess(response.data.data.UserKey);
+			if (response.data.status === 1) {
+				onSuccess(response.data.data.token, response.data.data.user_id);
 			} else {
-				onFailure(response.data.m);
+				onFailure(response.data.message);
 			}
 		})
 		.catch((error: any) => {

@@ -1,15 +1,15 @@
 import axios from "axios";
 
-const BASE_URL_UAT = "https://servicesbr.uat.mcdelivery.co.in/";
-// const BASE_URL_IP = "http://34.232.141.238/api/v1/";
-// const BASE_URL_PRODUCTION = "https://myknowledge.www.printos.com/api/v1/";
-
+const PRODUCTION = "http://murugappan.pythonanywhere.com/";
+const PATH = "api/v1/seller/";
+const BASE_URL = PRODUCTION + PATH;
 export const BaseAxiosInstance = axios.create({
-	baseURL: BASE_URL_UAT,
+	baseURL: BASE_URL,
 	timeout: 600000,
 	headers: { "Content-Type": "application/json", "Cache-Control": "no-cache" },
 });
 
-export const setGlobalHeader = (token: any) => {
-	BaseAxiosInstance.defaults.headers.common["UserID"] = token;
+export const setGlobalHeader = (token: string, userId: number) => {
+	BaseAxiosInstance.defaults.headers.common["token"] = token;
+	BaseAxiosInstance.defaults.headers.common["user-id"] = userId;
 };
