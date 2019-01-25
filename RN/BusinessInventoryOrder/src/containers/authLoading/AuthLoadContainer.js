@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Actions } from "../../redux";
 import { Colors, ScalePerctFullWidth, ScalePerctFullHeight } from "../../asset";
-import { getUserIdStorage, getUserCredentialsRealm } from "../../storage";
+import { getUserCredentialsRealm } from "../../storage";
 import { setGlobalHeader } from "../../service";
 import { LoadingComp } from "../../components";
 
@@ -39,7 +39,8 @@ class AuthLoadContainer extends PureComponent<Props> {
 	}
 }
 
-function mapStateToProps(state) {
+function mapStateToProps() {
+	// state
 	return {};
 }
 
