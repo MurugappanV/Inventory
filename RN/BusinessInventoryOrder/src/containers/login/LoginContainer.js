@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import LoginUI from "./LoginUI";
 import { LoginApi, setGlobalHeader } from "../../service";
 import { AlertComp } from "../../components";
-import { setUserIdStorage } from "../../storage";
+import { addUserCredentialsRealm } from "../../storage";
 import { Actions } from "../../redux";
 
 type Props = {
@@ -40,8 +40,8 @@ class LoginContainer extends PureComponent<Props> {
 		const { navigation, setUserIdAction } = this.props;
 		this.setState({ loading: false });
 		setGlobalHeader(token, userId);
-		setUserIdStorage(userId);
-		setUserIdAction(userId);
+		addUserCredentialsRealm(token, userId);
+		setUserIdAction(token, userId);
 		navigation.navigate("Home");
 	};
 

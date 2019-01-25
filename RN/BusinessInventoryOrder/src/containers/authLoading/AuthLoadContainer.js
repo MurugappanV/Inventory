@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Actions } from "../../redux";
 import { Colors, ScalePerctFullWidth, ScalePerctFullHeight } from "../../asset";
-import { getUserIdStorage } from "../../storage";
+import { getUserIdStorage, getUserCredentialsRealm } from "../../storage";
 import { setGlobalHeader } from "../../service";
 import { LoadingComp } from "../../components";
 
@@ -16,19 +16,18 @@ type Props = {
 class AuthLoadContainer extends PureComponent<Props> {
 	constructor(props) {
 		super(props);
-		getUserIdStorage()
-			.then((userId: string) => {
-				if (userId != null) {
-					setGlobalHeader(userId);
-					props.setUserIdAction(userId);
-					props.navigation.navigate("Home");
-				} else {
-					props.navigation.navigate("Login");
-				}
-			})
-			.catch(() => {
-				props.navigation.navigate("Login");
-			});
+		const userCred = getUserCredentialsRealm();
+		console.log("uc load ", userCred);
+		if (userCred != null) {
+			const { token, userId } = userCred;
+			const { setUserIdAction, navigation } = props;
+			setGlobalHeader(token, userId);
+			setUserIdAction(token, userId);
+			navigation.navigate("Home");
+		} else {
+			const { navigation } = props;
+			navigation.navigate("Login");
+		}
 	}
 
 	render() {
