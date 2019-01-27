@@ -16,7 +16,11 @@ export default class OrderUI extends PureComponent<Props> {
 			<View style={styles.container}>
 				<Header title="Orders" isLogoutEnable navigation={navigation} />
 				<OrderListUI {...this.props} />
-				<AddOrderUI onPress={() => {}} />
+				<AddOrderUI
+					onPress={() => {
+						navigation.navigate("Cart");
+					}}
+				/>
 			</View>
 		);
 	}

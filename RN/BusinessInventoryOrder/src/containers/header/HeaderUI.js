@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
 	backImage: {
 		width: ScalePerctFullWidth(5),
 		height: ScalePerctFullWidth(5),
-		tintColor: Colors.bodyPrimaryLight,
+		tintColor: Colors.bodyPrimaryLight + "BB",
 	},
 	logoutImage: {
 		width: ScalePerctFullWidth(4),

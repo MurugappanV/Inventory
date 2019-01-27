@@ -1,43 +1,38 @@
 import React from "react";
 import { StyleSheet, FlatList, View, ActivityIndicator, Text } from "react-native";
 import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors } from "../../asset";
-import ListItemUI from "./ListItemUI";
+import GroupUI from "./GroupUI";
 
 type Props = {
-	navigation: any,
-	orders: any,
+	items: any,
 	loading: boolean,
-	refreshing: boolean,
 	noRecordText: string,
-	onFetchRefresh: Function,
 };
 
-export default function renderOrderList(props: Props) {
-	const { navigation, orders, loading, refreshing, noRecordText, onFetchRefresh } = props;
+export default function renderCartList(props: Props) {
+	const { items, loading, noRecordText } = props;
 	return (
 		<FlatList
-			data={orders}
-			renderItem={({ item }) => <ListItemUI data={item} />}
+			data={items}
+			renderItem={({ item }) => <GroupUI data={item} />}
 			keyExtractor={(item, index) => item.id.toString() + index}
 			style={styles.listcontainer}
 			// ItemSeparatorComponent={renderSeperator}
 			// ListHeaderComponent={renderHeader}
-			ListFooterComponent={() => renderFooter(loading, refreshing)}
+			ListFooterComponent={() => renderFooter(loading)}
 			ListEmptyComponent={() => renderEmpty(loading, noRecordText)}
-			onRefresh={onFetchRefresh}
-			refreshing={refreshing}
+			// onRefresh={onFetchRefresh}
+			// refreshing={refreshing}
 		/>
 	);
 }
 
 const renderHeader = () => {};
 const renderSeperator = () => {};
-const renderFooter = (loading: boolean, refreshing: boolean) => {
+const renderFooter = (loading: boolean) => {
 	return (
 		<View style={styles.footer}>
-			{loading && !refreshing && (
-				<ActivityIndicator size="small" color={Colors.bodyTitleVarient} />
-			)}
+			{loading && <ActivityIndicator size="small" color={Colors.bodyTitleVarient} />}
 		</View>
 	);
 };
@@ -52,7 +47,7 @@ const renderEmpty = (loading: boolean, noRecordText: string) => {
 	return null;
 };
 
-renderOrderList.defaultProps = {};
+renderCartList.defaultProps = {};
 
 const styles = StyleSheet.create({
 	listcontainer: {

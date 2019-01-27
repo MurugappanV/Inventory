@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
-import { Images, Colors } from "../../asset";
+import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors } from "../../asset";
 import { getDateJson } from "../../utils";
 
 type Props = {
@@ -29,8 +29,9 @@ const getStatusImage = (status: string) => {
 };
 
 export default function renderListHeaderItem(props: Props) {
-	const { onOtherDetailsPress, created_date, order_no, status } = props;
+	const { onOtherDetailsPress, created_date, order_no, status, no_of_items } = props;
 	const { day, date, month, year } = getDateJson(created_date);
+	const noOfItems = `${no_of_items} item${no_of_items > 1 ? "s" : ""} `;
 	return (
 		<TouchableOpacity onPress={onOtherDetailsPress} style={styles.cont}>
 			<View style={styles.dateContainer}>
@@ -39,8 +40,10 @@ export default function renderListHeaderItem(props: Props) {
 				<Text style={styles.yearText}>{`${month} ${year}`}</Text>
 			</View>
 			<View style={styles.container}>
-				<Text style={styles.orderNoText}>{order_no}</Text>
-				<Text style={styles.noItemsText}>{"no of items"}</Text>
+				<Text ellipsizeMode="head" numberOfLines={1} style={styles.orderNoText}>
+					{order_no}
+				</Text>
+				<Text style={styles.noItemsText}>{noOfItems}</Text>
 				<TouchableOpacity onPress={onOtherDetailsPress} style={styles.otherDetContainer}>
 					<Text style={styles.otherDetailText}>{"other details"}</Text>
 				</TouchableOpacity>
@@ -61,7 +64,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 	},
 	dateContainer: {
-		padding: 16,
+		padding: ScalePerctFullWidth(4),
 		backgroundColor: Colors.bgPrimaryDark,
 		borderTopLeftRadius: 16,
 		borderBottomLeftRadius: 16,
@@ -70,50 +73,55 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: "center",
-		padding: 16,
+		padding: ScalePerctFullWidth(4),
 	},
 	statusContainer: {
 		alignItems: "center",
 		justifyContent: "center",
-		padding: 16,
+		padding: ScalePerctFullWidth(4),
 	},
 	statusImg: {
-		width: 20,
-		height: 20,
-		margin: 16,
+		width: ScalePerctFullWidth(6),
+		height: ScalePerctFullWidth(6),
+		margin: ScalePerctFullWidth(4),
 		marginTop: 0,
 	},
 	dayText: {
 		color: Colors.bodyPrimaryLight,
 		textAlign: "center",
-		fontSize: 14,
+		fontSize: 12,
 	},
 	dateText: {
 		color: Colors.bodyPrimaryLight,
 		textAlign: "center",
-		fontSize: 24,
+		fontSize: 20,
 		fontWeight: "bold",
 	},
 	yearText: {
 		color: Colors.bodyPrimaryLight,
 		textAlign: "center",
-		fontSize: 14,
+		fontSize: 12,
 	},
 	orderNoText: {
 		color: Colors.bodySecondaryDark,
-		fontSize: 20,
+		fontSize: 16,
 		fontWeight: "bold",
 	},
 	noItemsText: {
 		color: Colors.bodySecondaryDark,
 		fontSize: 14,
+		marginBottom: ScalePerctFullWidth(1),
 	},
 	otherDetailText: {
-		color: Colors.bodySecondaryDark,
-		fontSize: 14,
+		color: Colors.bodyPrimaryLight,
+		paddingHorizontal: ScalePerctFullWidth(2),
+		fontSize: 11,
 	},
 	otherDetContainer: {
-		paddingVertical: 10,
+		paddingVertical: ScalePerctFullWidth(1),
+		borderRadius: 4,
+		backgroundColor: Colors.bodySecondaryDark,
+		alignSelf: "flex-start",
 	},
 	statusText: {
 		color: Colors.bodySecondaryDark,

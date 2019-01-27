@@ -40,8 +40,8 @@ const V_DARK_GREEN = "#008737";
 const Colors = {
 	bgPrimaryDark: DARK_PURPLE,
 	bgPrimaryLight: LIGHT_PINK,
-	bgSecondaryDark: ARMY_GREEN,
-	bgSecondaryLight: LIGHT_PINK,
+	bgSecondaryDark: PURPLE,
+	bgSecondaryLight: LIGHT_GREY,
 	bgTransparent: TRANSPARENT,
 	bgSemiTransparent: BLACK20perc,
 	bgPrimaryVarient: GREEN,

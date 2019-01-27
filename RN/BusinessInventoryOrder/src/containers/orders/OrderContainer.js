@@ -31,15 +31,15 @@ class OrdersContainer extends PureComponent<Props> {
 	};
 
 	onOrderSuccess = (orders: any) => {
-		this.setState({ loading: false, refreshing: false });
+		this.setState({ loading: false, refreshing: false, noRecordText: "No orders found" });
 		const { setOrdersAction } = this.props;
 		setOrdersAction(orders);
 		console.log("fetched ", orders);
 	};
 
 	onOrderFailure = (message: string) => {
-		this.setState({ loading: false, refreshing: false });
-		AlertComp("Fetch orders failed", message, () => {});
+		this.setState({ loading: false, refreshing: false, noRecordText: message });
+		// AlertComp("Fetch orders failed", message, () => {});
 	};
 
 	onOrderError = (error: any) => {
@@ -47,8 +47,8 @@ class OrdersContainer extends PureComponent<Props> {
 		// .includes("Network Error")
 		// ? "Please check your internet connection"
 		// : "Some error occured, please try again later";
-		this.setState({ loading: false, refreshing: false });
-		AlertComp("Fetch order error", message, () => {});
+		this.setState({ loading: false, refreshing: false, noRecordText: message });
+		// AlertComp("Fetch order error", message, () => {});
 	};
 
 	onFetchRefresh = () => {

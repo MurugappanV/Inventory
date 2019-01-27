@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, FlatList, View, Text, Image, TouchableOpacity } from "react-native";
-import { Images, Colors } from "../../asset";
+import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors } from "../../asset";
 import { getDateddmmyy } from "../../utils";
 
 type Props = {
@@ -33,7 +33,7 @@ const renderLogs = (logs: any) => {
 		<FlatList
 			data={logs}
 			renderItem={({ item }) => {
-				const logText = `${getStatusLog(item.action)} ${item.name}`;
+				const logText = `${getStatusLog(item.action)}${item.name}`;
 				return (
 					<View style={styles.logContainer}>
 						<Text style={styles.logbyText}>{logText}</Text>
@@ -76,13 +76,13 @@ export default function renderListContentItem(props: Props) {
 
 const styles = StyleSheet.create({
 	cont: {
-		paddingVertical: 8,
-		paddingLeft: 16,
+		paddingVertical: ScalePerctFullWidth(2),
+		paddingLeft: ScalePerctFullWidth(4),
 	},
 	addressContainer: {
 		backgroundColor: "white",
 		borderRadius: 8,
-		padding: 16,
+		padding: ScalePerctFullWidth(4),
 		elevation: 5,
 		flexDirection: "row",
 	},
@@ -90,11 +90,11 @@ const styles = StyleSheet.create({
 		flex: 1,
 		borderRightWidth: 1,
 		borderColor: Colors.bgSemiTransparent,
-		paddingRight: 16,
+		paddingRight: ScalePerctFullWidth(4),
 	},
 	detailContainer: {
 		flex: 1,
-		paddingLeft: 16,
+		paddingLeft: ScalePerctFullWidth(4),
 	},
 	addressTitleText: {
 		color: Colors.bodySecondaryDark,
@@ -111,9 +111,9 @@ const styles = StyleSheet.create({
 		borderRadius: 8,
 		elevation: 2,
 		flexDirection: "row",
-		padding: 8,
+		padding: ScalePerctFullWidth(2),
 		justifyContent: "space-between",
-		marginTop: 4,
+		marginTop: ScalePerctFullWidth(1),
 	},
 	logbyText: {
 		color: Colors.bodySecondaryDark,
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
 	logdateText: {
 		color: Colors.bodySecondaryDark,
 		fontSize: 13,
-		paddingLeft: 16,
+		paddingLeft: ScalePerctFullWidth(4),
 	},
 	listcontainer: {},
 });
