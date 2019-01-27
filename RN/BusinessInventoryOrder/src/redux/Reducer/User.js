@@ -11,6 +11,6 @@ export const userCredentials = createReducer(initialUserCredentials, {
 		return action.data;
 	},
 	[Types.user.CLEAR_USER_ID]() {
-		return null;
+		return initialUserCredentials;
 	},
 });

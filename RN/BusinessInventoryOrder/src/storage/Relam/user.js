@@ -18,3 +18,10 @@ export function getUserCredentialsRealm() {
 	// });
 	return cred.length > 0 ? cred[0] : null;
 }
+
+export function removeUserCredentialsRealm() {
+	const creds = realm.objects("UserCredentials");
+	realm.write(() => {
+		realm.delete(creds);
+	});
+}

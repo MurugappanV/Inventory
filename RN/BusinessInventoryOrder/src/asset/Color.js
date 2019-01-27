@@ -49,8 +49,8 @@ const Colors = {
 
 	bodyPrimaryDark: BLACK,
 	bodyPrimaryLight: WHITE,
-	bodySecondaryDark: RED,
-	bodySecondaryLight: LIGHT_RED,
+	bodySecondaryDark: DARK_PURPLE,
+	bodySecondaryLight: LIGHT_PINK,
 	bodyPrimaryVarient: GREEN,
 	bodySecondaryVarient: GREY,
 	bodyTitleVarient: V_LIGHT_YELLOW,

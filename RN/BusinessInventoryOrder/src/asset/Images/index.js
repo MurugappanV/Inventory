@@ -6,13 +6,16 @@
  */
 
 const Images = {
-	logoImg: require("./logo.png"),
 	backImg: require("./back.png"),
-	dotImg: require("./dot.png"),
+	addImg: require("./add.png"),
 	logoutImg: require("./logout.png"),
 	tickImg: require("./tick.png"),
 	untickImg: require("./unTick.png"),
-	stautusArrowImg: require("./statusArrow.png"),
+	timeImg: require("./watch.png"),
+	sendImg: require("./bike.png"),
+	billImg: require("./bill.png"),
+	doneImg: require("./wright.png"),
+	cancelImg: require("./wrong.png"),
 };
 
 export default Images;

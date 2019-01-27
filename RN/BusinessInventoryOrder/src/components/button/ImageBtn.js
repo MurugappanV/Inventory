@@ -7,6 +7,7 @@
 
 import React from "react";
 import { StyleSheet, Image, TouchableOpacity } from "react-native";
+import { Colors } from "../../asset";
 
 type Props = {
 	onPress: Function,
@@ -40,5 +41,6 @@ const styles = StyleSheet.create({
 		width: 30,
 		height: 30,
 		resizeMode: "contain",
+		tintColor: Colors.bgPrimaryLight,
 	},
 });

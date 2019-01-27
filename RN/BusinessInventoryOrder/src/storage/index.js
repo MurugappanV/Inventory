@@ -1,2 +1,6 @@
-export { setUserIdStorage, getUserIdStorage } from "./AsyncStore";
-export { addUserCredentialsRealm, getUserCredentialsRealm } from "./Relam";
+// export { setUserIdStorage, getUserIdStorage } from "./AsyncStore";
+export {
+	addUserCredentialsRealm,
+	getUserCredentialsRealm,
+	removeUserCredentialsRealm,
+} from "./Relam";

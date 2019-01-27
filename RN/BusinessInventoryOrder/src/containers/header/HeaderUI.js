@@ -31,8 +31,8 @@ export default function HeaderUI(props: Props) {
 				</View>
 				{!!isLogoutEnable && (
 					<ImageBtn
-						style={styles.filter}
-						imgStyle={styles.filterImage}
+						style={styles.logout}
+						imgStyle={styles.logoutImage}
 						source={Images.logoutImg}
 						onPress={onLogout}
 					/>
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 		alignContent: "center",
-		backgroundColor: Colors.bgSecondaryDark,
+		backgroundColor: Colors.bgPrimaryDark,
 		width: ScalePerctFullWidth(100),
 		height: ScalePerctFullHeight(8),
 		elevation: 10,
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
 		paddingRight: Metrics.DEFAULT_PADDING,
 	},
 	title: {
-		color: Colors.bodyTitleVarient,
+		color: Colors.bodyPrimaryLight,
 		textAlign: "center",
 		textAlignVertical: "center",
 		fontSize: 17,
@@ -88,12 +88,14 @@ const styles = StyleSheet.create({
 	backImage: {
 		width: ScalePerctFullWidth(5),
 		height: ScalePerctFullWidth(5),
+		tintColor: Colors.bodyPrimaryLight,
 	},
-	filterImage: {
-		width: ScalePerctFullWidth(5),
-		height: ScalePerctFullWidth(5),
+	logoutImage: {
+		width: ScalePerctFullWidth(4),
+		height: ScalePerctFullWidth(4),
+		tintColor: Colors.bodyPrimaryLight,
 	},
-	filter: {
+	logout: {
 		alignSelf: "stretch",
 		padding: 0,
 		paddingLeft: Metrics.DEFAULT_PADDING,

@@ -1,1 +1,5 @@
-export { addUserCredentialsRealm, getUserCredentialsRealm } from "./user";
+export {
+	addUserCredentialsRealm,
+	getUserCredentialsRealm,
+	removeUserCredentialsRealm,
+} from "./user";

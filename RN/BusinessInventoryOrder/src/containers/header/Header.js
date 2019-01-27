@@ -1,7 +1,12 @@
 import React, { PureComponent } from "react";
 import HeaderUI from "./HeaderUI";
+import { LogoutApi } from "../../service";
+import { removeUserCredentialsRealm } from "../../storage/Relam/user";
+import { AlertComp } from "../../components";
 
-type Props = {};
+type Props = {
+	navigation?: any,
+};
 
 export default class Header extends PureComponent<Props> {
 	constructor(props) {
@@ -9,9 +14,31 @@ export default class Header extends PureComponent<Props> {
 		this.state = {};
 	}
 
+	onLogout = () => {
+		AlertComp(
+			"",
+			"Sure, you want to logout?",
+			() => {
+				LogoutApi(this.onLogOutSuccess, this.onLogOutFailure, this.onLogOutError);
+				removeUserCredentialsRealm();
+				const { navigation } = this.props;
+				navigation.navigate("Login");
+			},
+			true,
+		);
+	};
+
+	onLogOutSuccess = () => {};
+
+	onLogOutFailure = (message: string) => {};
+
+	onLogOutError = (error: string) => {};
+
 	render() {
-		return <HeaderUI {...this.props} />;
+		return <HeaderUI {...this.props} onLogout={this.onLogout} />;
 	}
 }
 
-Header.defaultProps = {};
+Header.defaultProps = {
+	navigation: undefined,
+};

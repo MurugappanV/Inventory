@@ -51,9 +51,10 @@ class LoginContainer extends PureComponent<Props> {
 	};
 
 	onLoginError = (error: any) => {
-		const message = error.toString().includes("Network Error")
-			? "Please check your internet connection"
-			: "Some error occured, please try again later";
+		const message = error.toString();
+		// .includes("Network Error")
+		// ? "Please check your internet connection"
+		// : "Some error occured, please try again later";
 		this.setState({ loading: false });
 		AlertComp("Login Error", message, () => {});
 	};
