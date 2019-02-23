@@ -7,14 +7,15 @@ type Props = {
 	items: any,
 	loading: boolean,
 	noRecordText: string,
+	onQtyChanged: Function,
 };
 
 export default function renderCartList(props: Props) {
-	const { items, loading, noRecordText } = props;
+	const { items, loading, noRecordText, onQtyChanged } = props;
 	return (
 		<FlatList
 			data={items}
-			renderItem={({ item }) => <GroupUI data={item} />}
+			renderItem={({ item }) => <GroupUI data={item} onQtyChanged={onQtyChanged} />}
 			keyExtractor={(item, index) => item.id.toString() + index}
 			style={styles.listcontainer}
 			// ItemSeparatorComponent={renderSeperator}

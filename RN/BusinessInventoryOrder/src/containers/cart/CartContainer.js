@@ -16,7 +16,7 @@ type Props = {
 class CartContainer extends PureComponent<Props> {
 	constructor(props: Props) {
 		super(props);
-		this.state = { loading: false, noRecordText: "No items found" };
+		this.state = { loading: false, noRecordText: "No items found", selected: new Map() };
 	}
 
 	componentDidMount() {
@@ -51,9 +51,31 @@ class CartContainer extends PureComponent<Props> {
 		// AlertComp("Fetch item error", message, () => {});
 	};
 
+	onItemSelected = (id: number, billName: string, qty: number) => {
+		const { selected } = this.state;
+		const newSelected = new Map([...selected]); //
+		if (qty === 0) {
+			if (newSelected.has(id)) {
+				newSelected.delete(id);
+			}
+		} else {
+			newSelected.set(id, { qty, billName });
+		}
+		console.log("selected", newSelected);
+		this.setState({ selected: newSelected });
+	};
+
 	render() {
-		const { loading, noRecordText } = this.state;
-		return <CartUI {...this.props} loading={loading} noRecordText={noRecordText} />;
+		const { loading, noRecordText, selected } = this.state;
+		return (
+			<CartUI
+				onQtyChanged={this.onItemSelected}
+				{...this.props}
+				loading={loading}
+				noRecordText={noRecordText}
+				selected={selected}
+			/>
+		);
 	}
 }
 

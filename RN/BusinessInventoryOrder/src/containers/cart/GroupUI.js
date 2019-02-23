@@ -6,6 +6,7 @@ import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors } from "../..
 
 type Props = {
 	onPress: Function,
+	onQtyChanged: Function,
 	data: any,
 };
 
@@ -21,7 +22,7 @@ export default class GroupUI extends PureComponent<Props> {
 	};
 
 	render() {
-		const { data } = this.props;
+		const { data, onQtyChanged } = this.props;
 		const { isCollapsed } = this.state;
 		const { name } = data;
 		return (
@@ -31,7 +32,7 @@ export default class GroupUI extends PureComponent<Props> {
 				</TouchableOpacity>
 				{isCollapsed && (
 					<View>
-						<SubGroupListUI {...data} />
+						<SubGroupListUI {...data} onQtyChanged={onQtyChanged} />
 					</View>
 				)}
 			</View>

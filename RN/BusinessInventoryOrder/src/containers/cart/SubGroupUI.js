@@ -5,6 +5,7 @@ import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors } from "../..
 
 type Props = {
 	onPress: Function,
+	onQtyChanged: Function,
 	data: any,
 };
 
@@ -14,7 +15,7 @@ export default class SubGroupUI extends PureComponent<Props> {
 	// }
 
 	render() {
-		const { data } = this.props;
+		const { data, onQtyChanged } = this.props;
 		const { name, id, items } = data;
 		return (
 			<View style={styles.cont}>
@@ -23,7 +24,7 @@ export default class SubGroupUI extends PureComponent<Props> {
 				</View>
 				<FlatList
 					data={items}
-					renderItem={({ item }) => <ItemUI data={item} />}
+					renderItem={({ item }) => <ItemUI data={item} onQtyChanged={onQtyChanged} />}
 					keyExtractor={(item, index) => item.id.toString() + index}
 					style={styles.listcontainer}
 				/>

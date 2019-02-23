@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
 import { Header } from "../header";
-// import AddOrderUI from "./AddOrderUI";
+import SelectedUI from "./SelectedUI";
 import CartListUI from "./CartListUI";
 // import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors } from "../../asset";
 
@@ -13,8 +13,6 @@ export default class CartUI extends PureComponent<Props> {
 	onBack = (navigation: any) => {
 		navigation.goBack();
 	};
-
-	onItemAdd = (item: any, qty: number) => {};
 
 	render() {
 		const { navigation } = this.props;
@@ -28,6 +26,7 @@ export default class CartUI extends PureComponent<Props> {
 				/>
 				<CartListUI {...this.props} />
 				{/* <AddOrderUI onPress={() => {}} /> */}
+				<SelectedUI />
 			</View>
 		);
 	}

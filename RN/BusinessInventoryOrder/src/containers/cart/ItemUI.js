@@ -6,34 +6,38 @@ import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors } from "../..
 
 type Props = {
 	onPress: Function,
+	onQtyChanged: Function,
 	data: any,
 };
 
 export default class ItemUI extends PureComponent<Props> {
 	constructor(props) {
 		super(props);
-		this.state = { text: 0 };
+		this.state = { text: "" };
 	}
 
-	onChanged(text) {
+	onChanged(id, text, available, bill_name) {
+		const { onQtyChanged } = this.props;
 		let newText = "";
 		const numbers = "0123456789";
 
 		for (let i = 0; i < text.length; i++) {
-			if (numbers.indexOf(text[i]) > -1) {
+			if (numbers.indexOf(text[i]) > -1 && Number.parseInt(newText + text[i]) <= available) {
 				newText += text[i];
 			} else {
 				// your call back function
-				alert("please enter numbers only");
+				alert("please enter numbers less than available");
 			}
 		}
+		if (newText === "") newText = "0";
+		onQtyChanged(id, bill_name, Number.parseInt(newText));
 		this.setState({ text: newText });
 	}
 
 	render() {
 		const { data } = this.props;
 		const { text } = this.state;
-		const { name, available } = data;
+		const { id, name, available, bill_name } = data;
 		return (
 			<View style={styles.cont}>
 				<View style={styles.headerContainer}>
@@ -41,7 +45,7 @@ export default class ItemUI extends PureComponent<Props> {
 					<TextInput
 						style={styles.input}
 						keyboardType="numeric"
-						onChangeText={text => this.onChanged(text)}
+						onChangeText={text => this.onChanged(id, text, available, bill_name)}
 						value={text}
 					/>
 					<Text style={styles.avilText}>{` / ${available}`}</Text>
