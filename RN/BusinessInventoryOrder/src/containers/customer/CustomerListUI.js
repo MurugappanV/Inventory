@@ -1,24 +1,21 @@
 import React from "react";
 import { StyleSheet, FlatList, View, ActivityIndicator, Text } from "react-native";
 import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors } from "../../asset";
-import GroupUI from "./GroupUI";
+import CustomerItemUI from "./CustomerItemUI";
 
 type Props = {
-	items: any,
+	customers: any,
 	loading: boolean,
 	noRecordText: string,
-	onQtyChanged: Function,
+	onItemSelected: Function,
 };
 
 export default function renderCartList(props: Props) {
-	const { items, loading, selected, noRecordText, onQtyChanged } = props;
+	const { customers, loading, noRecordText, onItemSelected } = props;
 	return (
 		<FlatList
-			data={items}
-			extraData={selected}
-			renderItem={({ item }) => (
-				<GroupUI data={item} onQtyChanged={onQtyChanged} selected={selected} />
-			)}
+			data={customers}
+			renderItem={({ item }) => <CustomerItemUI data={item} onPress={onItemSelected} />}
 			keyExtractor={(item, index) => item.id.toString() + index}
 			style={styles.listcontainer}
 			// ItemSeparatorComponent={renderSeperator}

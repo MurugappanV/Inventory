@@ -4,13 +4,16 @@ import { bindActionCreators } from "redux";
 import OrderUI from "./OrderUI";
 import { Actions } from "../../redux";
 import { AlertComp } from "../../components";
-import { OrdersApi } from "../../service";
+import { OrdersApi, UpdateOrderApi, UpdateStatusApi } from "../../service";
 
 type Props = {
 	navigation: any,
 	setOrdersAction: Function,
 	clearOrdersAction: Function,
+	clearOrderUpdateAction: Function,
 	orders: any,
+	orderUpdate: boolean,
+	userType: number,
 };
 
 class OrdersContainer extends PureComponent<Props> {
@@ -21,6 +24,14 @@ class OrdersContainer extends PureComponent<Props> {
 
 	componentDidMount() {
 		this.onOrder();
+	}
+
+	componentDidUpdate(prevProps) {
+		const { orderUpdate, clearOrderUpdateAction } = this.props;
+		if (orderUpdate && !prevProps.orderUpdate) {
+			clearOrderUpdateAction();
+			this.onOrder();
+		}
 	}
 
 	onOrder = () => {
@@ -34,7 +45,6 @@ class OrdersContainer extends PureComponent<Props> {
 		this.setState({ loading: false, refreshing: false, noRecordText: "No orders found" });
 		const { setOrdersAction } = this.props;
 		setOrdersAction(orders);
-		console.log("fetched ", orders);
 	};
 
 	onOrderFailure = (message: string) => {
@@ -52,9 +62,38 @@ class OrdersContainer extends PureComponent<Props> {
 	};
 
 	onFetchRefresh = () => {
-		console.log("on refresh");
 		this.setState({ refreshing: true });
 		this.onOrder();
+	};
+
+	onOrderPress = (status: number, id, retailerId, otherDetails) => {
+		const { navigation } = this.props;
+		if (status === 1) {
+			navigation.navigate("ViewCart", {
+				id,
+				retailerId,
+				otherDetails,
+			});
+		} else if (status === 2) {
+			navigation.navigate("Cart", {
+				id,
+				retailerId,
+				otherDetails,
+			});
+		} else if (status === 3 || status === 4 || status === 5 || status === 6) {
+			let stat = "CANCEL";
+			if (status === 3) {
+				stat = "BILLED";
+			} else if (status === 4) {
+				stat = "SEND";
+			} else if (status === 5) {
+				stat = "CLOSED";
+			}
+			AlertComp("Confirmation", `Sure want to change the status to ${stat}?`, () => {
+				UpdateStatusApi(id, status);
+				this.onFetchRefresh();
+			});
+		}
 	};
 
 	render() {
@@ -66,6 +105,7 @@ class OrdersContainer extends PureComponent<Props> {
 				refreshing={refreshing}
 				noRecordText={noRecordText}
 				onFetchRefresh={this.onFetchRefresh}
+				onOrderPress={this.onOrderPress}
 			/>
 		);
 	}
@@ -74,6 +114,8 @@ class OrdersContainer extends PureComponent<Props> {
 function mapStateToProps(state) {
 	return {
 		orders: state.orders,
+		orderUpdate: state.updates.orderUpdate,
+		userType: state.userCredentials.userType,
 	};
 }
 

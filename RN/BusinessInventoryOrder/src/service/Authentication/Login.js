@@ -7,7 +7,11 @@ const LoginApi = (userName, password, onSuccess, onFailure, onError) => {
 	BaseAxiosInstance.post(url, { name: userName, password })
 		.then((response: any) => {
 			if (response.data.status === 1) {
-				onSuccess(response.data.data.token, response.data.data.user_id);
+				onSuccess(
+					response.data.data.token,
+					response.data.data.user_id,
+					response.data.data.user_type,
+				);
 			} else {
 				onFailure(response.data.message);
 			}

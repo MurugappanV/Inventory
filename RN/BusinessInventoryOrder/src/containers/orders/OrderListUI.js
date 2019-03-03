@@ -10,14 +10,15 @@ type Props = {
 	refreshing: boolean,
 	noRecordText: string,
 	onFetchRefresh: Function,
+	userType: number,
 };
 
 export default function renderOrderList(props: Props) {
-	const { navigation, orders, loading, refreshing, noRecordText, onFetchRefresh } = props;
+	const { orders, loading, refreshing, noRecordText, onFetchRefresh } = props;
 	return (
 		<FlatList
 			data={orders}
-			renderItem={({ item }) => <ListItemUI data={item} />}
+			renderItem={({ item }) => <ListItemUI data={item} {...props} />}
 			keyExtractor={(item, index) => item.id.toString() + index}
 			style={styles.listcontainer}
 			// ItemSeparatorComponent={renderSeperator}

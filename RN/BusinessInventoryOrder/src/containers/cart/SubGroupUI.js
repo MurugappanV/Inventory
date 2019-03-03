@@ -15,7 +15,7 @@ export default class SubGroupUI extends PureComponent<Props> {
 	// }
 
 	render() {
-		const { data, onQtyChanged } = this.props;
+		const { data, onQtyChanged, selected } = this.props;
 		const { name, id, items } = data;
 		return (
 			<View style={styles.cont}>
@@ -24,7 +24,10 @@ export default class SubGroupUI extends PureComponent<Props> {
 				</View>
 				<FlatList
 					data={items}
-					renderItem={({ item }) => <ItemUI data={item} onQtyChanged={onQtyChanged} />}
+					extraData={selected}
+					renderItem={({ item }) => (
+						<ItemUI data={item} onQtyChanged={onQtyChanged} selected={selected} />
+					)}
 					keyExtractor={(item, index) => item.id.toString() + index}
 					style={styles.listcontainer}
 				/>

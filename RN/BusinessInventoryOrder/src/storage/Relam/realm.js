@@ -6,6 +6,7 @@ UserCredentials.schema = {
 	properties: {
 		token: "string",
 		userId: "int",
+		userType: "int",
 	},
 };
 

@@ -10,7 +10,7 @@ type Props = {
 	data: any,
 };
 
-export default class ItemUI extends PureComponent<Props> {
+export default class SelectedItemUI extends PureComponent<Props> {
 	constructor(props) {
 		super(props);
 		this.state = { text: "" };
@@ -31,25 +31,21 @@ export default class ItemUI extends PureComponent<Props> {
 		}
 		if (newText === "") newText = "0";
 		onQtyChanged(id, bill_name, Number.parseInt(newText));
-		// this.setState({ text: newText });
+		this.setState({ text: newText });
 	}
 
 	render() {
-		const { data, selected } = this.props;
-		const { id, name, available, bill_name } = data;
-		const text = (selected.has(id) ? selected.get(id).qty : 0) + "";
-		console.log("item ui selected", text, selected);
+		const { data, onPress } = this.props;
+		const id = data[0];
+		const { qty, billName } = data[1];
 		return (
 			<View style={styles.cont}>
 				<View style={styles.headerContainer}>
-					<Text style={styles.headerText}>{name}</Text>
-					<TextInput
-						style={styles.input}
-						keyboardType="numeric"
-						onChangeText={text => this.onChanged(id, text, available, bill_name)}
-						value={text}
-					/>
-					<Text style={styles.avilText}>{` / ${available}`}</Text>
+					<Text style={styles.headerText}>{billName}</Text>
+					<Text style={styles.avilText}>{qty}</Text>
+					<TouchableOpacity style={styles.cancelBtn} onPress={() => onPress(id)}>
+						<Text style={styles.headerText}>{"X"}</Text>
+					</TouchableOpacity>
 				</View>
 			</View>
 		);
@@ -85,5 +81,9 @@ const styles = StyleSheet.create({
 		width: ScalePerctFullWidth(10),
 		fontSize: 11,
 		color: Colors.bodyPrimaryVarient,
+	},
+	cancelBtn: {
+		paddingHorizontal: 10,
+		paddingVertical: 5,
 	},
 });

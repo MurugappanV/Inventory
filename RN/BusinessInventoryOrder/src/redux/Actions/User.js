@@ -1,8 +1,8 @@
 import Types from "../Types";
 
-export function setUserIdAction(token, userId) {
+export function setUserIdAction(token, userId, userType) {
 	return (dispatch, getState) => {
-		dispatch({ type: Types.user.SET_USER_ID, data: { token, userId } });
+		dispatch({ type: Types.user.SET_USER_ID, data: { token, userId, userType } });
 	};
 }
 

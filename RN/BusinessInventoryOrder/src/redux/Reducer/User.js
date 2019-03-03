@@ -4,6 +4,7 @@ import createReducer from "./CreateReducer";
 const initialUserCredentials = {
 	token: null,
 	userId: null,
+	userType: null,
 };
 
 export const userCredentials = createReducer(initialUserCredentials, {

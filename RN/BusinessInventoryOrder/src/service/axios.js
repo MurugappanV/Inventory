@@ -5,7 +5,7 @@ const PATH = "api/v1/seller/";
 const BASE_URL = PRODUCTION + PATH;
 export const BaseAxiosInstance = axios.create({
 	baseURL: BASE_URL,
-	timeout: 600000,
+	timeout: 60000,
 	headers: { "Content-Type": "application/json", "Cache-Control": "no-cache" },
 });
 

@@ -22,7 +22,7 @@ export default class GroupUI extends PureComponent<Props> {
 	};
 
 	render() {
-		const { data, onQtyChanged } = this.props;
+		const { data, onQtyChanged, selected } = this.props;
 		const { isCollapsed } = this.state;
 		const { name } = data;
 		return (
@@ -32,7 +32,7 @@ export default class GroupUI extends PureComponent<Props> {
 				</TouchableOpacity>
 				{isCollapsed && (
 					<View>
-						<SubGroupListUI {...data} onQtyChanged={onQtyChanged} />
+						<SubGroupListUI {...data} onQtyChanged={onQtyChanged} selected={selected} />
 					</View>
 				)}
 			</View>

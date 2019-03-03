@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
-import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors } from "../../asset";
+import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors, UserType } from "../../asset";
 import { getDateJson } from "../../utils";
 
 type Props = {
@@ -8,6 +8,7 @@ type Props = {
 	created_date: string,
 	order_no: string,
 	status: string,
+	userType: number,
 };
 
 const getStatusImage = (status: string) => {
@@ -28,8 +29,80 @@ const getStatusImage = (status: string) => {
 	}
 };
 
+const getStatusId = (status: string) => {
+	switch (status) {
+		case "CREATED":
+			return 1;
+		case "EDITED":
+			return 2;
+		case "BILLED":
+			return 3;
+		case "SEND":
+			return 4;
+		case "CLOSED":
+			return 5;
+		case "CANCELLED":
+			return 6;
+		default:
+			return 5;
+	}
+};
+
+function renderButton(label, onPress) {
+	return (
+		<TouchableOpacity key={label} onPress={onPress} style={styles.otherDetContainer}>
+			<Text style={styles.otherDetailText}>{label}</Text>
+		</TouchableOpacity>
+	);
+}
+
+const userButtons = {
+	[UserType.admin]: ["View", "Edit", "Bill", "Send", "Close", "Cancel"],
+	[UserType.manager]: ["View", "Edit", "Cancel"],
+	[UserType.seller]: ["View", "Bill", "Send"],
+};
+
+function renderButtons(props) {
+	const { status, userType, onOrderPress } = props;
+	const statusId = getStatusId(status);
+	return (
+		<View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+			{userButtons[userType] &&
+				userButtons[userType].map((btn: string) => {
+					if (btn === "Edit" && statusId < 3) {
+						return renderButton(btn, () => onOrderPress(2));
+					}
+					if (btn === "View") {
+						return renderButton(btn, () => onOrderPress(1));
+					}
+					if (btn === "Bill" && statusId < 3) {
+						return renderButton(btn, () => onOrderPress(3));
+					}
+					if (btn === "Send" && statusId === 3) {
+						return renderButton(btn, () => onOrderPress(4));
+					}
+					if (btn === "Close" && statusId === 4) {
+						return renderButton(btn, () => onOrderPress(5));
+					}
+					if (btn === "Cancel" && statusId < 4) {
+						return renderButton(btn, () => onOrderPress(6));
+					}
+					return null;
+				})}
+		</View>
+	);
+}
+
 export default function renderListHeaderItem(props: Props) {
-	const { onOtherDetailsPress, created_date, order_no, status, no_of_items } = props;
+	const {
+		onOtherDetailsPress,
+		onOrderPress,
+		created_date,
+		order_no,
+		status,
+		userType,
+		no_of_items,
+	} = props;
 	const { day, date, month, year } = getDateJson(created_date);
 	const noOfItems = `${no_of_items} item${no_of_items > 1 ? "s" : ""} `;
 	return (
@@ -44,9 +117,7 @@ export default function renderListHeaderItem(props: Props) {
 					{order_no}
 				</Text>
 				<Text style={styles.noItemsText}>{noOfItems}</Text>
-				<TouchableOpacity onPress={onOtherDetailsPress} style={styles.otherDetContainer}>
-					<Text style={styles.otherDetailText}>{"other details"}</Text>
-				</TouchableOpacity>
+				{renderButtons(props)}
 			</View>
 			<View style={styles.statusContainer}>
 				<Image source={getStatusImage(status)} style={styles.statusImg} />
@@ -122,6 +193,8 @@ const styles = StyleSheet.create({
 		borderRadius: 4,
 		backgroundColor: Colors.bodySecondaryDark,
 		alignSelf: "flex-start",
+		marginHorizontal: 2,
+		marginVertical: 2,
 	},
 	statusText: {
 		color: Colors.bodySecondaryDark,

@@ -7,12 +7,23 @@
 
 import React, { PureComponent } from "react";
 import { createSwitchNavigator, createStackNavigator, createAppContainer } from "react-navigation";
-import { Login, AuthLoading, Orders, Cart } from "../containers";
+import {
+	Login,
+	AuthLoading,
+	Orders,
+	Cart,
+	CustomerContainer,
+	AddCustomerContainer,
+	ViewCart,
+} from "../containers";
 
 const Stack = createStackNavigator(
 	{
 		Orders: { screen: Orders },
 		Cart: { screen: Cart },
+		ViewCart: { screen: ViewCart },
+		Customers: { screen: CustomerContainer },
+		AddCustomer: { screen: AddCustomerContainer },
 	},
 	{
 		defaultNavigationOptions: () => ({

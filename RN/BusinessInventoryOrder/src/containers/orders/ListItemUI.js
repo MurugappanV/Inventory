@@ -6,8 +6,9 @@ import ListItemContentUI from "./ListItemContentUI";
 import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors } from "../../asset";
 
 type Props = {
-	onPress: Function,
 	data: any,
+	userType: number,
+	onOrderPress: Function,
 };
 
 export default class ListItem extends PureComponent<Props> {
@@ -22,11 +23,18 @@ export default class ListItem extends PureComponent<Props> {
 	};
 
 	render() {
-		const { data } = this.props;
+		const { data, userType, onOrderPress } = this.props;
 		const { isCollapsed } = this.state;
 		return (
 			<View style={styles.cont}>
-				<ListItemHeaderUI onOtherDetailsPress={this.onOtherDetailsPress} {...data} />
+				<ListItemHeaderUI
+					onOrderPress={(status: number) => {
+						onOrderPress(status, data.id, data.retailer.id, data.other_details);
+					}}
+					onOtherDetailsPress={this.onOtherDetailsPress}
+					{...data}
+					userType={userType}
+				/>
 				<Collapsible collapsed={isCollapsed}>
 					<ListItemContentUI {...data} />
 				</Collapsible>

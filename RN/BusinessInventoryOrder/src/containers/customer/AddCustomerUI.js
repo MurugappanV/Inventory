@@ -1,0 +1,115 @@
+import React, { PureComponent } from "react";
+import { View, StyleSheet, TextInput, Text } from "react-native";
+import { TextField } from "react-native-material-textfield";
+import { Button } from "../../components";
+import { Header } from "../header";
+import { ScalePerctFullHeight, ScalePerctFullWidth, Colors } from "../../asset";
+
+type Props = {
+	name: string,
+	phone: string,
+	address: string,
+	onNameInputChange: Function,
+	onPhoneInputChange: Function,
+	onAddressInputChange: Function,
+	onAddCustomer: Function,
+	loading: boolean,
+};
+
+export default class AddCustomerUI extends PureComponent<Props> {
+	render() {
+		const {
+			name,
+			phone,
+			address,
+			onNameInputChange,
+			onPhoneInputChange,
+			onAddressInputChange,
+			onAddCustomer,
+			loading,
+		} = this.props;
+		return (
+			<View>
+				<Header title="New Customer" />
+				<View style={styles.inputContainer}>
+					<TextField
+						onSubmitEditing={() => this.textInput.focus()}
+						returnKeyType="next"
+						label="Enter name "
+						value={name}
+						onChangeText={input => onNameInputChange(input)}
+					/>
+					<TextField
+						ref={(component: any) => {
+							this.textInput = component;
+						}}
+						returnKeyType="next"
+						onSubmitEditing={() => this.textInput2.focus()}
+						label="Enter phone number"
+						value={phone}
+						onChangeText={input => onPhoneInputChange(input)}
+					/>
+					{/* <TextField
+						ref={(component: any) => {
+							this.textInput2 = component;
+						}}
+						returnKeyType="done"
+						onSubmitEditing={onAddCustomer}
+						label="Enter address"
+						value={address}
+						onChangeText={input => onAddressInputChange(input)}
+                    /> */}
+					<Text style={styles.otherDetailsText}>{"Any other details"}</Text>
+					<TextInput
+						ref={(component: any) => {
+							this.textInput2 = component;
+						}}
+						returnKeyType="done"
+						multiline
+						label="Enter address"
+						style={styles.otherDetailsInput}
+						onChangeText={input => onAddressInputChange(input)}
+						value={address}
+						onSubmitEditing={() => {}}
+					/>
+				</View>
+				<Button
+					style={styles.loginBtn}
+					title="ADD"
+					onPress={onAddCustomer}
+					loading={loading}
+				/>
+			</View>
+		);
+	}
+}
+
+AddCustomerUI.defaultProps = {};
+
+const styles = StyleSheet.create({
+	loginBtn: {
+		alignSelf: "center",
+		width: "40%",
+	},
+	inputContainer: {
+		paddingHorizontal: ScalePerctFullWidth(10),
+		paddingVertical: ScalePerctFullHeight(10),
+	},
+	otherDetailsText: {
+		fontSize: 11,
+		paddingTop: 20,
+		paddingBottom: 5,
+		paddingHorizontal: 5,
+		color: Colors.bodySecondaryVarient,
+	},
+	otherDetailsInput: {
+		fontSize: 11,
+		padding: 10,
+		marginBottom: 20,
+		borderColor: Colors.bgPrimaryDark,
+		borderWidth: 1,
+		height: 100,
+		alignSelf: "stretch",
+		textAlignVertical: "top",
+	},
+});

@@ -19,10 +19,10 @@ class AuthLoadContainer extends PureComponent<Props> {
 		const userCred = getUserCredentialsRealm();
 		console.log("uc load ", userCred);
 		if (userCred != null) {
-			const { token, userId } = userCred;
+			const { token, userId, userType } = userCred;
 			const { setUserIdAction, navigation } = props;
 			setGlobalHeader(token, userId);
-			setUserIdAction(token, userId);
+			setUserIdAction(token, userId, userType);
 			navigation.navigate("Home");
 		} else {
 			const { navigation } = props;

@@ -9,11 +9,14 @@ type Props = {
 };
 
 export default function renderSubGroupList(props: Props) {
-	const { sub_groups, onQtyChanged } = props;
+	const { sub_groups, onQtyChanged, selected } = props;
 	return (
 		<FlatList
 			data={sub_groups}
-			renderItem={({ item }) => <SubGroupUI data={item} onQtyChanged={onQtyChanged} />}
+			extraData={selected}
+			renderItem={({ item }) => (
+				<SubGroupUI data={item} onQtyChanged={onQtyChanged} selected={selected} />
+			)}
 			keyExtractor={(item, index) => item.id.toString() + index}
 			style={styles.listcontainer}
 		/>

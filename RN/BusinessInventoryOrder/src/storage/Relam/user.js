@@ -1,10 +1,11 @@
 import realm from "./realm";
 
-export function addUserCredentialsRealm(token, userId) {
+export function addUserCredentialsRealm(token, userId, userType) {
 	realm.write(() => {
 		realm.create("UserCredentials", {
 			token,
 			userId,
+			userType,
 		});
 	});
 }

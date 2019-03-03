@@ -13,62 +13,27 @@ import SelectedItemUI from "./SelectedItemUI";
 import { Button } from "../../components";
 
 type Props = {
-	onCancel: Function,
-	selected: any,
-	onOrder: Function,
-	onItemUnSelected: Function,
+	items: any,
+	loading: boolean,
+	noRecordText: string,
 };
 
-const initialBottom =
-	ScalePerctFullHeight(0) - (Platform.OS == "android" && Platform.Version < 21 ? 24 : 0);
-
 export default class renderSelectedUI extends PureComponent<Props> {
-	constructor() {
-		super();
-		this.state = { isOpen: false };
-	}
-
-	toggleOpen = () => {
-		this.setState({ isOpen: !this.state.isOpen });
-	};
-
 	render() {
-		const { onItemUnSelected, onOrder, selected } = this.props;
-		const { isOpen } = this.state;
-
+		const { loading, noRecordText, items } = this.props;
 		return (
-			<View
-				style={[
-					styles.container,
-					isOpen
-						? { bottom: initialBottom }
-						: { bottom: (ScalePerctFullHeight(100) - 50) * -1 },
-				]}
-			>
-				<View style={styles.headerContainer}>
-					<Text style={styles.headerSelected}>{`Selected ${selected.size} item${
-						selected.size > 1 ? "s" : ""
-					}`}</Text>
-					<TouchableOpacity onPress={() => this.toggleOpen()} style={styles.btn}>
-						<Text style={styles.headerClose}>{isOpen ? "close" : "open"}</Text>
-					</TouchableOpacity>
-				</View>
-				<FlatList
-					data={Array.from(selected.entries())}
-					renderItem={({ item }) => (
-						<SelectedItemUI data={item} onPress={onItemUnSelected} />
-					)}
-					keyExtractor={(item, index) => item[0].toString() + index}
-					style={styles.listcontainer}
-					// ItemSeparatorComponent={renderSeperator}
-					// ListHeaderComponent={renderHeader}
-					// ListFooterComponent={() => renderFooter(loading)}
-					// ListEmptyComponent={() => renderEmpty(loading, noRecordText)}
-					// onRefresh={onFetchRefresh}
-					// refreshing={refreshing}
-				/>
-				<Button style={styles.orderBtn} title="ORDER" onPress={() => onOrder()} />
-			</View>
+			<FlatList
+				data={items}
+				renderItem={({ item }) => <SelectedItemUI data={item} onPress={() => {}} />}
+				keyExtractor={(item, index) => `${item.id}${index}`}
+				style={styles.listcontainer}
+				// ItemSeparatorComponent={renderSeperator}
+				// ListHeaderComponent={renderHeader}
+				ListFooterComponent={() => renderFooter(loading)}
+				ListEmptyComponent={() => renderEmpty(loading, noRecordText)}
+				// onRefresh={onFetchRefresh}
+				// refreshing={refreshing}
+			/>
 		);
 	}
 }

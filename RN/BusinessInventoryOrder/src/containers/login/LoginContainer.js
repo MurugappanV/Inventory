@@ -36,12 +36,12 @@ class LoginContainer extends PureComponent<Props> {
 		LoginApi(name, password, this.onLoginSuccess, this.onLoginFailure, this.onLoginError);
 	};
 
-	onLoginSuccess = (token: string, userId: number) => {
+	onLoginSuccess = (token: string, userId: number, userType: number) => {
 		const { navigation, setUserIdAction } = this.props;
 		this.setState({ loading: false });
 		setGlobalHeader(token, userId);
-		addUserCredentialsRealm(token, userId);
-		setUserIdAction(token, userId);
+		addUserCredentialsRealm(token, userId, userType);
+		setUserIdAction(token, userId, userType);
 		navigation.navigate("Home");
 	};
 
