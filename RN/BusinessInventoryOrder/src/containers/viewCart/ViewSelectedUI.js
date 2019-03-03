@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
 	listcontainer: {
 		flex: 1,
 		backgroundColor: "#00000010",
+		paddingTop: 10,
 	},
 	footer: {
 		padding: ScalePerctFullHeight(10),

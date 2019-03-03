@@ -58,8 +58,8 @@ function renderButton(label, onPress) {
 
 const userButtons = {
 	[UserType.admin]: ["View", "Edit", "Bill", "Send", "Close", "Cancel"],
-	[UserType.manager]: ["View", "Edit", "Cancel"],
-	[UserType.seller]: ["View", "Bill", "Send"],
+	[UserType.manager]: ["View", "Bill", "Send"],
+	[UserType.seller]: ["View", "Edit", "Cancel"],
 };
 
 function renderButtons(props) {

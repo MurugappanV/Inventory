@@ -7,6 +7,7 @@ import {
 	ActivityIndicator,
 	Text,
 	Platform,
+	Keyboard,
 } from "react-native";
 import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors } from "../../asset";
 import SelectedItemUI from "./SelectedItemUI";
@@ -19,8 +20,7 @@ type Props = {
 	onItemUnSelected: Function,
 };
 
-const initialBottom =
-	ScalePerctFullHeight(0) - (Platform.OS == "android" && Platform.Version < 21 ? 24 : 0);
+const initialBottom = (Platform.OS == "android" && Platform.Version < 21 ? 0 : 0) * -1;
 
 export default class renderSelectedUI extends PureComponent<Props> {
 	constructor() {
@@ -29,6 +29,7 @@ export default class renderSelectedUI extends PureComponent<Props> {
 	}
 
 	toggleOpen = () => {
+		Keyboard.dismiss();
 		this.setState({ isOpen: !this.state.isOpen });
 	};
 
@@ -42,7 +43,7 @@ export default class renderSelectedUI extends PureComponent<Props> {
 					styles.container,
 					isOpen
 						? { bottom: initialBottom }
-						: { bottom: (ScalePerctFullHeight(100) - 50) * -1 },
+						: { bottom: (ScalePerctFullHeight(100) - 74) * -1 },
 				]}
 			>
 				<View style={styles.headerContainer}>
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
 		left: 0,
 		right: 0,
 		width: ScalePerctFullWidth(100),
-		height: ScalePerctFullHeight(100),
+		height: ScalePerctFullHeight(100) - 24,
 		zIndex: 1000,
 		backgroundColor: Colors.bgPrimaryLight,
 		elevation: 15,
