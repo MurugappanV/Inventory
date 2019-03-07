@@ -27,7 +27,7 @@ export default class StockUI extends PureComponent<Props> {
 				{isAdd(userType) && (
 					<AddStockUI
 						onPress={() => {
-							// navigation.navigate("Cart");
+							navigation.navigate("AddStock");
 						}}
 					/>
 				)}

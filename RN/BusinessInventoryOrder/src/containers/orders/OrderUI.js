@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
 import { Header } from "../header";
 import AddOrderUI from "./AddOrderUI";
+import StockBtnUI from "./StockBtnUI";
 import OrderListUI from "./OrderListUI";
 import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors, UserType } from "../../asset";
 
@@ -12,6 +13,13 @@ type Props = {
 
 function isAdd(userType) {
 	if (userType === UserType.admin || userType === UserType.seller) {
+		return true;
+	}
+	return false;
+}
+
+function isStock(userType) {
+	if (userType === UserType.admin || userType === UserType.manager) {
 		return true;
 	}
 	return false;
@@ -28,6 +36,13 @@ export default class OrderUI extends PureComponent<Props> {
 					<AddOrderUI
 						onPress={() => {
 							navigation.navigate("Cart");
+						}}
+					/>
+				)}
+				{isStock(userType) && (
+					<StockBtnUI
+						onPress={() => {
+							navigation.navigate("Stocks");
 						}}
 					/>
 				)}

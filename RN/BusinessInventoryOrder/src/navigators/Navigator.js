@@ -15,6 +15,9 @@ import {
 	CustomerContainer,
 	AddCustomerContainer,
 	ViewCart,
+	Stocks,
+	AddStock,
+	ViewStock,
 } from "../containers";
 
 const Stack = createStackNavigator(
@@ -24,6 +27,9 @@ const Stack = createStackNavigator(
 		ViewCart: { screen: ViewCart },
 		Customers: { screen: CustomerContainer },
 		AddCustomer: { screen: AddCustomerContainer },
+		Stocks: { screen: Stocks },
+		AddStock: { screen: AddStock },
+		ViewStock: { screen: ViewStock },
 	},
 	{
 		defaultNavigationOptions: () => ({

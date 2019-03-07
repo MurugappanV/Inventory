@@ -69,7 +69,7 @@ class StocksContainer extends PureComponent<Props> {
 	onStockPress = (data: any) => {
 		const { navigation } = this.props;
 		const { id } = data;
-		navigation.navigate("ViewCart", {
+		navigation.navigate("ViewStock", {
 			id,
 			stockData: data,
 		});
