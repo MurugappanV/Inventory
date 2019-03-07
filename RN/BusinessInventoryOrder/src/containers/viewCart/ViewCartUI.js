@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
 import { Header } from "../header";
 import SelectedUI from "./ViewSelectedUI";
+import { CustomerItemUI } from "../../components";
 
 type Props = {
 	navigation: any,
@@ -13,7 +14,7 @@ export default class CartUI extends PureComponent<Props> {
 	};
 
 	render() {
-		const { navigation } = this.props;
+		const { navigation, orderData } = this.props;
 		return (
 			<View style={styles.container}>
 				<Header
@@ -21,6 +22,7 @@ export default class CartUI extends PureComponent<Props> {
 					navigation={navigation}
 					onBack={() => this.onBack(navigation)}
 				/>
+				<CustomerItemUI data={orderData.retailer} onPress={() => {}} />
 				<SelectedUI {...this.props} />
 			</View>
 		);

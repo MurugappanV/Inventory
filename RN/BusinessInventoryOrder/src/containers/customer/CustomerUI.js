@@ -3,8 +3,7 @@ import { View, StyleSheet, Text, TextInput, TouchableOpacity } from "react-nativ
 import { Header } from "../header";
 import CustomerListUI from "./CustomerListUI";
 import { ScalePerctFullHeight, ScalePerctFullWidth, Colors } from "../../asset";
-import { Button } from "../../components";
-import CustomerItemUI from "./CustomerItemUI";
+import { Button, CustomerItemUI } from "../../components";
 
 type Props = {
 	navigation: any,

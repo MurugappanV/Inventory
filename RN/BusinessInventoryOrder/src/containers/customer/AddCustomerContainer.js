@@ -20,6 +20,7 @@ class AddCustomerContainer extends PureComponent<Props> {
 		this.state = {
 			name: "",
 			phone: "",
+			gst: "",
 			address: "",
 			loading: false,
 		};
@@ -29,6 +30,7 @@ class AddCustomerContainer extends PureComponent<Props> {
 		this.state = {
 			name: "",
 			phone: "",
+			gst: "",
 			address: "",
 			loading: false,
 		};
@@ -42,17 +44,22 @@ class AddCustomerContainer extends PureComponent<Props> {
 		this.setState({ phone });
 	};
 
+	onGstInputChange = (gst: string) => {
+		this.setState({ gst });
+	};
+
 	onAddressInputChange = (address: string) => {
 		this.setState({ address });
 	};
 
 	onAddCustomer = () => {
-		const { name, phone, address } = this.state;
+		const { name, phone, gst, address } = this.state;
 		if (phone.match(phoneno)) {
 			AddCustomerApi(
 				name,
-				address,
+				address.split("\n").join(";"),
 				phone,
+				gst,
 				this.onAddSuccess,
 				this.onAddFailure,
 				this.onAddError,
@@ -83,7 +90,7 @@ class AddCustomerContainer extends PureComponent<Props> {
 	};
 
 	render() {
-		const { loading, name, phone, address } = this.state;
+		const { loading, name, phone, gst, address } = this.state;
 		return (
 			<AddCustomerUI
 				onAddCustomer={this.onAddCustomer}
@@ -92,9 +99,11 @@ class AddCustomerContainer extends PureComponent<Props> {
 				name={name}
 				phone={phone}
 				address={address}
+				gst={gst}
 				onNameInputChange={this.onNameInputChange}
 				onPhoneInputChange={this.onPhoneInputChange}
 				onAddressInputChange={this.onAddressInputChange}
+				onGstInputChange={this.onGstInputChange}
 			/>
 		);
 	}

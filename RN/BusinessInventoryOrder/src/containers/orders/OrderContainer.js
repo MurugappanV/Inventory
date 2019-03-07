@@ -66,13 +66,15 @@ class OrdersContainer extends PureComponent<Props> {
 		this.onOrder();
 	};
 
-	onOrderPress = (status: number, id, retailerId, otherDetails) => {
+	onOrderPress = (status: number, data: any) => {
 		const { navigation } = this.props;
+		const { id, retailer, other_details } = data
+		const retailerId = retailer.id;
+		const otherDetails = other_details;
 		if (status === 1) {
 			navigation.navigate("ViewCart", {
 				id,
-				retailerId,
-				otherDetails,
+				orderData: data
 			});
 		} else if (status === 2) {
 			navigation.navigate("Cart", {

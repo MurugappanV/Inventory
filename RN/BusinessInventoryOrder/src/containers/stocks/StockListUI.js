@@ -1,39 +1,44 @@
 import React from "react";
 import { StyleSheet, FlatList, View, ActivityIndicator, Text } from "react-native";
 import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors } from "../../asset";
-import {CustomerItemUI} from "../../components";
+import ListItemUI from "./ListItemUI";
 
 type Props = {
-	customers: any,
+	navigation: any,
+	stocks: any,
 	loading: boolean,
+	refreshing: boolean,
 	noRecordText: string,
-	onItemSelected: Function,
+	onFetchRefresh: Function,
+	userType: number,
 };
 
-export default function renderCartList(props: Props) {
-	const { customers, loading, noRecordText, onItemSelected } = props;
+export default function renderStockList(props: Props) {
+	const { stocks, loading, refreshing, noRecordText, onFetchRefresh } = props;
 	return (
 		<FlatList
-			data={customers}
-			renderItem={({ item }) => <CustomerItemUI data={item} onPress={onItemSelected} />}
+			data={stocks}
+			renderItem={({ item }) => <ListItemUI data={item} {...props} />}
 			keyExtractor={(item, index) => item.id.toString() + index}
 			style={styles.listcontainer}
 			// ItemSeparatorComponent={renderSeperator}
 			// ListHeaderComponent={renderHeader}
-			ListFooterComponent={() => renderFooter(loading)}
+			ListFooterComponent={() => renderFooter(loading, refreshing)}
 			ListEmptyComponent={() => renderEmpty(loading, noRecordText)}
-			// onRefresh={onFetchRefresh}
-			// refreshing={refreshing}
+			onRefresh={onFetchRefresh}
+			refreshing={refreshing}
 		/>
 	);
 }
 
 const renderHeader = () => {};
 const renderSeperator = () => {};
-const renderFooter = (loading: boolean) => {
+const renderFooter = (loading: boolean, refreshing: boolean) => {
 	return (
 		<View style={styles.footer}>
-			{loading && <ActivityIndicator size="small" color={Colors.bodyTitleVarient} />}
+			{loading && !refreshing && (
+				<ActivityIndicator size="small" color={Colors.bodyTitleVarient} />
+			)}
 		</View>
 	);
 };
@@ -48,7 +53,7 @@ const renderEmpty = (loading: boolean, noRecordText: string) => {
 	return null;
 };
 
-renderCartList.defaultProps = {};
+renderStockList.defaultProps = {};
 
 const styles = StyleSheet.create({
 	listcontainer: {

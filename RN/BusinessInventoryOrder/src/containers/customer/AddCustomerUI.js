@@ -21,11 +21,13 @@ export default class AddCustomerUI extends PureComponent<Props> {
 		const {
 			name,
 			phone,
+			gst,
 			address,
 			onNameInputChange,
 			onPhoneInputChange,
 			onAddressInputChange,
 			onAddCustomer,
+			onGstInputChange,
 			loading,
 		} = this.props;
 		return (
@@ -49,20 +51,20 @@ export default class AddCustomerUI extends PureComponent<Props> {
 						value={phone}
 						onChangeText={input => onPhoneInputChange(input)}
 					/>
-					{/* <TextField
+					<TextField
 						ref={(component: any) => {
 							this.textInput2 = component;
 						}}
-						returnKeyType="done"
-						onSubmitEditing={onAddCustomer}
-						label="Enter address"
-						value={address}
-						onChangeText={input => onAddressInputChange(input)}
-                    /> */}
+						returnKeyType="next"
+						onSubmitEditing={() => this.textInput3.focus()}
+						label="GST number"
+						value={gst}
+						onChangeText={input => onGstInputChange(input)}
+                    />
 					<Text style={styles.otherDetailsText}>{"Any other details"}</Text>
 					<TextInput
 						ref={(component: any) => {
-							this.textInput2 = component;
+							this.textInput3 = component;
 						}}
 						returnKeyType="done"
 						multiline

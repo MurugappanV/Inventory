@@ -3,6 +3,7 @@ import createReducer from "./CreateReducer";
 
 const initialUpdates = {
 	orderUpdate: false,
+	stockUpdate: false,
 	customerUpdate: false,
 };
 
@@ -17,6 +18,18 @@ export const updates = createReducer(initialUpdates, {
 		return {
 			...state,
 			orderUpdate: false,
+		};
+	},
+	[Types.update.SET_UPDATE_STOCK](state) {
+		return {
+			...state,
+			stockUpdate: true,
+		};
+	},
+	[Types.update.CLEAR_UPDATE_STOCK](state) {
+		return {
+			...state,
+			stockUpdate: false,
 		};
 	},
 	[Types.update.SET_UPDATE_CUSTOMER](state) {

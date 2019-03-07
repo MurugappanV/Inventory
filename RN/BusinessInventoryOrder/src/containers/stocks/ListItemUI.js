@@ -8,7 +8,7 @@ import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors } from "../..
 type Props = {
 	data: any,
 	userType: number,
-	onOrderPress: Function,
+	onStockPress: Function,
 };
 
 export default class ListItem extends PureComponent<Props> {
@@ -23,13 +23,13 @@ export default class ListItem extends PureComponent<Props> {
 	};
 
 	render() {
-		const { data, userType, onOrderPress } = this.props;
+		const { data, userType, onStockPress } = this.props;
 		const { isCollapsed } = this.state;
 		return (
 			<View style={styles.cont}>
 				<ListItemHeaderUI
-					onOrderPress={(status: number) => {
-						onOrderPress(status, data);
+					onStockPress={() => {
+						onStockPress(data);
 					}}
 					onOtherDetailsPress={this.onOtherDetailsPress}
 					{...data}

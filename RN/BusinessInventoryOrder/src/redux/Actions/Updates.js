@@ -14,6 +14,20 @@ export function clearOrderUpdateAction() {
 	};
 }
 
+export function setStockUpdateAction() {
+	return (dispatch: any) => {
+		// getState
+		dispatch({ type: Types.update.SET_UPDATE_STOCK });
+	};
+}
+
+export function clearStockUpdateAction() {
+	return (dispatch: any) => {
+		// getState
+		dispatch({ type: Types.update.CLEAR_UPDATE_STOCK });
+	};
+}
+
 export function setCustomerUpdateAction() {
 	return (dispatch: any) => {
 		// getState

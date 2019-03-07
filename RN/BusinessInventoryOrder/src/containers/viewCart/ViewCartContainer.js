@@ -20,15 +20,17 @@ type Props = {
 class CartContainer extends PureComponent<Props> {
 	constructor(props: Props) {
 		super(props);
-		this.state = { loading: false, noRecordText: "No items found", items: [] };
+		this.state = { loading: false, noRecordText: "No items found", items: [], orderData: undefined };
 	}
 
 	componentDidMount() {
 		const { navigation } = this.props;
 		const id = navigation.getParam("id");
+		const orderData = navigation.getParam("orderData");
 		if (id) {
 			this.fetchOrderItems(id);
 		}
+		this.setState({orderData: orderData})
 	}
 
 	fetchOrderItems = (id: number) => {
@@ -55,9 +57,9 @@ class CartContainer extends PureComponent<Props> {
 	};
 
 	render() {
-		const { loading, noRecordText, items } = this.state;
+		const { loading, noRecordText, items, orderData } = this.state;
 		return (
-			<CartUI {...this.props} loading={loading} noRecordText={noRecordText} items={items} />
+			<CartUI {...this.props} loading={loading} noRecordText={noRecordText} items={items} orderData={orderData}/>
 		);
 	}
 }

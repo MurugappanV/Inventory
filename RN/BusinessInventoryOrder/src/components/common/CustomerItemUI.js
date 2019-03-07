@@ -19,6 +19,12 @@ export default class CustomerItemUI extends PureComponent<Props> {
 				<Text style={styles.avilText}>
 					{data.address && data.address.split(";").join("\n")}
 				</Text>
+				<Text style={styles.avilText}>
+					{data.phone_no}
+				</Text>
+				<Text style={styles.avilText}>
+					{`GST ${data.gstin_no}`}
+				</Text>
 			</TouchableOpacity>
 		);
 	}
