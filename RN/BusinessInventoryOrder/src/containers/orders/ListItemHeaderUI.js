@@ -198,6 +198,6 @@ const styles = StyleSheet.create({
 	},
 	statusText: {
 		color: Colors.bodySecondaryDark,
-		fontSize: 14,
+		fontSize: 11,
 	},
 });

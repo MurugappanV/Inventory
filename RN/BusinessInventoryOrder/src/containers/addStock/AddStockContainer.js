@@ -84,9 +84,9 @@ class AddStockContainer extends PureComponent<Props> {
 	};
 
 	onAddStock = () => {
-		const { selectedItems } = this.props;
+		const { selected } = this.state;
 		const items = [];
-		selectedItems.forEach((value, key) => {
+		selected.forEach((value, key) => {
 			items.push({
 				item_id: key,
 				qty: value.qty,

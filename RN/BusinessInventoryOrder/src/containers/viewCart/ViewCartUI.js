@@ -6,6 +6,7 @@ import { CustomerItemUI } from "../../components";
 
 type Props = {
 	navigation: any,
+	orderData: any,
 };
 
 export default class CartUI extends PureComponent<Props> {
@@ -22,7 +23,7 @@ export default class CartUI extends PureComponent<Props> {
 					navigation={navigation}
 					onBack={() => this.onBack(navigation)}
 				/>
-				<CustomerItemUI data={orderData.retailer} onPress={() => {}} />
+				{orderData && <CustomerItemUI data={orderData.retailer} onPress={() => {}} />}
 				<SelectedUI {...this.props} />
 			</View>
 		);
