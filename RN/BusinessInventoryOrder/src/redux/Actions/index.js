@@ -5,6 +5,7 @@ import * as CartActions from "./Cart";
 import * as CustomerActions from "./Customer";
 import * as UpdatesAction from "./Updates";
 import * as StockActions from "./Stock";
+import * as UsersActions from "./Users";
 
 const Actions = Object.assign(
 	{},
@@ -15,6 +16,7 @@ const Actions = Object.assign(
 	CartActions,
 	CustomerActions,
 	UpdatesAction,
+	UsersActions,
 );
 
 export default Actions;

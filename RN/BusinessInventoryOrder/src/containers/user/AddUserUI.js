@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { View, StyleSheet, TextInput, Text } from "react-native";
+import { View, StyleSheet, Picker } from "react-native";
 import { TextField } from "react-native-material-textfield";
 import { Button } from "../../components";
 import { Header } from "../header";
@@ -7,30 +7,30 @@ import { ScalePerctFullHeight, ScalePerctFullWidth, Colors } from "../../asset";
 
 type Props = {
 	name: string,
-	phone: string,
-	address: string,
-	gst: string,
+	password: string,
+	email: string,
+	userType: number,
 	onNameInputChange: Function,
-	onPhoneInputChange: Function,
-	onAddressInputChange: Function,
-	onAddCustomer: Function,
-	onGstInputChange: Function,
+	onPasswordInputChange: Function,
+	onEmailInputChange: Function,
+	onUserTypeInputChange: Function,
+	onAddUser: Function,
 	loading: boolean,
 	navigation: any,
 };
 
-export default class AddCustomerUI extends PureComponent<Props> {
+export default class AddUserUI extends PureComponent<Props> {
 	render() {
 		const {
 			name,
-			phone,
-			gst,
-			address,
+			password,
+			email,
+			userType,
 			onNameInputChange,
-			onPhoneInputChange,
-			onAddressInputChange,
-			onAddCustomer,
-			onGstInputChange,
+			onPasswordInputChange,
+			onEmailInputChange,
+			onAddUser,
+			onUserTypeInputChange,
 			loading,
 			navigation,
 		} = this.props;
@@ -55,9 +55,9 @@ export default class AddCustomerUI extends PureComponent<Props> {
 						}}
 						returnKeyType="next"
 						onSubmitEditing={() => this.textInput2.focus()}
-						label="Enter phone number"
-						value={phone}
-						onChangeText={input => onPhoneInputChange(input)}
+						label="Enter password"
+						value={password}
+						onChangeText={input => onPasswordInputChange(input)}
 					/>
 					<TextField
 						ref={(component: any) => {
@@ -65,28 +65,25 @@ export default class AddCustomerUI extends PureComponent<Props> {
 						}}
 						returnKeyType="next"
 						onSubmitEditing={() => this.textInput3.focus()}
-						label="GST number"
-						value={gst}
-						onChangeText={input => onGstInputChange(input)}
+						label="Enter email address"
+						value={email}
+						onChangeText={input => onEmailInputChange(input)}
 					/>
-					<Text style={styles.otherDetailsText}>{"Any other details"}</Text>
-					<TextInput
-						ref={(component: any) => {
-							this.textInput3 = component;
-						}}
-						returnKeyType="done"
-						multiline
-						label="Enter address"
-						style={styles.otherDetailsInput}
-						onChangeText={input => onAddressInputChange(input)}
-						value={address}
-						onSubmitEditing={() => {}}
-					/>
+					<Picker
+						selectedValue={userType}
+						style={styles.picker}
+						onValueChange={(itemValue: number) => onUserTypeInputChange(itemValue)}
+					>
+						<Picker.Item label="Viewer" value={4} />
+						<Picker.Item label="Admin" value={1} />
+						<Picker.Item label="Manager" value={2} />
+						<Picker.Item label="Sales Person" value={3} />
+					</Picker>
 				</View>
 				<Button
 					style={styles.loginBtn}
 					title="ADD"
-					onPress={onAddCustomer}
+					onPress={onAddUser}
 					loading={loading}
 				/>
 			</View>
@@ -94,7 +91,7 @@ export default class AddCustomerUI extends PureComponent<Props> {
 	}
 }
 
-AddCustomerUI.defaultProps = {};
+AddUserUI.defaultProps = {};
 
 const styles = StyleSheet.create({
 	loginBtn: {
@@ -121,5 +118,9 @@ const styles = StyleSheet.create({
 		height: 100,
 		alignSelf: "stretch",
 		textAlignVertical: "top",
+	},
+	picker: {
+		height: 50,
+		width: 100,
 	},
 });

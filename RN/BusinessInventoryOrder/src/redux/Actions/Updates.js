@@ -41,3 +41,17 @@ export function clearCustomerUpdateAction() {
 		dispatch({ type: Types.update.CLEAR_UPDATE_CUSTOMER });
 	};
 }
+
+export function setUsersUpdateAction() {
+	return (dispatch: any) => {
+		// getState
+		dispatch({ type: Types.update.SET_UPDATE_USERS });
+	};
+}
+
+export function clearUsersUpdateAction() {
+	return (dispatch: any) => {
+		// getState
+		dispatch({ type: Types.update.CLEAR_UPDATE_USERS });
+	};
+}

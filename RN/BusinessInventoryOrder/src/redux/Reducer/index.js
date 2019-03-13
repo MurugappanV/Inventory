@@ -6,6 +6,7 @@ import * as CartReducer from "./Cart";
 import * as CustomerReducer from "./Customer";
 import * as UpdatesReducer from "./Updates";
 import * as StockReducer from "./Stock";
+import * as UsersReducer from "./Users";
 
 const reducer = combineReducers(
 	Object.assign(
@@ -16,6 +17,7 @@ const reducer = combineReducers(
 		CartReducer,
 		CustomerReducer,
 		UpdatesReducer,
+		UsersReducer,
 	),
 );
 export default reducer;

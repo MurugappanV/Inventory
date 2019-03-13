@@ -4,6 +4,7 @@ export { Orders } from "./orders";
 export { Cart } from "./cart";
 export { ViewCart } from "./viewCart";
 export { AddCustomerContainer, CustomerContainer } from "./customer";
+export { AddUserContainer, UserContainer } from "./user";
 export { Stocks } from "./stocks";
 export { AddStock } from "./addStock";
 export { ViewStock } from "./viewStock";

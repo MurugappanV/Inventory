@@ -18,6 +18,8 @@ import {
 	Stocks,
 	AddStock,
 	ViewStock,
+	AddUserContainer,
+	UserContainer,
 } from "../containers";
 
 const Stack = createStackNavigator(
@@ -27,6 +29,8 @@ const Stack = createStackNavigator(
 		ViewCart: { screen: ViewCart },
 		Customers: { screen: CustomerContainer },
 		AddCustomer: { screen: AddCustomerContainer },
+		Users: { screen: UserContainer },
+		AddUser: { screen: AddUserContainer },
 		Stocks: { screen: Stocks },
 		AddStock: { screen: AddStock },
 		ViewStock: { screen: ViewStock },

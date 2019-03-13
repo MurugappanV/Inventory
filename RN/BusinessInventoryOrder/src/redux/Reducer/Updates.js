@@ -5,6 +5,7 @@ const initialUpdates = {
 	orderUpdate: false,
 	stockUpdate: false,
 	customerUpdate: false,
+	usersUpdate: false,
 };
 
 export const updates = createReducer(initialUpdates, {
@@ -42,6 +43,18 @@ export const updates = createReducer(initialUpdates, {
 		return {
 			...state,
 			customerUpdate: false,
+		};
+	},
+	[Types.update.SET_UPDATE_USERS](state) {
+		return {
+			...state,
+			usersUpdate: true,
+		};
+	},
+	[Types.update.CLEAR_UPDATE_USERS](state) {
+		return {
+			...state,
+			usersUpdate: false,
 		};
 	},
 });
