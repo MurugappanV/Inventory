@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import { Header } from "../header";
 import SelectedUI from "./SelectedUI";
 import AddStockListUI from "./AddStockListUI";
-import { ScalePerctFullHeight, ScalePerctFullWidth } from "../../asset";
+import { ScalePerctFullHeight, ScalePerctFullWidth, Colors } from "../../asset";
 
 type Props = {
 	navigation: any,
@@ -21,10 +21,6 @@ export default class AddStockUI extends PureComponent<Props> {
 		navigation.goBack();
 	};
 
-	// onOrder = (navigation: any, orderId: number, retailerId: number, otherDetails: string) => {
-	// 	navigation.navigate("Customers", { id: orderId, retailerId, otherDetails });
-	// };
-
 	render() {
 		const { navigation, selected, onItemUnSelected, onAddStock } = this.props;
 		return (
@@ -34,6 +30,9 @@ export default class AddStockUI extends PureComponent<Props> {
 					navigation={navigation}
 					onBack={() => this.onBack(navigation)}
 				/>
+				<TouchableOpacity onPress={() => {}} style={styles.btn}>
+					<Text style={styles.btnText}>{"New Group"}</Text>
+				</TouchableOpacity>
 				<AddStockListUI {...this.props} />
 				{selected.size > 0 && (
 					<SelectedUI
@@ -55,5 +54,13 @@ const styles = StyleSheet.create({
 		// position: "absolute",
 		// width: ScalePerctFullWidth(100),
 		// height: ScalePerctFullHeight(100),
+	},
+	btn: {
+		padding: ScalePerctFullWidth(1),
+	},
+	btnText: {
+		color: Colors.bodySecondaryDark,
+		alignSelf: "flex-start",
+		fontSize: 11,
 	},
 });

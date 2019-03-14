@@ -86,8 +86,23 @@ class CartContainer extends PureComponent<Props> {
 
 	onItemSuccess = (items: any) => {
 		this.setState({ loading: false, noRecordText: "No items found" });
-		const { setItemsAction } = this.props;
-		setItemsAction(items);
+		const { setItemsAction, selectedItems, setCartSelectedAction } = this.props;
+		const newSelected = new Map([...selectedItems]); //
+		console.log("selected", newSelected);
+		const newItems = items.map((item: any) => {
+			console.log("item", item)
+			if (selectedItems.has(item.id)) {
+				newSelected.get(item.id).available = item.available + selectedItems.get(item.id).qty;
+			}
+			return {
+				...item,
+				available: selectedItems.has(item.id)
+					? (item.available + selectedItems.get(item.id).qty)
+					: item.available,
+			};
+		});
+		setItemsAction(newItems);
+		setCartSelectedAction(newSelected);
 	};
 
 	onItemFailure = (message: string) => {
@@ -104,7 +119,7 @@ class CartContainer extends PureComponent<Props> {
 		// AlertComp("Fetch item error", message, () => {});
 	};
 
-	onItemSelected = (id: number, billName: string, qty: number) => {
+	onItemSelected = (id: number, billName: string, qty: number, available: number) => {
 		const { selectedItems, setCartSelectedAction } = this.props;
 		const newSelected = new Map([...selectedItems]); //
 		if (qty === 0) {
@@ -112,7 +127,7 @@ class CartContainer extends PureComponent<Props> {
 				newSelected.delete(id);
 			}
 		} else {
-			newSelected.set(id, { qty, billName });
+			newSelected.set(id, { qty, billName, available });
 		}
 		console.log("selected", newSelected);
 		setCartSelectedAction(newSelected);

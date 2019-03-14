@@ -21,6 +21,9 @@ export default class SubGroupUI extends PureComponent<Props> {
 			<View style={styles.cont}>
 				<View style={styles.headerContainer}>
 					<Text style={styles.headerText}>{name}</Text>
+					<TouchableOpacity onPress={() => {}} style={styles.btn}>
+						<Text style={styles.btnText}>{"New Item"}</Text>
+					</TouchableOpacity>
 				</View>
 				<FlatList
 					data={items}
@@ -44,9 +47,19 @@ const styles = StyleSheet.create({
 	headerContainer: {
 		borderBottomWidth: 0.2,
 		borderColor: "#00000020",
-		padding: ScalePerctFullWidth(1),
+		flexDirection: "row",
 	},
 	headerText: {
+		color: Colors.bodySecondaryDark,
+		alignSelf: "flex-start",
+		fontSize: 11,
+		padding: ScalePerctFullWidth(1),
+		flex: 1,
+	},
+	btn: {
+		padding: ScalePerctFullWidth(1),
+	},
+	btnText: {
 		color: Colors.bodySecondaryDark,
 		alignSelf: "flex-start",
 		fontSize: 11,

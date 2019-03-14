@@ -13,7 +13,16 @@ type Props = {
 export default class SelectedItemUI extends PureComponent<Props> {
 	constructor(props) {
 		super(props);
-		this.state = { text: "" };
+		this.state = { text: props.data[1].qty };
+	}
+
+	static getDerivedStateFromProps(nextProps, prevState) {
+		if (prevState.text !== nextProps.data[1].qty) {
+			return {
+				text: nextProps.data[1].qty,
+			}
+		}
+		return null;
 	}
 
 	onChanged(id, text, available, bill_name) {
@@ -30,19 +39,26 @@ export default class SelectedItemUI extends PureComponent<Props> {
 			}
 		}
 		if (newText === "") newText = "0";
-		onQtyChanged(id, bill_name, Number.parseInt(newText));
-		this.setState({ text: newText });
+		onQtyChanged(id, bill_name, Number.parseInt(newText), available);
+		// this.setState({ text: newText });
 	}
 
 	render() {
 		const { data, onPress } = this.props;
+		const { text } = this.state;
 		const id = data[0];
-		const { qty, billName } = data[1];
+		const { qty, billName, available } = data[1];
 		return (
 			<View style={styles.cont}>
 				<View style={styles.headerContainer}>
 					<Text style={styles.headerText}>{billName}</Text>
-					<Text style={styles.avilText}>{qty}</Text>
+					<TextInput
+						style={styles.input}
+						keyboardType="numeric"
+						onChangeText={text => this.onChanged(id, text, available, billName)}
+						value={text}
+					/>
+					<Text style={styles.avilText}>{` / ${available}`}</Text>
 					<TouchableOpacity style={styles.cancelBtn} onPress={() => onPress(id)}>
 						<Text style={styles.headerText}>{"X"}</Text>
 					</TouchableOpacity>
@@ -78,7 +94,6 @@ const styles = StyleSheet.create({
 		padding: 0,
 	},
 	avilText: {
-		width: ScalePerctFullWidth(10),
 		fontSize: 11,
 		color: Colors.bodyPrimaryVarient,
 	},

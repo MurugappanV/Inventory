@@ -29,6 +29,9 @@ export default class GroupUI extends PureComponent<Props> {
 			<View style={styles.cont}>
 				<TouchableOpacity onPress={this.onHeaderPress} style={styles.headerContainer}>
 					<Text style={styles.headerText}>{name}</Text>
+					<TouchableOpacity onPress={() => {}} style={styles.btn}>
+						<Text style={styles.btnText}>{"New Sub Group"}</Text>
+					</TouchableOpacity>
 				</TouchableOpacity>
 				{isCollapsed && (
 					<View>
@@ -48,9 +51,20 @@ const styles = StyleSheet.create({
 	headerContainer: {
 		borderBottomWidth: 1,
 		borderColor: Colors.bodySecondaryDark,
-		padding: ScalePerctFullWidth(1),
+		flexDirection: "row",
 	},
 	headerText: {
+		color: Colors.bodySecondaryDark,
+		alignSelf: "flex-start",
+		fontSize: 11,
+		fontWeight: "bold",
+		padding: ScalePerctFullWidth(1),
+		flex: 1,
+	},
+	btn: {
+		padding: ScalePerctFullWidth(1),
+	},
+	btnText: {
 		color: Colors.bodySecondaryDark,
 		alignSelf: "flex-start",
 		fontSize: 11,

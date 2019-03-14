@@ -30,7 +30,7 @@ export default class ItemUI extends PureComponent<Props> {
 			}
 		}
 		if (newText === "") newText = "0";
-		onQtyChanged(id, bill_name, Number.parseInt(newText));
+		onQtyChanged(id, bill_name, Number.parseInt(newText), available);
 		// this.setState({ text: newText });
 	}
 
@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
 		padding: 0,
 	},
 	avilText: {
-		width: ScalePerctFullWidth(10),
 		fontSize: 11,
 		color: Colors.bodyPrimaryVarient,
 	},

@@ -18,14 +18,16 @@ type Props = {
 	selected: any,
 	onOrder: Function,
 	onItemUnSelected: Function,
+	onQtyChanged: Function,
+	isDefaultOpen?: boolean,
 };
 
 const initialBottom = (Platform.OS == "android" && Platform.Version < 21 ? 0 : 0) * -1;
 
 export default class renderSelectedUI extends PureComponent<Props> {
-	constructor() {
-		super();
-		this.state = { isOpen: false };
+	constructor(props) {
+		super(props);
+		this.state = { isOpen: props.isDefaultOpen };
 	}
 
 	toggleOpen = () => {
@@ -34,7 +36,7 @@ export default class renderSelectedUI extends PureComponent<Props> {
 	};
 
 	render() {
-		const { onItemUnSelected, onOrder, selected } = this.props;
+		const { onQtyChanged, onItemUnSelected, onOrder, selected } = this.props;
 		const { isOpen } = this.state;
 
 		return (
@@ -57,7 +59,7 @@ export default class renderSelectedUI extends PureComponent<Props> {
 				<FlatList
 					data={Array.from(selected.entries())}
 					renderItem={({ item }) => (
-						<SelectedItemUI data={item} onPress={onItemUnSelected} />
+						<SelectedItemUI data={item} onPress={onItemUnSelected} onQtyChanged={onQtyChanged}/>
 					)}
 					keyExtractor={(item, index) => item[0].toString() + index}
 					style={styles.listcontainer}
@@ -94,7 +96,9 @@ const renderEmpty = (loading: boolean, noRecordText: string) => {
 	return null;
 };
 
-renderSelectedUI.defaultProps = {};
+renderSelectedUI.defaultProps = {
+	isDefaultOpen: false,
+};
 
 const styles = StyleSheet.create({
 	container: {

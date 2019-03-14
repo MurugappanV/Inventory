@@ -13,6 +13,7 @@ type Props = {
 	selected: any,
 	deletedItems: any,
 	onItemUnSelected: Function,
+	onQtyChanged: Function,
 };
 
 export default class CartUI extends PureComponent<Props> {
@@ -33,6 +34,7 @@ export default class CartUI extends PureComponent<Props> {
 			onItemUnSelected,
 			otherDetails,
 			deletedItems,
+			onQtyChanged,
 		} = this.props;
 		return (
 			<View style={styles.container}>
@@ -45,10 +47,12 @@ export default class CartUI extends PureComponent<Props> {
 				{/* <AddOrderUI onPress={() => {}} /> */}
 				{selected.size > 0 && (
 					<SelectedUI
+						isDefaultOpen={!!orderId}
 						selected={selected}
 						deletedItems={deletedItems}
 						onOrder={() => this.onOrder(navigation, orderId, retailerId, otherDetails)}
 						onItemUnSelected={onItemUnSelected}
+						onQtyChanged={onQtyChanged}
 					/>
 				)}
 			</View>
