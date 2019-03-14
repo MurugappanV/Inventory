@@ -13,14 +13,14 @@ type Props = {
 export default class SelectedItemUI extends PureComponent<Props> {
 	constructor(props) {
 		super(props);
-		this.state = { text: props.data[1].qty };
+		this.state = { text: props.data[1].qty + "" };
 	}
 
 	static getDerivedStateFromProps(nextProps, prevState) {
 		if (prevState.text !== nextProps.data[1].qty) {
 			return {
-				text: nextProps.data[1].qty,
-			}
+				text: nextProps.data[1].qty + "",
+			};
 		}
 		return null;
 	}

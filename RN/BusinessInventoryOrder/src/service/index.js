@@ -1,4 +1,4 @@
-export { LoginApi, LogoutApi } from "./Authentication";
+export { LoginApi, LogoutApi, PermissionsApi } from "./Authentication";
 export { OrdersApi, OrderItemsApi, AddOrderApi, UpdateOrderApi, UpdateStatusApi } from "./Order";
 export { AddCustomerApi, CustomerListApi, UpdateCustomerApi } from "./Customer";
 export { ItemsApi, AddGroupApi, AddItemApi, AddSubGroupApi } from "./Item";

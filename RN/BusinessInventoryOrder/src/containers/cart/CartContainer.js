@@ -60,7 +60,7 @@ class CartContainer extends PureComponent<Props> {
 		const { setCartSelectedAction, setCartDeletedAction } = this.props;
 		setCartSelectedAction(newSelected);
 		setCartDeletedAction(newDeleted);
-		this.onItem();
+		this.onItem(newSelected);
 	};
 
 	onOrderFailure = (message: string) => {
@@ -77,28 +77,47 @@ class CartContainer extends PureComponent<Props> {
 		// AlertComp("Fetch item error", message, () => {});
 	};
 
-	onItem = () => {
+	onItem = (selected: any) => {
 		this.setState({ loading: true });
 		const { clearItemsAction } = this.props;
 		clearItemsAction();
-		ItemsApi(this.onItemSuccess, this.onItemFailure, this.onItemError);
+		ItemsApi(
+			(items: any) => this.onItemSuccess(selected, items),
+			this.onItemFailure,
+			this.onItemError,
+		);
 	};
 
-	onItemSuccess = (items: any) => {
+	onItemSuccess = (selected: any, items: any) => {
 		this.setState({ loading: false, noRecordText: "No items found" });
-		const { setItemsAction, selectedItems, setCartSelectedAction } = this.props;
-		const newSelected = new Map([...selectedItems]); //
+		const { setItemsAction, setCartSelectedAction } = this.props;
+		const selectedItems = selected || new Map();
+		const newSelected = new Map(); //
 		console.log("selected", newSelected);
-		const newItems = items.map((item: any) => {
-			console.log("item", item)
-			if (selectedItems.has(item.id)) {
-				newSelected.get(item.id).available = item.available + selectedItems.get(item.id).qty;
-			}
+		const newItems = items.map((group: any) => {
 			return {
-				...item,
-				available: selectedItems.has(item.id)
-					? (item.available + selectedItems.get(item.id).qty)
-					: item.available,
+				...group,
+				sub_groups: group.sub_groups.map((subGroup: any) => {
+					return {
+						...subGroup,
+						items: subGroup.items.map((item: any) => {
+							if (selectedItems.has(item.id)) {
+								const { qty } = selectedItems.get(item.id);
+								newSelected.set(item.id, {
+									qty,
+									billName: item.bill_name,
+									available: item.available + qty,
+								});
+							}
+							return {
+								...item,
+								available: selectedItems.has(item.id)
+									? item.available + selectedItems.get(item.id).qty
+									: item.available,
+							};
+						}),
+					};
+				}),
 			};
 		});
 		setItemsAction(newItems);

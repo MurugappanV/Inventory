@@ -4,31 +4,49 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Actions } from "../../redux";
 import { Colors, ScalePerctFullWidth, ScalePerctFullHeight } from "../../asset";
-import { getUserCredentialsRealm } from "../../storage";
-import { setGlobalHeader } from "../../service";
+import { getUserStorage } from "../../storage";
+import { setGlobalHeader, PermissionsApi } from "../../service";
 import { LoadingComp } from "../../components";
 
 type Props = {
 	navigation: any,
-	setUserIdAction: Function,
+	setUserPermissions: Function,
 };
 
 class AuthLoadContainer extends PureComponent<Props> {
 	constructor(props) {
 		super(props);
-		const userCred = getUserCredentialsRealm();
-		console.log("uc load ", userCred);
-		if (userCred != null) {
-			const { token, userId, userType } = userCred;
-			const { setUserIdAction, navigation } = props;
-			setGlobalHeader(token, userId);
-			setUserIdAction(token, userId, userType);
-			navigation.navigate("Home");
-		} else {
-			const { navigation } = props;
-			navigation.navigate("Login");
-		}
+		getUserStorage()
+			.then((user: string) => {
+				if (user != null) {
+					const userCred = user.split(",");
+					setGlobalHeader(userCred[1], userCred[0]);
+					PermissionsApi(
+						(permissions: any) => {
+							this.onPreferenceSuccess(userCred[0], userCred[1], permissions);
+						},
+						this.onFailure,
+						this.onFailure,
+					);
+				} else {
+					this.onFailure();
+				}
+			})
+			.catch(() => {
+				this.onFailure();
+			});
 	}
+
+	onPreferenceSuccess = (userId, token, permissions) => {
+		const { setUserPermissions, navigation } = this.props;
+		setUserPermissions(userId, token, permissions);
+		navigation.navigate("Home");
+	};
+
+	onFailure = () => {
+		const { navigation } = this.props;
+		navigation.navigate("Login");
+	};
 
 	render() {
 		return (

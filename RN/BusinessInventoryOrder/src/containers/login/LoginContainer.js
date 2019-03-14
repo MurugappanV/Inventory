@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import LoginUI from "./LoginUI";
 import { LoginApi, setGlobalHeader } from "../../service";
 import { AlertComp } from "../../components";
-import { addUserCredentialsRealm } from "../../storage";
+import { setUserStorage } from "../../storage";
 import { Actions } from "../../redux";
 
 type Props = {
@@ -36,12 +36,13 @@ class LoginContainer extends PureComponent<Props> {
 		LoginApi(name, password, this.onLoginSuccess, this.onLoginFailure, this.onLoginError);
 	};
 
-	onLoginSuccess = (token: string, userId: number, userType: number) => {
+	onLoginSuccess = (user: any) => {
+		// token: string, userId: number, userType: number
 		const { navigation, setUserIdAction } = this.props;
 		this.setState({ loading: false });
-		setGlobalHeader(token, userId);
-		addUserCredentialsRealm(token, userId, userType);
-		setUserIdAction(token, userId, userType);
+		setGlobalHeader(user.token, user.user_id);
+		setUserStorage(user.user_id, user.token);
+		setUserIdAction(user);
 		navigation.navigate("Home");
 	};
 

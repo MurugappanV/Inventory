@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import HeaderUI from "./HeaderUI";
 import { LogoutApi } from "../../service";
-import { removeUserCredentialsRealm } from "../../storage/Relam/user";
+import { setUserStorage } from "../../storage";
 import { AlertComp } from "../../components";
 
 type Props = {
@@ -20,7 +20,7 @@ export default class Header extends PureComponent<Props> {
 			"Sure, you want to logout?",
 			() => {
 				LogoutApi(this.onLogOutSuccess, this.onLogOutFailure, this.onLogOutError);
-				removeUserCredentialsRealm();
+				setUserStorage(null);
 				const { navigation } = this.props;
 				navigation.navigate("Login");
 			},

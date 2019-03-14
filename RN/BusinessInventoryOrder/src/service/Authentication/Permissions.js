@@ -1,10 +1,8 @@
 import { BaseAxiosInstance } from "../axios";
 
-const LoginApi = (userName, password, onSuccess, onFailure, onError) => {
-	const url = "login";
-	// login='robodiego'
-	// password='Buddy6jar!'
-	BaseAxiosInstance.post(url, { name: userName, password })
+const PermissionsApi = (onSuccess, onFailure, onError) => {
+	const url = "permissions";
+	BaseAxiosInstance.get(url)
 		.then((response: any) => {
 			if (response.data.status === 1) {
 				onSuccess(response.data.data);
@@ -17,4 +15,4 @@ const LoginApi = (userName, password, onSuccess, onFailure, onError) => {
 		});
 };
 
-export default LoginApi;
+export default PermissionsApi;

@@ -1,13 +1,13 @@
 import { AsyncStorage } from "react-native";
 
-export function setUserIdStorage(userId) {
+export function setUserStorage(userId, token) {
 	if (userId == null) {
-		AsyncStorage.removeItem("userId");
+		AsyncStorage.removeItem("user");
 	} else {
-		AsyncStorage.setItem("userId", userId);
+		AsyncStorage.setItem("user", `${userId},${token}`);
 	}
 }
 
-export function getUserIdStorage() {
-	return AsyncStorage.getItem("userId");
+export function getUserStorage() {
+	return AsyncStorage.getItem("user");
 }
