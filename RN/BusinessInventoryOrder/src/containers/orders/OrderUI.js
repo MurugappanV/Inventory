@@ -25,12 +25,29 @@ function isStock(userType) {
 	return false;
 }
 
+function isSettings(userType) {
+	if (userType === UserType.admin) {
+		return true;
+	}
+	return false;
+}
+
 export default class OrderUI extends PureComponent<Props> {
+	onSettings = () => {
+		const { navigation } = this.props;
+		navigation.navigate("Users");
+	};
+
 	render() {
 		const { navigation, userType } = this.props;
 		return (
 			<View style={styles.container}>
-				<Header title="Orders" isLogoutEnable navigation={navigation} />
+				<Header
+					title="Orders"
+					isLogoutEnable
+					navigation={navigation}
+					onSettings={isSettings(userType) ? this.onSettings : undefined}
+				/>
 				<OrderListUI {...this.props} />
 				{isAdd(userType) && (
 					<AddOrderUI

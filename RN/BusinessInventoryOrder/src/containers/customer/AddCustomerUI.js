@@ -39,7 +39,7 @@ export default class AddCustomerUI extends PureComponent<Props> {
 				<Header
 					title="New Customer"
 					navigation={navigation}
-					onBack={() => this.onBack(navigation)}
+					onBack={() => navigation.goBack()}
 				/>
 				<View style={styles.inputContainer}>
 					<TextField

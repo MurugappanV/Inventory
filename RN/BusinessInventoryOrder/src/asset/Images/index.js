@@ -8,6 +8,7 @@
 const Images = {
 	backImg: require("./back.png"),
 	addImg: require("./add.png"),
+	adminImg: require("./admin.png"),
 	inventoryImg: require("./inventory.png"),
 	logoutImg: require("./logout.png"),
 	tickImg: require("./tick.png"),

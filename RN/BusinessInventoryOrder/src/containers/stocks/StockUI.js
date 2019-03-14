@@ -22,7 +22,12 @@ export default class StockUI extends PureComponent<Props> {
 		const { navigation, userType } = this.props;
 		return (
 			<View style={styles.container}>
-				<Header title="Stocks" isLogoutEnable navigation={navigation} onBack={() => this.onBack(navigation)} />
+				<Header
+					title="Stocks"
+					isLogoutEnable
+					navigation={navigation}
+					onBack={() => navigation.goBack()}
+				/>
 				<StockListUI {...this.props} />
 				{isAdd(userType) && (
 					<AddStockUI

@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { View, StyleSheet, Picker } from "react-native";
+import { View, StyleSheet, Picker, Text } from "react-native";
 import { TextField } from "react-native-material-textfield";
 import { Button } from "../../components";
 import { Header } from "../header";
@@ -37,9 +37,9 @@ export default class AddUserUI extends PureComponent<Props> {
 		return (
 			<View>
 				<Header
-					title="New Customer"
+					title="New User"
 					navigation={navigation}
-					onBack={() => this.onBack(navigation)}
+					onBack={() => navigation.goBack()}
 				/>
 				<View style={styles.inputContainer}>
 					<TextField
@@ -64,11 +64,12 @@ export default class AddUserUI extends PureComponent<Props> {
 							this.textInput2 = component;
 						}}
 						returnKeyType="next"
-						onSubmitEditing={() => this.textInput3.focus()}
+						onSubmitEditing={() => {}}
 						label="Enter email address"
 						value={email}
 						onChangeText={input => onEmailInputChange(input)}
 					/>
+					<Text style={styles.otherDetailsText}>{"Select user type"}</Text>
 					<Picker
 						selectedValue={userType}
 						style={styles.picker}
@@ -80,12 +81,7 @@ export default class AddUserUI extends PureComponent<Props> {
 						<Picker.Item label="Sales Person" value={3} />
 					</Picker>
 				</View>
-				<Button
-					style={styles.loginBtn}
-					title="ADD"
-					onPress={onAddUser}
-					loading={loading}
-				/>
+				<Button style={styles.loginBtn} title="ADD" onPress={onAddUser} loading={loading} />
 			</View>
 		);
 	}
@@ -120,7 +116,7 @@ const styles = StyleSheet.create({
 		textAlignVertical: "top",
 	},
 	picker: {
-		height: 50,
-		width: 100,
+		height: 40,
+		width: 200,
 	},
 });

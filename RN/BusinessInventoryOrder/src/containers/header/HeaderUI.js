@@ -9,15 +9,18 @@ type Props = {
 	onLogout?: Function,
 	onBack?: Function,
 	isLogoutEnable?: boolean,
+	onSettings?: Function,
 };
 
 export default function HeaderUI(props: Props) {
-	const { onBack, onLogout, isLogoutEnable, title, style } = props;
+	const { onBack, onLogout, isLogoutEnable, title, style, onSettings } = props;
 	return (
 		<View>
 			<StatusBar backgroundColor={Colors.bgSecondaryDark} barStyle="light-content" />
 			<View style={StyleSheet.flatten([styles.container, style])}>
-				{!!onBack && (
+				{!onBack ? (
+					<View style={styles.emptyView} />
+				) : (
 					<ImageBtn
 						style={styles.back}
 						imgStyle={styles.backImage}
@@ -25,19 +28,28 @@ export default function HeaderUI(props: Props) {
 						onPress={onBack}
 					/>
 				)}
-				{!onBack && <View style={styles.emptyView} />}
+				{onSettings && <View style={styles.emptyView} />}
 				<View style={styles.textView}>
 					<Text style={styles.title}>{title}</Text>
 				</View>
-				{!!isLogoutEnable && (
+				{onSettings && (
+					<ImageBtn
+						style={styles.settings}
+						imgStyle={styles.settingsImage}
+						source={Images.adminImg}
+						onPress={onSettings}
+					/>
+				)}
+				{isLogoutEnable ? (
 					<ImageBtn
 						style={styles.logout}
 						imgStyle={styles.logoutImage}
 						source={Images.logoutImg}
 						onPress={onLogout}
 					/>
+				) : (
+					<View style={styles.emptyView} />
 				)}
-				{!isLogoutEnable && <View style={styles.emptyView} />}
 			</View>
 		</View>
 	);
@@ -48,6 +60,7 @@ HeaderUI.defaultProps = {
 	isLogoutEnable: false,
 	onLogout: undefined,
 	onBack: undefined,
+	onSettings: undefined,
 };
 
 const styles = StyleSheet.create({
@@ -96,6 +109,16 @@ const styles = StyleSheet.create({
 		tintColor: Colors.bodyPrimaryLight,
 	},
 	logout: {
+		alignSelf: "stretch",
+		padding: 0,
+		paddingLeft: Metrics.DEFAULT_PADDING,
+		paddingRight: Metrics.DEFAULT_PADDING,
+	},
+	settingsImage: {
+		width: ScalePerctFullWidth(4),
+		height: ScalePerctFullWidth(4),
+	},
+	settings: {
 		alignSelf: "stretch",
 		padding: 0,
 		paddingLeft: Metrics.DEFAULT_PADDING,

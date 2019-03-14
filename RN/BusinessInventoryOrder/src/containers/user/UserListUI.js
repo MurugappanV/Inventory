@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, FlatList, View, ActivityIndicator, Text } from "react-native";
 import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors } from "../../asset";
-import { CustomerItemUI } from "../../components";
+import { UserItemUI } from "../../components";
 
 type Props = {
 	users: any,
@@ -15,7 +15,7 @@ export default function renderCartList(props: Props) {
 	return (
 		<FlatList
 			data={users}
-			renderItem={({ item }) => <CustomerItemUI data={item} onPress={onUserTypeChange} />}
+			renderItem={({ item }) => <UserItemUI data={item} onPress={onUserTypeChange} />}
 			keyExtractor={(item, index) => item.id.toString() + index}
 			style={styles.listcontainer}
 			// ItemSeparatorComponent={renderSeperator}

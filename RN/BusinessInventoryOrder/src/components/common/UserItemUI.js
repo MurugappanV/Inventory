@@ -21,16 +21,16 @@ export default class UserItemUI extends PureComponent<Props> {
 		return (
 			<View onPress={() => onPress(data.id)} style={styles.cont}>
 				<Text style={styles.headerText}>{data.name}</Text>
-				<Text style={styles.avilText}>
-					{data.password}
-				</Text>
-				<Text style={styles.avilText}>
-					{data.email}
-				</Text>
+				<Text style={styles.avilText}>{data.password}</Text>
+				<Text style={styles.avilText}>{data.email}</Text>
 				<Picker
 					selectedValue={data.user_type}
 					style={styles.picker}
-					onValueChange={(itemValue: number) => onPress(data.id, itemValue, data.name, UserTypes[itemValue])}
+					onValueChange={(itemValue: number) =>
+						onPress(data.id, itemValue, data.name, UserTypes[itemValue])
+					}
+					itemStyle={styles.pickerItem}
+					prompt={"Select user type"}
 				>
 					<Picker.Item label="Viewer" value={4} />
 					<Picker.Item label="Admin" value={1} />
@@ -63,7 +63,11 @@ const styles = StyleSheet.create({
 		paddingVertical: 5,
 	},
 	picker: {
-		height: 50,
-		width: 100,
+		height: 40,
+		width: 200,
+		padding: 0,
+	},
+	pickerItem: {
+		fontSize: 11,
 	},
 });
