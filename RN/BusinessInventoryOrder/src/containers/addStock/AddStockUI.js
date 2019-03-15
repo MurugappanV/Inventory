@@ -21,6 +21,32 @@ export default class AddStockUI extends PureComponent<Props> {
 		navigation.goBack();
 	};
 
+	renderConfirm = (
+		customer: any,
+		otherDetails: string,
+		onConfirm: Function,
+		onItemSelected: Function,
+		onOtherDetailsChange: Function,
+	) => {
+		return (
+			<TouchableOpacity
+				onPress={() => onItemSelected(null)}
+				style={styles.confirmAbsoluteContainer}
+			>
+				<TouchableOpacity onPress={() => {}} style={styles.confirmContainer}>
+					<Text style={styles.otherDetailsText}>{"Any other details"}</Text>
+					<TextInput
+						multiline
+						style={styles.otherDetailsInput}
+						onChangeText={(textChange: string) => onOtherDetailsChange(textChange)}
+						value={otherDetails}
+					/>
+					<Button style={styles.orderBtn} title="Confirm" onPress={() => onConfirm()} />
+				</TouchableOpacity>
+			</TouchableOpacity>
+		);
+	};
+
 	render() {
 		const { navigation, selected, onItemUnSelected, onAddStock } = this.props;
 		return (

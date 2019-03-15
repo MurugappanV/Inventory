@@ -11,6 +11,7 @@ type Props = {
 	retailerId: number,
 	otherDetails: string,
 	selected: any,
+	items: any,
 	deletedItems: any,
 	onItemUnSelected: Function,
 	onQtyChanged: Function,
@@ -31,6 +32,7 @@ export default class CartUI extends PureComponent<Props> {
 			orderId,
 			retailerId,
 			selected,
+			items,
 			onItemUnSelected,
 			otherDetails,
 			deletedItems,
@@ -45,7 +47,7 @@ export default class CartUI extends PureComponent<Props> {
 				/>
 				<CartListUI {...this.props} />
 				{/* <AddOrderUI onPress={() => {}} /> */}
-				{selected.size > 0 && (
+				{items.size > 0 && (
 					<SelectedUI
 						isDefaultOpen={!!orderId}
 						selected={selected}
