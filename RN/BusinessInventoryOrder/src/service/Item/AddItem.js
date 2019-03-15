@@ -5,7 +5,7 @@ const AddItemApi = (name, billName, subGroupId, onSuccess, onFailure, onError) =
 	BaseAxiosInstance.post(url, { name, bill_name: billName, sub_group_id: subGroupId })
 		.then((response: any) => {
 			if (response.data.status === 1) {
-				onSuccess(response.data.message);
+				onSuccess(response.data.data);
 			} else {
 				onFailure(response.data.message);
 			}

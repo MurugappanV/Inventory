@@ -6,6 +6,7 @@ import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors } from "../..
 type Props = {
 	onPress: Function,
 	onQtyChanged: Function,
+	onAlertOpen: Function,
 	data: any,
 };
 
@@ -15,13 +16,13 @@ export default class SubGroupUI extends PureComponent<Props> {
 	// }
 
 	render() {
-		const { data, onQtyChanged, selected } = this.props;
+		const { data, onQtyChanged, selected, onAlertOpen } = this.props;
 		const { name, id, items } = data;
 		return (
 			<View style={styles.cont}>
 				<View style={styles.headerContainer}>
 					<Text style={styles.headerText}>{name}</Text>
-					<TouchableOpacity onPress={() => {}} style={styles.btn}>
+					<TouchableOpacity onPress={() => onAlertOpen(3, id)} style={styles.btn}>
 						<Text style={styles.btnText}>{"New Item"}</Text>
 					</TouchableOpacity>
 				</View>

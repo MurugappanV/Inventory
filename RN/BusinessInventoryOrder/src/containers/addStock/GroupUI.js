@@ -7,6 +7,7 @@ import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors } from "../..
 type Props = {
 	onPress: Function,
 	onQtyChanged: Function,
+	onAlertOpen: Function,
 	data: any,
 };
 
@@ -22,20 +23,20 @@ export default class GroupUI extends PureComponent<Props> {
 	};
 
 	render() {
-		const { data, onQtyChanged, selected } = this.props;
+		const { data, onQtyChanged, selected, onAlertOpen } = this.props;
 		const { isCollapsed } = this.state;
-		const { name } = data;
+		const { id, name } = data;
 		return (
 			<View style={styles.cont}>
 				<TouchableOpacity onPress={this.onHeaderPress} style={styles.headerContainer}>
 					<Text style={styles.headerText}>{name}</Text>
-					<TouchableOpacity onPress={() => {}} style={styles.btn}>
+					<TouchableOpacity onPress={() => onAlertOpen(2, id)} style={styles.btn}>
 						<Text style={styles.btnText}>{"New Sub Group"}</Text>
 					</TouchableOpacity>
 				</TouchableOpacity>
 				{isCollapsed && (
 					<View>
-						<SubGroupListUI {...data} onQtyChanged={onQtyChanged} selected={selected} />
+						<SubGroupListUI {...data} onQtyChanged={onQtyChanged} selected={selected} onAlertOpen={onAlertOpen}/>
 					</View>
 				)}
 			</View>

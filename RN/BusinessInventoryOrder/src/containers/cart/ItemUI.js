@@ -38,7 +38,6 @@ export default class ItemUI extends PureComponent<Props> {
 		const { data, selected } = this.props;
 		const { id, name, available, bill_name } = data;
 		const text = (selected.has(id) ? selected.get(id).qty : 0) + "";
-		console.log("item ui selected", text, selected);
 		return (
 			<View style={styles.cont}>
 				<View style={styles.headerContainer}>

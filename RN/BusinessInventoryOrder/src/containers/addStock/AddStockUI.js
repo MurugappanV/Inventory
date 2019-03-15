@@ -4,6 +4,7 @@ import { Header } from "../header";
 import SelectedUI from "./SelectedUI";
 import AddStockListUI from "./AddStockListUI";
 import { ScalePerctFullHeight, ScalePerctFullWidth, Colors } from "../../asset";
+import AlertForm from "./AlertForm";
 
 type Props = {
 	navigation: any,
@@ -14,6 +15,9 @@ type Props = {
 	deletedItems: any,
 	onItemUnSelected: Function,
 	onAddStock: Function,
+	alertSettings: any,
+	onAlertClose: Function,
+	onAlertOpen: Function,
 };
 
 export default class AddStockUI extends PureComponent<Props> {
@@ -21,34 +25,8 @@ export default class AddStockUI extends PureComponent<Props> {
 		navigation.goBack();
 	};
 
-	renderConfirm = (
-		customer: any,
-		otherDetails: string,
-		onConfirm: Function,
-		onItemSelected: Function,
-		onOtherDetailsChange: Function,
-	) => {
-		return (
-			<TouchableOpacity
-				onPress={() => onItemSelected(null)}
-				style={styles.confirmAbsoluteContainer}
-			>
-				<TouchableOpacity onPress={() => {}} style={styles.confirmContainer}>
-					<Text style={styles.otherDetailsText}>{"Any other details"}</Text>
-					<TextInput
-						multiline
-						style={styles.otherDetailsInput}
-						onChangeText={(textChange: string) => onOtherDetailsChange(textChange)}
-						value={otherDetails}
-					/>
-					<Button style={styles.orderBtn} title="Confirm" onPress={() => onConfirm()} />
-				</TouchableOpacity>
-			</TouchableOpacity>
-		);
-	};
-
 	render() {
-		const { navigation, selected, onItemUnSelected, onAddStock } = this.props;
+		const { navigation, selected, onItemUnSelected, onAddStock, alertSettings, onAlertClose, onAlertOpen } = this.props;
 		return (
 			<View style={styles.container}>
 				<Header
@@ -56,7 +34,7 @@ export default class AddStockUI extends PureComponent<Props> {
 					navigation={navigation}
 					onBack={() => this.onBack(navigation)}
 				/>
-				<TouchableOpacity onPress={() => {}} style={styles.btn}>
+				<TouchableOpacity onPress={() => onAlertOpen(1)} style={styles.btn}>
 					<Text style={styles.btnText}>{"New Group"}</Text>
 				</TouchableOpacity>
 				<AddStockListUI {...this.props} />
@@ -67,6 +45,7 @@ export default class AddStockUI extends PureComponent<Props> {
 						onItemUnSelected={onItemUnSelected}
 					/>
 				)}
+				{alertSettings && <AlertForm {...alertSettings} onClose={onAlertClose} />}
 			</View>
 		);
 	}

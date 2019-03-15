@@ -9,16 +9,17 @@ type Props = {
 	loading: boolean,
 	noRecordText: string,
 	onQtyChanged: Function,
+	onAlertOpen: Function,
 };
 
 export default function renderAddStockList(props: Props) {
-	const { items, loading, selected, noRecordText, onQtyChanged } = props;
+	const { items, loading, selected, noRecordText, onQtyChanged, onAlertOpen } = props;
 	return (
 		<FlatList
 			data={items}
 			extraData={selected}
 			renderItem={({ item }) => (
-				<GroupUI data={item} onQtyChanged={onQtyChanged} selected={selected} />
+				<GroupUI data={item} onQtyChanged={onQtyChanged} selected={selected} onAlertOpen={onAlertOpen}/>
 			)}
 			keyExtractor={(item, index) => item.id.toString() + index}
 			style={styles.listcontainer}

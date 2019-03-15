@@ -1,52 +1,89 @@
 import React, { PureComponent } from "react";
 import { View, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native";
-import { Header } from "../header";
-import CustomerListUI from "./CustomerListUI";
+import { TextField } from "react-native-material-textfield";
 import { ScalePerctFullHeight, ScalePerctFullWidth, Colors } from "../../asset";
-import { Button, CustomerItemUI } from "../../components";
+import { Button } from "../../components";
 
 type Props = {
-	navigation: any,
-	onAddCustomer: Function,
+	placeholder1: string,
+	placeholder2?: string,
 	onConfirm: Function,
-	onItemSelected: Function,
-	customerId: number,
-	customers: any,
-	otherDetails: string,
-	onOtherDetailsChange: Function,
+	title: string,
+	onClose: Function,
 };
 
 export default class AlertForm extends PureComponent<Props> {
+	constructor(props: Props) {
+		super(props);
+		this.state = {
+			input1: "",
+			input2: "",
+		};
+	}
+
+	componentDidMount() {
+		this.state = {
+			input1: "",
+			input2: "",
+		};
+	}
+
+	onInput1Change = (text) => {
+		this.setState({ input1: text });
+	}
+
+	onInput2Change = (text) => {
+		this.setState({ input2: text });
+	}
+
 	render() {
 		const {
-			customer,
-			otherDetails,
+			placeholder1,
+			placeholder2,
 			onConfirm,
-			onItemSelected,
-			onOtherDetailsChange,
+			title,
+			onClose,
 		} = this.props;
+		const {
+			input1,
+			input2,
+		} = this.state;
 		return (
 			<TouchableOpacity
-				onPress={() => onItemSelected(null)}
+				onPress={() => onClose(null)}
 				style={styles.confirmAbsoluteContainer}
 			>
 				<TouchableOpacity onPress={() => {}} style={styles.confirmContainer}>
-					<CustomerItemUI data={customer} onPress={() => {}} />
-					<Text style={styles.otherDetailsText}>{"Any other details"}</Text>
-					<TextInput
-						multiline
-						style={styles.otherDetailsInput}
-						onChangeText={(textChange: string) => onOtherDetailsChange(textChange)}
-						value={otherDetails}
+					<Text style={styles.otherDetailsText}>{title}</Text>
+					<TextField
+						onSubmitEditing={placeholder2 ? () => this.textInput.focus() : () => onConfirm(input1, input2)}
+						returnKeyType={placeholder2 ? "next" : "done"}
+						label={placeholder1}
+						value={input1}
+						onChangeText={this.onInput1Change}
 					/>
-					<Button style={styles.orderBtn} title="Confirm" onPress={() => onConfirm()} />
+					{placeholder2 && (
+						<TextField
+							ref={(component: any) => {
+								this.textInput = component;
+							}}
+							returnKeyType="done"
+							onSubmitEditing={() => onConfirm(input1, input2)}
+							label={placeholder2}
+							value={input2}
+							onChangeText={this.onInput2Change}
+						/>
+					)}
+					<Button style={styles.orderBtn} title="Confirm" onPress={() => onConfirm(input1, input2)} />
 				</TouchableOpacity>
 			</TouchableOpacity>
 		);
 	}
 }
 
-CartUI.defaultProps = {};
+AlertForm.defaultProps = {
+	placeholder2: undefined,
+};
 
 const styles = StyleSheet.create({
 	container: {

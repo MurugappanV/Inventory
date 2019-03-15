@@ -93,7 +93,6 @@ class CartContainer extends PureComponent<Props> {
 		const { setItemsAction, setCartSelectedAction } = this.props;
 		const selectedItems = selected || new Map();
 		const newSelected = new Map(); //
-		console.log("selected", newSelected);
 		const newItems = items.map((group: any) => {
 			return {
 				...group,
@@ -148,7 +147,6 @@ class CartContainer extends PureComponent<Props> {
 		} else {
 			newSelected.set(id, { qty, billName, available });
 		}
-		console.log("selected", newSelected);
 		setCartSelectedAction(newSelected);
 		// this.setState({ selected: newSelected });
 	};

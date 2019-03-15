@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import AddStockUI from "./AddStockUI";
 import { Actions } from "../../redux";
 import { AlertComp } from "../../components";
-import { ItemsApi, AddStockApi } from "../../service";
+import { ItemsApi, AddStockApi, AddGroupApi, AddSubGroupApi, AddItemApi } from "../../service";
 
 type Props = {
 	navigation: any,
@@ -21,7 +21,7 @@ type Props = {
 class AddStockContainer extends PureComponent<Props> {
 	constructor(props: Props) {
 		super(props);
-		this.state = { loading: false, noRecordText: "No items found", selected: new Map() };
+		this.state = { loading: false, noRecordText: "No items found", selected: new Map(), alertSettings: null };
 	}
 
 	componentDidMount() {
@@ -66,7 +66,6 @@ class AddStockContainer extends PureComponent<Props> {
 		} else {
 			newSelected.set(id, { qty, billName });
 		}
-		console.log("selected", newSelected);
 		// setCartSelectedAction(newSelected);
 		this.setState({ selected: newSelected });
 	};
@@ -117,8 +116,146 @@ class AddStockContainer extends PureComponent<Props> {
 		AlertComp("Add stock error", message, () => {});
 	};
 
+	onAddItem = (name: string, billName: string, subGroupId: number, ) => {
+		AddItemApi(
+			name,
+			billName,
+			subGroupId,
+			(response: any) => this.onAddItemSuccess(response, subGroupId),
+			(msg: any) => this.onAddFailure("Add item failed", msg),
+			(err: any) => this.onAddError("Add item error", err),
+		);
+	};
+
+	onAddGroup = (name: string) => {
+		AddGroupApi(
+			name,
+			this.onAddGroupSuccess,
+			(msg: any) => this.onAddFailure("Add group failed", msg),
+			(err: any) => this.onAddError("Add group error", err),
+		);
+	};
+
+	onAddSubGroup = (name: string, groupId: number) => {
+		AddSubGroupApi(
+			name,
+			groupId,
+			(response: any) => this.onAddSubGroupSuccess(response, groupId),
+			(msg: any) => this.onAddFailure("Add sub group failed", msg),
+			(err: any) => this.onAddError("Add sub group error", err),
+		);
+	};
+
+	onAddItemSuccess = (response: any, subGroupId: number) => {
+		AlertComp("Add item success", "", () => {});
+		const { setItemsAction, items } = this.props;
+		const newItems = items.map((group: any) => {
+			return {
+				...group,
+				sub_groups: group.sub_groups.map((subGroup: any) => {
+					if (subGroup.id == subGroupId) {
+						return {
+							...subGroup,
+							items: subGroup.items ? subGroup.items.map((item: any) => {
+								return {
+									...item,
+								};
+							}).concat([{ ...response, available: 0 }]) : [{ ...response, available: 0 }],
+						};
+					}
+					return {
+						...subGroup,
+					};
+				}),
+			};
+		});
+		setItemsAction(newItems);
+		this.setState({ alertSettings: null });
+	};
+
+	onAddGroupSuccess = (response: any) => {
+		AlertComp("Add group success", "", () => {});
+		const { setItemsAction, items } = this.props;
+		const newItems = items.map((group: any) => {
+			return {
+				...group,
+			};
+		}).concat([{ ...response }]);
+		console.log("add group props", newItems, response)
+		setItemsAction(newItems);
+		this.setState({ alertSettings: null });
+	};
+
+	onAddSubGroupSuccess = (response: any, groupId: number) => {
+		AlertComp("Add sub group success", "", () => {});
+		const { setItemsAction, items } = this.props;
+		const newItems = items.map((group: any) => {
+			if (group.id == groupId) {
+				return {
+					...group,
+					sub_groups: group.sub_groups ? group.sub_groups.map((subGroup: any) => {
+						return {
+							...subGroup,
+						};
+					}).concat([{ ...response }]) : [{ ...response }],
+				};
+			}
+			return {
+				...group,
+			};
+		});
+		setItemsAction(newItems);
+		this.setState({ alertSettings: null });
+	};
+
+	onAddFailure = (title: string, message: string) => {
+		AlertComp(title, message, () => {});
+		this.setState({ alertSettings: null });
+	};
+
+	onAddError = (title: string, error: any) => {
+		const message = error.toString();
+		AlertComp(title, message, () => {});
+		this.setState({ alertSettings: null });
+	};
+
+	onAlertClose = () => {
+		this.setState({ alertSettings: null });
+	}
+
+	onAlertOpen = (type: number, id: number) => { // 1 - group, 2 - subgroup, 3 - item
+		let alertSettings = null;
+		switch (type) {
+		case 1:
+			alertSettings = {
+				placeholder1: "Enter group name",
+				title: "Add group",
+				onConfirm: (name: string) => this.onAddGroup(name),
+			}
+			break;
+		case 2:
+			alertSettings = {
+				placeholder1: "Enter sub group name",
+				title: "Add sub group",
+				onConfirm: (name: string) => this.onAddSubGroup(name, id),
+			}
+			break;
+		case 3:
+			alertSettings = {
+				placeholder1: "Enter item name",
+				placeholder2: "Enter item bill name",
+				title: "Add item",
+				onConfirm: (name: string, billName: string) => this.onAddItem(name, billName, id),
+			}
+			break;
+		default:
+			break;
+		}
+		this.setState({ alertSettings });
+	}
+
 	render() {
-		const { loading, noRecordText, selected } = this.state;
+		const { loading, noRecordText, selected, alertSettings } = this.state;
 		// const { selectedItems, deletedItems, navigation } = this.props;
 		// const id = navigation.getParam("id");
 		// const retailerId = navigation.getParam("retailerId");
@@ -132,6 +269,9 @@ class AddStockContainer extends PureComponent<Props> {
 				loading={loading}
 				noRecordText={noRecordText}
 				selected={selected}
+				alertSettings={alertSettings}
+				onAlertClose={this.onAlertClose}
+				onAlertOpen={this.onAlertOpen}
 			/>
 		);
 	}

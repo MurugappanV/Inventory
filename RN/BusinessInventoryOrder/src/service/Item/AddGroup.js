@@ -5,7 +5,7 @@ const AddGroupApi = (name, onSuccess, onFailure, onError) => {
 	BaseAxiosInstance.post(url, { name })
 		.then((response: any) => {
 			if (response.data.status === 1) {
-				onSuccess(response.data.data.name);
+				onSuccess(response.data.data);
 			} else {
 				onFailure(response.data.message);
 			}
