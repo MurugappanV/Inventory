@@ -26,7 +26,15 @@ export default class AddStockUI extends PureComponent<Props> {
 	};
 
 	render() {
-		const { navigation, selected, onItemUnSelected, onAddStock, alertSettings, onAlertClose, onAlertOpen } = this.props;
+		const {
+			navigation,
+			selected,
+			onItemUnSelected,
+			onAddStock,
+			alertSettings,
+			onAlertClose,
+			onAlertOpen,
+		} = this.props;
 		return (
 			<View style={styles.container}>
 				<Header
@@ -35,7 +43,7 @@ export default class AddStockUI extends PureComponent<Props> {
 					onBack={() => this.onBack(navigation)}
 				/>
 				<TouchableOpacity onPress={() => onAlertOpen(1)} style={styles.btn}>
-					<Text style={styles.btnText}>{"New Group"}</Text>
+					<Text style={styles.btnText}>{"+ New Group"}</Text>
 				</TouchableOpacity>
 				<AddStockListUI {...this.props} />
 				{selected.size > 0 && (
@@ -56,16 +64,19 @@ AddStockUI.defaultProps = {};
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		backgroundColor: "#00000010",
 		// position: "absolute",
 		// width: ScalePerctFullWidth(100),
 		// height: ScalePerctFullHeight(100),
 	},
 	btn: {
 		padding: ScalePerctFullWidth(1),
+		alignSelf: "stretch",
+		backgroundColor: "#00000010",
 	},
 	btnText: {
 		color: Colors.bodySecondaryDark,
-		alignSelf: "flex-start",
+		alignSelf: "flex-end",
 		fontSize: 11,
 	},
 });

@@ -31,12 +31,17 @@ export default class GroupUI extends PureComponent<Props> {
 				<TouchableOpacity onPress={this.onHeaderPress} style={styles.headerContainer}>
 					<Text style={styles.headerText}>{name}</Text>
 					<TouchableOpacity onPress={() => onAlertOpen(2, id)} style={styles.btn}>
-						<Text style={styles.btnText}>{"New Sub Group"}</Text>
+						<Text style={styles.btnText}>{"+"}</Text>
 					</TouchableOpacity>
 				</TouchableOpacity>
 				{isCollapsed && (
 					<View>
-						<SubGroupListUI {...data} onQtyChanged={onQtyChanged} selected={selected} onAlertOpen={onAlertOpen}/>
+						<SubGroupListUI
+							{...data}
+							onQtyChanged={onQtyChanged}
+							selected={selected}
+							onAlertOpen={onAlertOpen}
+						/>
 					</View>
 				)}
 			</View>
@@ -63,12 +68,13 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	btn: {
-		padding: ScalePerctFullWidth(1),
+		paddingVertical: ScalePerctFullWidth(1),
+		paddingHorizontal: ScalePerctFullWidth(1),
 	},
 	btnText: {
 		color: Colors.bodySecondaryDark,
 		alignSelf: "flex-start",
-		fontSize: 11,
+		fontSize: 16,
 		fontWeight: "bold",
 	},
 });

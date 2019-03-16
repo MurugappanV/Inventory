@@ -28,35 +28,27 @@ export default class AlertForm extends PureComponent<Props> {
 		};
 	}
 
-	onInput1Change = (text) => {
+	onInput1Change = text => {
 		this.setState({ input1: text });
-	}
+	};
 
-	onInput2Change = (text) => {
+	onInput2Change = text => {
 		this.setState({ input2: text });
-	}
+	};
 
 	render() {
-		const {
-			placeholder1,
-			placeholder2,
-			onConfirm,
-			title,
-			onClose,
-		} = this.props;
-		const {
-			input1,
-			input2,
-		} = this.state;
+		const { placeholder1, placeholder2, onConfirm, title, onClose } = this.props;
+		const { input1, input2 } = this.state;
 		return (
-			<TouchableOpacity
-				onPress={() => onClose(null)}
-				style={styles.confirmAbsoluteContainer}
-			>
+			<TouchableOpacity onPress={() => onClose(null)} style={styles.confirmAbsoluteContainer}>
 				<TouchableOpacity onPress={() => {}} style={styles.confirmContainer}>
-					<Text style={styles.otherDetailsText}>{title}</Text>
+					<Text style={styles.titleText}>{title}</Text>
 					<TextField
-						onSubmitEditing={placeholder2 ? () => this.textInput.focus() : () => onConfirm(input1, input2)}
+						onSubmitEditing={
+							placeholder2
+								? () => this.textInput.focus()
+								: () => onConfirm(input1, input2)
+						}
 						returnKeyType={placeholder2 ? "next" : "done"}
 						label={placeholder1}
 						value={input1}
@@ -74,7 +66,11 @@ export default class AlertForm extends PureComponent<Props> {
 							onChangeText={this.onInput2Change}
 						/>
 					)}
-					<Button style={styles.orderBtn} title="Confirm" onPress={() => onConfirm(input1, input2)} />
+					<Button
+						style={styles.orderBtn}
+						title="Confirm"
+						onPress={() => onConfirm(input1, input2)}
+					/>
 				</TouchableOpacity>
 			</TouchableOpacity>
 		);
@@ -93,6 +89,7 @@ const styles = StyleSheet.create({
 		// height: ScalePerctFullHeight(100),
 	},
 	orderBtn: {
+		marginTop: 20,
 		alignSelf: "stretch",
 		width: "100%",
 	},
@@ -109,12 +106,11 @@ const styles = StyleSheet.create({
 		backgroundColor: Colors.bgPrimaryLight,
 		padding: 20,
 	},
-	otherDetailsText: {
-		fontSize: 11,
-		paddingTop: 20,
-		paddingBottom: 5,
+	titleText: {
+		fontSize: 14,
+		paddingVertical: 5,
 		paddingHorizontal: 5,
-		color: Colors.bodySecondaryVarient,
+		color: Colors.bodyPrimaryDark,
 	},
 	otherDetailsInput: {
 		fontSize: 11,

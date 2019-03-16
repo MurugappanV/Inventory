@@ -23,7 +23,7 @@ export default class SubGroupUI extends PureComponent<Props> {
 				<View style={styles.headerContainer}>
 					<Text style={styles.headerText}>{name}</Text>
 					<TouchableOpacity onPress={() => onAlertOpen(3, id)} style={styles.btn}>
-						<Text style={styles.btnText}>{"New Item"}</Text>
+						<Text style={styles.btnText}>{"+"}</Text>
 					</TouchableOpacity>
 				</View>
 				<FlatList
@@ -59,10 +59,12 @@ const styles = StyleSheet.create({
 	},
 	btn: {
 		padding: ScalePerctFullWidth(1),
+		paddingVertical: ScalePerctFullWidth(1),
+		paddingHorizontal: ScalePerctFullWidth(1),
 	},
 	btnText: {
 		color: Colors.bodySecondaryDark,
 		alignSelf: "flex-start",
-		fontSize: 11,
+		fontSize: 16,
 	},
 });

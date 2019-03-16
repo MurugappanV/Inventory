@@ -47,7 +47,7 @@ export default class CartUI extends PureComponent<Props> {
 				/>
 				<CartListUI {...this.props} />
 				{/* <AddOrderUI onPress={() => {}} /> */}
-				{items.size > 0 && (
+				{items.length > 0 && selected.size > 0 && (
 					<SelectedUI
 						isDefaultOpen={!!orderId}
 						selected={selected}
