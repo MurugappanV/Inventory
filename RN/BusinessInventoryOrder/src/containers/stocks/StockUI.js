@@ -3,23 +3,15 @@ import { View, StyleSheet } from "react-native";
 import { Header } from "../header";
 import AddStockUI from "./AddStockUI";
 import StockListUI from "./StockListUI";
-import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors, UserType } from "../../asset";
 
 type Props = {
 	navigation: any,
-	userType: number,
+	permissions: any,
 };
-
-function isAdd(userType) {
-	if (userType === UserType.admin || userType === UserType.manager) {
-		return true;
-	}
-	return false;
-}
 
 export default class StockUI extends PureComponent<Props> {
 	render() {
-		const { navigation, userType } = this.props;
+		const { navigation, permissions } = this.props;
 		return (
 			<View style={styles.container}>
 				<Header
@@ -29,7 +21,7 @@ export default class StockUI extends PureComponent<Props> {
 					onBack={() => navigation.goBack()}
 				/>
 				<StockListUI {...this.props} />
-				{isAdd(userType) && (
+				{permissions.stock.add && (
 					<AddStockUI
 						onPress={() => {
 							navigation.navigate("AddStock");

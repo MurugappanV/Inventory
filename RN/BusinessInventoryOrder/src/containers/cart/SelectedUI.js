@@ -40,14 +40,7 @@ export default class renderSelectedUI extends PureComponent<Props> {
 		const { isOpen } = this.state;
 
 		return (
-			<View
-				style={[
-					styles.container,
-					isOpen
-						? { bottom: initialBottom }
-						: { bottom: (ScalePerctFullHeight(100) - 74) * -1 },
-				]}
-			>
+			<View style={[isOpen ? styles.openContainer : styles.closeContainer]}>
 				<View style={styles.headerContainer}>
 					<Text style={styles.headerSelected}>{`Selected ${selected.size} item${
 						selected.size > 1 ? "s" : ""
@@ -56,21 +49,29 @@ export default class renderSelectedUI extends PureComponent<Props> {
 						<Text style={styles.headerClose}>{isOpen ? "close" : "open"}</Text>
 					</TouchableOpacity>
 				</View>
-				<FlatList
-					data={Array.from(selected.entries())}
-					renderItem={({ item }) => (
-						<SelectedItemUI data={item} onPress={onItemUnSelected} onQtyChanged={onQtyChanged}/>
-					)}
-					keyExtractor={(item, index) => item[0].toString() + index}
-					style={styles.listcontainer}
-					// ItemSeparatorComponent={renderSeperator}
-					// ListHeaderComponent={renderHeader}
-					// ListFooterComponent={() => renderFooter(loading)}
-					// ListEmptyComponent={() => renderEmpty(loading, noRecordText)}
-					// onRefresh={onFetchRefresh}
-					// refreshing={refreshing}
-				/>
-				<Button style={styles.orderBtn} title="ORDER" onPress={() => onOrder()} />
+				{isOpen && (
+					<FlatList
+						data={Array.from(selected.entries())}
+						renderItem={({ item }) => (
+							<SelectedItemUI
+								data={item}
+								onPress={onItemUnSelected}
+								onQtyChanged={onQtyChanged}
+							/>
+						)}
+						keyExtractor={(item, index) => item[0].toString() + index}
+						style={styles.listcontainer}
+						// ItemSeparatorComponent={renderSeperator}
+						// ListHeaderComponent={renderHeader}
+						// ListFooterComponent={() => renderFooter(loading)}
+						// ListEmptyComponent={() => renderEmpty(loading, noRecordText)}
+						// onRefresh={onFetchRefresh}
+						// refreshing={refreshing}
+					/>
+				)}
+				{isOpen && (
+					<Button style={styles.orderBtn} title="ORDER" onPress={() => onOrder()} />
+				)}
 			</View>
 		);
 	}
@@ -101,13 +102,18 @@ renderSelectedUI.defaultProps = {
 };
 
 const styles = StyleSheet.create({
-	container: {
+	openContainer: {
+		...StyleSheet.absoluteFill,
+		zIndex: 10,
+		backgroundColor: Colors.bgPrimaryLight,
+		elevation: 15,
+	},
+	closeContainer: {
 		position: "absolute",
 		left: 0,
 		right: 0,
-		width: ScalePerctFullWidth(100),
-		height: ScalePerctFullHeight(100) - 24,
-		zIndex: 1000,
+		bottom: 0,
+		zIndex: 10,
 		backgroundColor: Colors.bgPrimaryLight,
 		elevation: 15,
 	},
@@ -158,3 +164,13 @@ const styles = StyleSheet.create({
 // paddingHorizontal: ScalePerctFullWidth(10),
 // paddingVertical: ScalePerctFullHeight(10),
 // backgroundColor: "red",
+
+// isOpen
+// 						? { bottom: initialBottom }
+// 						: { bottom: (ScalePerctFullHeight(100) - 74) * -1 },
+
+// position: "absolute",
+// 		left: 0,
+// 		right: 0,
+// 		width: ScalePerctFullWidth(100),
+// 		height: ScalePerctFullHeight(100) - 24,

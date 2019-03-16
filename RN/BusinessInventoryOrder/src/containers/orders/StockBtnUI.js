@@ -5,13 +5,14 @@ import { Images, Colors } from "../../asset";
 
 type Props = {
 	onPress: Function,
+	style: any,
 };
 
 export default function renderStockBtn(props: Props) {
-	const { onPress } = props;
+	const { onPress, style } = props;
 	return (
 		<ImageBtn
-			style={styles.addBtn}
+			style={[styles.addBtn, style]}
 			source={Images.inventoryImg}
 			onPress={onPress}
 			imgStyle={styles.addBtnImg}

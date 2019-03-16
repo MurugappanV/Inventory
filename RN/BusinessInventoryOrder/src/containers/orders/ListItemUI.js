@@ -7,7 +7,7 @@ import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors } from "../..
 
 type Props = {
 	data: any,
-	userType: number,
+	permissions: any,
 	onOrderPress: Function,
 };
 
@@ -23,7 +23,7 @@ export default class ListItem extends PureComponent<Props> {
 	};
 
 	render() {
-		const { data, userType, onOrderPress } = this.props;
+		const { data, permissions, onOrderPress } = this.props;
 		const { isCollapsed } = this.state;
 		return (
 			<View style={styles.cont}>
@@ -33,7 +33,7 @@ export default class ListItem extends PureComponent<Props> {
 					}}
 					onOtherDetailsPress={this.onOtherDetailsPress}
 					{...data}
-					userType={userType}
+					permissions={permissions}
 				/>
 				<Collapsible collapsed={isCollapsed}>
 					<ListItemContentUI {...data} />

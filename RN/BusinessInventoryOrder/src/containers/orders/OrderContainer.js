@@ -13,7 +13,7 @@ type Props = {
 	clearOrderUpdateAction: Function,
 	orders: any,
 	orderUpdate: boolean,
-	userType: number,
+	permissions: any,
 };
 
 class OrdersContainer extends PureComponent<Props> {
@@ -68,13 +68,13 @@ class OrdersContainer extends PureComponent<Props> {
 
 	onOrderPress = (status: number, data: any) => {
 		const { navigation } = this.props;
-		const { id, retailer, other_details } = data
+		const { id, retailer, other_details } = data;
 		const retailerId = retailer.id;
 		const otherDetails = other_details;
 		if (status === 1) {
 			navigation.navigate("ViewCart", {
 				id,
-				orderData: data
+				orderData: data,
 			});
 		} else if (status === 2) {
 			navigation.navigate("Cart", {
@@ -117,7 +117,7 @@ function mapStateToProps(state) {
 	return {
 		orders: state.orders,
 		orderUpdate: state.updates.orderUpdate,
-		userType: state.userCredentials.userType,
+		permissions: state.userCredentials.permissions,
 	};
 }
 

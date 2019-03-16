@@ -37,7 +37,6 @@ class LoginContainer extends PureComponent<Props> {
 	};
 
 	onLoginSuccess = (user: any) => {
-		// token: string, userId: number, userType: number
 		const { navigation, setUserIdAction } = this.props;
 		this.setState({ loading: false });
 		setGlobalHeader(user.token, user.user_id);

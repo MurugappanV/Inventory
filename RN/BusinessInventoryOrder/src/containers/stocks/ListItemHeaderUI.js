@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
-import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors, UserType } from "../../asset";
+import { ScalePerctFullWidth, Images, Colors } from "../../asset";
 import { getDateJson } from "../../utils";
 
 type Props = {
@@ -8,7 +8,6 @@ type Props = {
 	created_date: string,
 	stock_no: string,
 	status: string,
-	userType: number,
 };
 
 const getStatusImage = (status: string) => {
@@ -56,43 +55,6 @@ function renderButton(label, onPress) {
 	);
 }
 
-// const userButtons = {
-// 	[UserType.admin]: ["View", "Edit", "Bill", "Send", "Close", "Cancel"],
-// 	[UserType.manager]: ["View", "Bill", "Send"],
-// 	[UserType.seller]: ["View", "Edit", "Cancel"],
-// };
-
-// function renderButtons(props) {
-// 	const { status, userType, onStockPress } = props;
-// 	const statusId = getStatusId(status);
-// 	return (
-// 		<View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-// 			{userButtons[userType] &&
-// 				userButtons[userType].map((btn: string) => {
-// 					if (btn === "Edit" && statusId < 3) {
-// 						return renderButton(btn, () => onStockPress(2));
-// 					}
-// 					if (btn === "View") {
-// 						return renderButton(btn, () => onStockPress(1));
-// 					}
-// 					if (btn === "Bill" && statusId < 3) {
-// 						return renderButton(btn, () => onStockPress(3));
-// 					}
-// 					if (btn === "Send" && statusId === 3) {
-// 						return renderButton(btn, () => onStockPress(4));
-// 					}
-// 					if (btn === "Close" && statusId === 4) {
-// 						return renderButton(btn, () => onStockPress(5));
-// 					}
-// 					if (btn === "Cancel" && statusId < 4) {
-// 						return renderButton(btn, () => onStockPress(6));
-// 					}
-// 					return null;
-// 				})}
-// 		</View>
-// 	);
-// }
-
 export default function renderListHeaderItem(props: Props) {
 	const {
 		onOtherDetailsPress,
@@ -100,7 +62,6 @@ export default function renderListHeaderItem(props: Props) {
 		created_date,
 		stock_no,
 		status,
-		userType,
 		no_of_items,
 	} = props;
 	const { day, date, month, year } = getDateJson(created_date);

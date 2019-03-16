@@ -10,7 +10,6 @@ type Props = {
 	refreshing: boolean,
 	noRecordText: string,
 	onFetchRefresh: Function,
-	userType: number,
 };
 
 export default function renderOrderList(props: Props) {

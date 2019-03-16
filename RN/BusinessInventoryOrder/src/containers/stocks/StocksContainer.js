@@ -13,7 +13,7 @@ type Props = {
 	clearStockUpdateAction: Function,
 	stocks: any,
 	stockUpdate: boolean,
-	userType: number,
+	permissions: any,
 };
 
 class StocksContainer extends PureComponent<Props> {
@@ -94,7 +94,7 @@ function mapStateToProps(state) {
 	return {
 		stocks: state.stocks,
 		stockUpdate: state.updates.stockUpdate,
-		userType: state.userCredentials.userType,
+		permissions: state.userCredentials.permissions,
 	};
 }
 

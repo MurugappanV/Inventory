@@ -4,33 +4,11 @@ import { Header } from "../header";
 import AddOrderUI from "./AddOrderUI";
 import StockBtnUI from "./StockBtnUI";
 import OrderListUI from "./OrderListUI";
-import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors, UserType } from "../../asset";
 
 type Props = {
 	navigation: any,
-	userType: number,
+	permissions: any,
 };
-
-function isAdd(userType) {
-	if (userType === UserType.admin || userType === UserType.seller) {
-		return true;
-	}
-	return false;
-}
-
-function isStock(userType) {
-	if (userType === UserType.admin || userType === UserType.manager) {
-		return true;
-	}
-	return false;
-}
-
-function isSettings(userType) {
-	if (userType === UserType.admin) {
-		return true;
-	}
-	return false;
-}
 
 export default class OrderUI extends PureComponent<Props> {
 	onSettings = () => {
@@ -39,28 +17,29 @@ export default class OrderUI extends PureComponent<Props> {
 	};
 
 	render() {
-		const { navigation, userType } = this.props;
+		const { navigation, permissions } = this.props;
 		return (
 			<View style={styles.container}>
 				<Header
 					title="Orders"
 					isLogoutEnable
 					navigation={navigation}
-					onSettings={isSettings(userType) ? this.onSettings : undefined}
+					onSettings={permissions.user.view ? this.onSettings : undefined}
 				/>
 				<OrderListUI {...this.props} />
-				{isAdd(userType) && (
+				{permissions.order.add && (
 					<AddOrderUI
 						onPress={() => {
 							navigation.navigate("Cart");
 						}}
 					/>
 				)}
-				{isStock(userType) && (
+				{permissions.stock.view && (
 					<StockBtnUI
 						onPress={() => {
 							navigation.navigate("Stocks");
 						}}
+						style={permissions.order.add ? { bottom: 90 } : { bottom: 20 }}
 					/>
 				)}
 			</View>

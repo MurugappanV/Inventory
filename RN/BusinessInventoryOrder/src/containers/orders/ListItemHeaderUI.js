@@ -8,7 +8,7 @@ type Props = {
 	created_date: string,
 	order_no: string,
 	status: string,
-	userType: number,
+	permissions: any,
 };
 
 const getStatusImage = (status: string) => {
@@ -56,39 +56,23 @@ function renderButton(label, onPress) {
 	);
 }
 
-const userButtons = {
-	[UserType.admin]: ["View", "Edit", "Bill", "Send", "Close", "Cancel"],
-	[UserType.manager]: ["View", "Bill", "Send"],
-	[UserType.seller]: ["View", "Edit", "Cancel"],
-};
-
 function renderButtons(props) {
-	const { status, userType, onOrderPress } = props;
+	const { status, permissions, onOrderPress } = props;
 	const statusId = getStatusId(status);
 	return (
 		<View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-			{userButtons[userType] &&
-				userButtons[userType].map((btn: string) => {
-					if (btn === "Edit" && statusId < 3) {
-						return renderButton(btn, () => onOrderPress(2));
-					}
-					if (btn === "View") {
-						return renderButton(btn, () => onOrderPress(1));
-					}
-					if (btn === "Bill" && statusId < 3) {
-						return renderButton(btn, () => onOrderPress(3));
-					}
-					if (btn === "Send" && statusId === 3) {
-						return renderButton(btn, () => onOrderPress(4));
-					}
-					if (btn === "Close" && statusId === 4) {
-						return renderButton(btn, () => onOrderPress(5));
-					}
-					if (btn === "Cancel" && statusId < 4) {
-						return renderButton(btn, () => onOrderPress(6));
-					}
-					return null;
-				})}
+			{renderButton("View", () => onOrderPress(1))}
+			{permissions.order.edit && statusId < 3 && renderButton("Edit", () => onOrderPress(2))}
+			{permissions.order.bill && statusId < 3 && renderButton("Bill", () => onOrderPress(3))}
+			{permissions.order.send &&
+				statusId === 3 &&
+				renderButton("Send", () => onOrderPress(4))}
+			{permissions.order.close &&
+				statusId === 4 &&
+				renderButton("Close", () => onOrderPress(5))}
+			{permissions.order.cancel &&
+				statusId < 3 &&
+				renderButton("Cancel", () => onOrderPress(6))}
 		</View>
 	);
 }
@@ -100,7 +84,6 @@ export default function renderListHeaderItem(props: Props) {
 		created_date,
 		order_no,
 		status,
-		userType,
 		no_of_items,
 	} = props;
 	const { day, date, month, year } = getDateJson(created_date);
