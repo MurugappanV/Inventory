@@ -37,10 +37,13 @@ const LIGHT_GREEN = "#10E365";
 const DARK_GREEN = "#00AE46";
 const V_DARK_GREEN = "#008737";
 
+const DARK_BLUE = "#0295aa";
+const DARKER_GREY = "#365558";
+
 const Colors = {
-	bgPrimaryDark: DARK_PURPLE,
+	bgPrimaryDark: DARK_BLUE,
 	bgPrimaryLight: LIGHT_PINK,
-	bgSecondaryDark: PURPLE,
+	bgSecondaryDark: DARK_BLUE,
 	bgSecondaryLight: LIGHT_GREY,
 	bgTransparent: TRANSPARENT,
 	bgSemiTransparent: BLACK20perc,
@@ -49,7 +52,7 @@ const Colors = {
 
 	bodyPrimaryDark: BLACK,
 	bodyPrimaryLight: WHITE,
-	bodySecondaryDark: DARK_PURPLE,
+	bodySecondaryDark: DARK_BLUE,
 	bodySecondaryLight: LIGHT_PINK,
 	bodyPrimaryVarient: V_DARK_GREEN,
 	bodySecondaryVarient: GREY,
