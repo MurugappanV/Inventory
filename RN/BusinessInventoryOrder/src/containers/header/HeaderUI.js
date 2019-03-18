@@ -10,10 +10,11 @@ type Props = {
 	onBack?: Function,
 	isLogoutEnable?: boolean,
 	onSettings?: Function,
+	onStockList?: Function,
 };
 
 export default function HeaderUI(props: Props) {
-	const { onBack, onLogout, isLogoutEnable, title, style, onSettings } = props;
+	const { onBack, onLogout, isLogoutEnable, title, style, onSettings, onStockList } = props;
 	return (
 		<View>
 			<StatusBar backgroundColor={Colors.bgSecondaryDark} barStyle="light-content" />
@@ -28,7 +29,7 @@ export default function HeaderUI(props: Props) {
 						onPress={onBack}
 					/>
 				)}
-				{onSettings && <View style={styles.emptyView} />}
+				{onSettings || (onStockList && <View style={styles.emptyView} />)}
 				<View style={styles.textView}>
 					<Text style={styles.title}>{title}</Text>
 				</View>
@@ -38,6 +39,14 @@ export default function HeaderUI(props: Props) {
 						imgStyle={styles.settingsImage}
 						source={Images.adminImg}
 						onPress={onSettings}
+					/>
+				)}
+				{onStockList && (
+					<ImageBtn
+						style={styles.settings}
+						imgStyle={styles.settingsImage}
+						source={Images.stockListImg}
+						onPress={onStockList}
 					/>
 				)}
 				{isLogoutEnable ? (
@@ -61,6 +70,7 @@ HeaderUI.defaultProps = {
 	onLogout: undefined,
 	onBack: undefined,
 	onSettings: undefined,
+	onStockList: undefined,
 };
 
 const styles = StyleSheet.create({
@@ -68,7 +78,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 		alignContent: "center",
-		backgroundColor: Colors.bgPrimaryDark,
+		backgroundColor: Colors.bgSemiTransparent,
 		width: ScalePerctFullWidth(100),
 		height: ScalePerctFullHeight(8),
 		elevation: 10,

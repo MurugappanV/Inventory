@@ -1,9 +1,10 @@
 import React, { PureComponent } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import { Header } from "../header";
 import AddOrderUI from "./AddOrderUI";
 import StockBtnUI from "./StockBtnUI";
 import OrderListUI from "./OrderListUI";
+import { Images, ScalePerctFullWidth, ScalePerctFullHeight, Colors } from "../../asset";
 
 type Props = {
 	navigation: any,
@@ -20,6 +21,7 @@ export default class OrderUI extends PureComponent<Props> {
 		const { navigation, permissions } = this.props;
 		return (
 			<View style={styles.container}>
+				<Image source={Images.bgImg} style={styles.fullContainer} resizeMode={"cover"} />
 				<Header
 					title="Orders"
 					isLogoutEnable
@@ -52,5 +54,11 @@ OrderUI.defaultProps = {};
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+	},
+	fullContainer: {
+		position: "absolute",
+		width: ScalePerctFullWidth(100),
+		height: ScalePerctFullHeight(100),
+		zIndex: -1,
 	},
 });

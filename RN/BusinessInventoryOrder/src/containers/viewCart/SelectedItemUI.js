@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
 		alignSelf: "center",
 		fontSize: 11,
 		flex: 1,
+		color: Colors.bodySemiTransparent,
 	},
 	input: {
 		height: 35,

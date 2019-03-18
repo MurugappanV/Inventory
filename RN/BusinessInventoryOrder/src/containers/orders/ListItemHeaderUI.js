@@ -112,32 +112,42 @@ export default function renderListHeaderItem(props: Props) {
 
 const styles = StyleSheet.create({
 	cont: {
-		backgroundColor: "white",
+		backgroundColor: Colors.bgSemiTransparent,
 		borderRadius: 16,
 		elevation: 5,
 		flexDirection: "row",
+		borderColor: Colors.bgPrimaryDark,
+		borderWidth: 0.5,
 	},
 	dateContainer: {
-		padding: ScalePerctFullWidth(4),
-		backgroundColor: Colors.bgPrimaryDark,
+		backgroundColor: "rgba(0, 145, 234, 0.5)",
+		borderRightColor: Colors.bgPrimaryDark,
+		borderRightWidth: 0.5,
 		borderTopLeftRadius: 16,
 		borderBottomLeftRadius: 16,
 		justifyContent: "center",
+		paddingVertical: 10,
+		paddingRight: 10,
+		paddingLeft: 10,
 	},
 	container: {
 		flex: 1,
 		justifyContent: "center",
-		padding: ScalePerctFullWidth(4),
+		paddingVertical: 10,
+		paddingRight: 5,
+		paddingLeft: 10,
 	},
 	statusContainer: {
 		alignItems: "center",
 		justifyContent: "center",
-		padding: ScalePerctFullWidth(4),
+		paddingVertical: 10,
+		paddingRight: 10,
+		paddingLeft: 5,
 	},
 	statusImg: {
-		width: ScalePerctFullWidth(6),
-		height: ScalePerctFullWidth(6),
-		margin: ScalePerctFullWidth(4),
+		width: 25,
+		height: 25,
+		margin: 10,
 		marginTop: 0,
 	},
 	dayText: {
@@ -158,12 +168,12 @@ const styles = StyleSheet.create({
 	},
 	orderNoText: {
 		color: Colors.bodySecondaryDark,
-		fontSize: 16,
+		fontSize: 14,
 		fontWeight: "bold",
 	},
 	noItemsText: {
 		color: Colors.bodySecondaryDark,
-		fontSize: 14,
+		fontSize: 12,
 		marginBottom: ScalePerctFullWidth(1),
 	},
 	otherDetailText: {
@@ -174,13 +184,14 @@ const styles = StyleSheet.create({
 	otherDetContainer: {
 		paddingVertical: ScalePerctFullWidth(1),
 		borderRadius: 4,
-		backgroundColor: Colors.bodySecondaryDark,
+		borderColor: Colors.bodySecondaryDark,
+		borderWidth: 1,
 		alignSelf: "flex-start",
 		marginHorizontal: 2,
 		marginVertical: 2,
 	},
 	statusText: {
 		color: Colors.bodySecondaryDark,
-		fontSize: 11,
+		fontSize: 8,
 	},
 });

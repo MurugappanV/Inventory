@@ -53,6 +53,9 @@ export default class AlertForm extends PureComponent<Props> {
 						label={placeholder1}
 						value={input1}
 						onChangeText={this.onInput1Change}
+						textColor={Colors.bodyPrimaryLight}
+						baseColor={Colors.bodyPrimaryLight}
+						tintColor={Colors.bodySecondaryDark}
 					/>
 					{placeholder2 && (
 						<TextField
@@ -64,6 +67,9 @@ export default class AlertForm extends PureComponent<Props> {
 							label={placeholder2}
 							value={input2}
 							onChangeText={this.onInput2Change}
+							textColor={Colors.bodyPrimaryLight}
+							baseColor={Colors.bodyPrimaryLight}
+							tintColor={Colors.bodySecondaryDark}
 						/>
 					)}
 					<Button
@@ -98,19 +104,22 @@ const styles = StyleSheet.create({
 		flexDirection: "column",
 		justifyContent: "center",
 		alignItems: "center",
-		backgroundColor: Colors.bgSemiTransparent,
+		backgroundColor: "#000000A0",
 		zIndex: 10,
 	},
 	confirmContainer: {
 		width: "80%",
-		backgroundColor: Colors.bgPrimaryLight,
+		backgroundColor: "#000000BB",
 		padding: 20,
+		borderRadius: 20,
+		borderColor: Colors.bgPrimaryDark,
+		borderWidth: 1,
 	},
 	titleText: {
 		fontSize: 14,
 		paddingVertical: 5,
 		paddingHorizontal: 5,
-		color: Colors.bodyPrimaryDark,
+		color: Colors.bgPrimaryDark,
 	},
 	otherDetailsInput: {
 		fontSize: 11,

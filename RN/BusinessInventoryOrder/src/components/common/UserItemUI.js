@@ -32,10 +32,10 @@ export default class UserItemUI extends PureComponent<Props> {
 					itemStyle={styles.pickerItem}
 					prompt={"Select user type"}
 				>
-					<Picker.Item label="Viewer" value={4} />
-					<Picker.Item label="Admin" value={1} />
-					<Picker.Item label="Manager" value={2} />
-					<Picker.Item label="Sales Person" value={3} />
+					<Picker.Item color={Colors.bgPrimaryDark} label="Viewer" value={4} />
+					<Picker.Item color={Colors.bgPrimaryDark} label="Admin" value={1} />
+					<Picker.Item color={Colors.bgPrimaryDark} label="Manager" value={2} />
+					<Picker.Item color={Colors.bgPrimaryDark} label="Sales Person" value={3} />
 				</Picker>
 			</View>
 		);
@@ -53,10 +53,11 @@ const styles = StyleSheet.create({
 		alignSelf: "flex-start",
 		fontSize: 14,
 		fontWeight: "bold",
-		color: Colors.bodyPrimaryDark,
+		color: Colors.bodySecondaryDark,
 	},
 	avilText: {
 		fontSize: 11,
+		color: Colors.bodySemiTransparent,
 	},
 	cancelBtn: {
 		paddingHorizontal: 10,
@@ -66,8 +67,11 @@ const styles = StyleSheet.create({
 		height: 40,
 		width: 200,
 		padding: 0,
+		borderColor: Colors.bgPrimaryDark,
 	},
 	pickerItem: {
 		fontSize: 11,
+		color: Colors.bodySemiTransparent,
+		borderWidth: 1,
 	},
 });

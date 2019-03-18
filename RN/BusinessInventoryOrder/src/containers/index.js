@@ -8,3 +8,4 @@ export { AddUserContainer, UserContainer } from "./user";
 export { Stocks } from "./stocks";
 export { AddStock } from "./addStock";
 export { ViewStock } from "./viewStock";
+export { StockList } from "./StockList";

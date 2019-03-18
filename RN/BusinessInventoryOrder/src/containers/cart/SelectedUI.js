@@ -8,6 +8,7 @@ import {
 	Text,
 	Platform,
 	Keyboard,
+	Image,
 } from "react-native";
 import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors } from "../../asset";
 import SelectedItemUI from "./SelectedItemUI";
@@ -41,6 +42,7 @@ export default class renderSelectedUI extends PureComponent<Props> {
 
 		return (
 			<View style={[isOpen ? styles.openContainer : styles.closeContainer]}>
+				<Image source={Images.bgImg} style={styles.fullContainer} resizeMode={"cover"} />
 				<View style={styles.headerContainer}>
 					<Text style={styles.headerSelected}>{`Selected ${selected.size} item${
 						selected.size > 1 ? "s" : ""
@@ -153,11 +155,18 @@ const styles = StyleSheet.create({
 		color: Colors.bodySecondaryVarient,
 	},
 	orderBtn: {
-		alignSelf: "stretch",
-		width: "100%",
+		alignSelf: "center",
+		width: "80%",
+		marginBottom: 10,
 	},
 	btn: {
 		padding: 15,
+	},
+	fullContainer: {
+		position: "absolute",
+		width: ScalePerctFullWidth(100),
+		height: ScalePerctFullHeight(100),
+		zIndex: -1,
 	},
 });
 

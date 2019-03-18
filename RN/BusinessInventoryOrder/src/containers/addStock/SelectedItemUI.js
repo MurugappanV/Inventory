@@ -44,7 +44,7 @@ export default class SelectedItemUI extends PureComponent<Props> {
 					<Text style={styles.headerText}>{billName}</Text>
 					<Text style={styles.avilText}>{qty}</Text>
 					<TouchableOpacity style={styles.cancelBtn} onPress={() => onPress(id)}>
-						<Text style={styles.headerText}>{"X"}</Text>
+						<Image source={Images.closeImg} style={styles.img} />
 					</TouchableOpacity>
 				</View>
 			</View>
@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
 		alignSelf: "center",
 		fontSize: 11,
 		flex: 1,
+		color: Colors.bodySemiTransparent,
 	},
 	input: {
 		height: 35,
@@ -76,6 +77,7 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 1,
 		borderColor: Colors.bodyPrimaryVarient,
 		padding: 0,
+		color: Colors.bodySemiTransparent,
 	},
 	avilText: {
 		width: ScalePerctFullWidth(10),
@@ -85,5 +87,10 @@ const styles = StyleSheet.create({
 	cancelBtn: {
 		paddingHorizontal: 10,
 		paddingVertical: 5,
+	},
+	img: {
+		width: 15,
+		height: 15,
+		tintColor: Colors.bodySemiTransparent,
 	},
 });

@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
-import { View, StyleSheet, TextInput, Text } from "react-native";
+import { View, StyleSheet, TextInput, Text, Image } from "react-native";
 import { TextField } from "react-native-material-textfield";
 import { Button } from "../../components";
 import { Header } from "../header";
-import { ScalePerctFullHeight, ScalePerctFullWidth, Colors } from "../../asset";
+import { ScalePerctFullHeight, ScalePerctFullWidth, Colors, Images } from "../../asset";
 
 type Props = {
 	name: string,
@@ -35,7 +35,8 @@ export default class AddCustomerUI extends PureComponent<Props> {
 			navigation,
 		} = this.props;
 		return (
-			<View>
+			<View style={styles.cont}>
+				<Image source={Images.bgImg} style={styles.fullContainer} resizeMode={"stretch"} />
 				<Header
 					title="New Customer"
 					navigation={navigation}
@@ -48,6 +49,9 @@ export default class AddCustomerUI extends PureComponent<Props> {
 						label="Enter name "
 						value={name}
 						onChangeText={input => onNameInputChange(input)}
+						textColor={Colors.bodyPrimaryLight}
+						baseColor={Colors.bodyPrimaryLight}
+						tintColor={Colors.bodySecondaryDark}
 					/>
 					<TextField
 						ref={(component: any) => {
@@ -58,6 +62,9 @@ export default class AddCustomerUI extends PureComponent<Props> {
 						label="Enter phone number"
 						value={phone}
 						onChangeText={input => onPhoneInputChange(input)}
+						textColor={Colors.bodyPrimaryLight}
+						baseColor={Colors.bodyPrimaryLight}
+						tintColor={Colors.bodySecondaryDark}
 					/>
 					<TextField
 						ref={(component: any) => {
@@ -68,6 +75,9 @@ export default class AddCustomerUI extends PureComponent<Props> {
 						label="GST number"
 						value={gst}
 						onChangeText={input => onGstInputChange(input)}
+						textColor={Colors.bodyPrimaryLight}
+						baseColor={Colors.bodyPrimaryLight}
+						tintColor={Colors.bodySecondaryDark}
 					/>
 					<Text style={styles.otherDetailsText}>{"Any other details"}</Text>
 					<TextInput
@@ -97,20 +107,24 @@ export default class AddCustomerUI extends PureComponent<Props> {
 AddCustomerUI.defaultProps = {};
 
 const styles = StyleSheet.create({
+	cont: {
+		width: ScalePerctFullWidth(100),
+		height: ScalePerctFullHeight(100),
+	},
 	loginBtn: {
 		alignSelf: "center",
 		width: "40%",
 	},
 	inputContainer: {
 		paddingHorizontal: ScalePerctFullWidth(10),
-		paddingVertical: ScalePerctFullHeight(10),
+		paddingBottom: 50,
 	},
 	otherDetailsText: {
 		fontSize: 11,
 		paddingTop: 20,
 		paddingBottom: 5,
 		paddingHorizontal: 5,
-		color: Colors.bodySecondaryVarient,
+		color: Colors.bgPrimaryDark,
 	},
 	otherDetailsInput: {
 		fontSize: 11,
@@ -121,5 +135,12 @@ const styles = StyleSheet.create({
 		height: 100,
 		alignSelf: "stretch",
 		textAlignVertical: "top",
+		color: Colors.bodySemiTransparent,
+	},
+	fullContainer: {
+		position: "absolute",
+		width: ScalePerctFullWidth(100),
+		height: ScalePerctFullHeight(100),
+		zIndex: -1,
 	},
 });

@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
-import { View, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, Image, TextInput, TouchableOpacity } from "react-native";
 import { Header } from "../header";
 import CustomerListUI from "./CustomerListUI";
-import { ScalePerctFullHeight, ScalePerctFullWidth, Colors } from "../../asset";
+import { ScalePerctFullHeight, ScalePerctFullWidth, Colors, Images } from "../../asset";
 import { Button, CustomerItemUI } from "../../components";
 
 type Props = {
@@ -67,6 +67,7 @@ export default class CartUI extends PureComponent<Props> {
 		console.log("customer", customer);
 		return (
 			<View style={styles.container}>
+				<Image source={Images.bgImg} style={styles.fullContainer} resizeMode={"stretch"} />
 				<Header
 					title="Select Customer"
 					navigation={navigation}
@@ -101,28 +102,32 @@ const styles = StyleSheet.create({
 		// height: ScalePerctFullHeight(100),
 	},
 	orderBtn: {
-		alignSelf: "stretch",
-		width: "100%",
+		alignSelf: "center",
+		width: "80%",
+		marginBottom: 10,
 	},
 	confirmAbsoluteContainer: {
 		...StyleSheet.absoluteFill,
 		flexDirection: "column",
 		justifyContent: "center",
 		alignItems: "center",
-		backgroundColor: Colors.bgSemiTransparent,
+		backgroundColor: "#000000A0",
 		zIndex: 10,
 	},
 	confirmContainer: {
 		width: "80%",
-		backgroundColor: Colors.bgPrimaryLight,
+		backgroundColor: "#000000BB",
 		padding: 20,
+		borderRadius: 20,
+		borderColor: Colors.bgPrimaryDark,
+		borderWidth: 1,
 	},
 	otherDetailsText: {
 		fontSize: 11,
 		paddingTop: 20,
 		paddingBottom: 5,
 		paddingHorizontal: 5,
-		color: Colors.bodySecondaryVarient,
+		color: Colors.bgPrimaryDark,
 	},
 	otherDetailsInput: {
 		fontSize: 11,
@@ -133,5 +138,12 @@ const styles = StyleSheet.create({
 		height: 100,
 		alignSelf: "stretch",
 		textAlignVertical: "top",
+		color: Colors.bodySemiTransparent,
+	},
+	fullContainer: {
+		position: "absolute",
+		width: ScalePerctFullWidth(100),
+		height: ScalePerctFullHeight(100),
+		zIndex: -1,
 	},
 });

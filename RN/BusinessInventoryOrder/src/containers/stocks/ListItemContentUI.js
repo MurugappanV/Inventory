@@ -82,11 +82,12 @@ const styles = StyleSheet.create({
 		paddingLeft: ScalePerctFullWidth(4),
 	},
 	addressContainer: {
-		backgroundColor: "white",
 		borderRadius: 8,
-		padding: ScalePerctFullWidth(4),
+		padding: 10,
 		elevation: 5,
 		flexDirection: "row",
+		borderColor: Colors.bgSecondaryLight,
+		borderWidth: 0.5,
 	},
 	deliveryAddsContainer: {
 		flex: 1,
@@ -104,28 +105,30 @@ const styles = StyleSheet.create({
 	},
 	addressText: {
 		fontSize: 13,
+		color: Colors.bodySemiTransparent,
 	},
 	phoneNoText: {
 		fontSize: 13,
 	},
 	logContainer: {
-		backgroundColor: "white",
+		borderColor: Colors.bgSecondaryLight,
+		borderWidth: 0.5,
 		borderRadius: 8,
 		elevation: 2,
 		flexDirection: "row",
-		paddingHorizontal: ScalePerctFullWidth(4),
-		paddingVertical: ScalePerctFullWidth(2),
+		paddingHorizontal: 10,
+		paddingVertical: 5,
 		justifyContent: "space-between",
-		marginTop: ScalePerctFullWidth(1),
+		marginTop: 2,
 	},
 	logbyText: {
 		color: Colors.bodySecondaryDark,
 		fontSize: 13,
 	},
 	logdateText: {
-		color: Colors.bodySecondaryDark,
+		color: Colors.bodySemiTransparent,
 		fontSize: 13,
-		paddingLeft: ScalePerctFullWidth(4),
+		paddingLeft: 10,
 	},
 	listcontainer: {},
 });

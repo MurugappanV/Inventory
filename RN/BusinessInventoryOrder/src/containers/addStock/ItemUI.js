@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
 		alignSelf: "center",
 		fontSize: 11,
 		flex: 1,
+		color: Colors.bodySemiTransparent,
 	},
 	input: {
 		height: 35,
@@ -79,6 +80,7 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 1,
 		borderColor: Colors.bodyPrimaryVarient,
 		padding: 0,
+		color: Colors.bodySemiTransparent,
 	},
 	avilText: {
 		width: ScalePerctFullWidth(10),

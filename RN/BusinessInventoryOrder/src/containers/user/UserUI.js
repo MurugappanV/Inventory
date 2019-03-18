@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
-import { View, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, Image } from "react-native";
 import { Header } from "../header";
 import CustomerListUI from "./UserListUI";
-import { ScalePerctFullHeight, ScalePerctFullWidth, Colors } from "../../asset";
+import { ScalePerctFullHeight, ScalePerctFullWidth, Colors, Images } from "../../asset";
 import { Button } from "../../components";
 
 type Props = {
@@ -16,23 +16,17 @@ export default class UserUI extends PureComponent<Props> {
 	};
 
 	render() {
-		const {
-			navigation,
-			onAddUser,
-		} = this.props;
+		const { navigation, onAddUser } = this.props;
 		return (
 			<View style={styles.container}>
+				<Image source={Images.bgImg} style={styles.fullContainer} resizeMode={"stretch"} />
 				<Header
 					title="Users"
 					navigation={navigation}
 					onBack={() => this.onBack(navigation)}
 				/>
 				<CustomerListUI {...this.props} />
-				<Button
-					style={styles.orderBtn}
-					title="Add User"
-					onPress={() => onAddUser()}
-				/>
+				<Button style={styles.orderBtn} title="Add User" onPress={() => onAddUser()} />
 			</View>
 		);
 	}
@@ -48,8 +42,9 @@ const styles = StyleSheet.create({
 		// height: ScalePerctFullHeight(100),
 	},
 	orderBtn: {
-		alignSelf: "stretch",
-		width: "100%",
+		alignSelf: "center",
+		width: "80%",
+		marginBottom: 10,
 	},
 	confirmAbsoluteContainer: {
 		...StyleSheet.absoluteFill,
@@ -80,5 +75,11 @@ const styles = StyleSheet.create({
 		height: 100,
 		alignSelf: "stretch",
 		textAlignVertical: "top",
+	},
+	fullContainer: {
+		position: "absolute",
+		width: ScalePerctFullWidth(100),
+		height: ScalePerctFullHeight(100),
+		zIndex: -1,
 	},
 });

@@ -1,4 +1,5 @@
 import React from "react";
+import AwesomeButtonRick from "react-native-really-awesome-button/src/themes/rick";
 import { Text, ActivityIndicator, TouchableOpacity, StyleSheet } from "react-native";
 import { Colors, ScalePerctFullHeight } from "../../asset";
 
@@ -14,34 +15,54 @@ type Props = {
 function Button(props: Props) {
 	const { title, onPress, style, textStyle, buttonTheme, loading } = props;
 	return (
-		<TouchableOpacity
-			onPress={onPress}
-			style={StyleSheet.flatten([
-				styles.container,
-				style,
-				buttonTheme === "Dark" ? styles.bgDark : styles.bgLight,
-			])}
+		<AwesomeButtonRick
+			type="primary"
+			progress
+			onPress={(next: any) => {
+				onPress();
+				next();
+			}}
+			activityColor={
+				buttonTheme === "Dark" ? Colors.bodyPrimaryLight : Colors.bodySecondaryDark
+			}
+			backgroundColor={
+				buttonTheme === "Dark" ? Colors.bgPrimaryDark : Colors.bgSecondaryLight
+			}
+			backgroundDarker={Colors.bgSecondaryDark}
+			textColor={buttonTheme === "Dark" ? Colors.bodyPrimaryLight : Colors.bodySecondaryDark}
+			style={style}
+			stretch
 		>
-			{!loading && (
-				<Text
-					style={StyleSheet.flatten([
-						styles.text,
-						textStyle,
-						buttonTheme === "Dark" ? styles.textLight : styles.textDark,
-					])}
-				>
-					{title}
-				</Text>
-			)}
-			{loading && (
-				<ActivityIndicator
-					size="small"
-					color={
-						buttonTheme === "Dark" ? Colors.bodyPrimaryLight : Colors.bodySecondaryDark
-					}
-				/>
-			)}
-		</TouchableOpacity>
+			{title}
+		</AwesomeButtonRick>
+		// <TouchableOpacity
+		// 	onPress={onPress}
+		// 	style={StyleSheet.flatten([
+		// 		styles.container,
+		// 		style,
+		// 		buttonTheme === "Dark" ? styles.bgDark : styles.bgLight,
+		// 	])}
+		// >
+		// 	{!loading && (
+		// 		<Text
+		// 			style={StyleSheet.flatten([
+		// 				styles.text,
+		// 				textStyle,
+		// 				buttonTheme === "Dark" ? styles.textLight : styles.textDark,
+		// 			])}
+		// 		>
+		// 			{title}
+		// 		</Text>
+		// 	)}
+		// 	{loading && (
+		// 		<ActivityIndicator
+		// 			size="small"
+		// 			color={
+		// 				buttonTheme === "Dark" ? Colors.bodyPrimaryLight : Colors.bodySecondaryDark
+		// 			}
+		// 		/>
+		// 	)}
+		// </TouchableOpacity>
 	);
 }
 

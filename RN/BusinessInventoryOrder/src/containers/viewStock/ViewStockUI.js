@@ -1,7 +1,8 @@
 import React, { PureComponent } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import { Header } from "../header";
 import SelectedUI from "./ViewSelectedUI";
+import { Images, ScalePerctFullWidth, ScalePerctFullHeight } from "../../asset";
 
 type Props = {
 	navigation: any,
@@ -16,6 +17,7 @@ export default class ViewStockUI extends PureComponent<Props> {
 		const { navigation } = this.props;
 		return (
 			<View style={styles.container}>
+				<Image source={Images.bgImg} style={styles.fullContainer} resizeMode={"cover"} />
 				<Header
 					title="Stock Items"
 					navigation={navigation}
@@ -35,5 +37,11 @@ const styles = StyleSheet.create({
 		// position: "absolute",
 		// width: ScalePerctFullWidth(100),
 		// height: ScalePerctFullHeight(100),
+	},
+	fullContainer: {
+		position: "absolute",
+		width: ScalePerctFullWidth(100),
+		height: ScalePerctFullHeight(100),
+		zIndex: -1,
 	},
 });

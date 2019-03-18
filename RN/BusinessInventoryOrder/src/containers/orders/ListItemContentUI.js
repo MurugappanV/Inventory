@@ -80,21 +80,22 @@ const styles = StyleSheet.create({
 		paddingLeft: ScalePerctFullWidth(4),
 	},
 	addressContainer: {
-		backgroundColor: "white",
 		borderRadius: 8,
-		padding: ScalePerctFullWidth(4),
+		padding: 10,
 		elevation: 5,
 		flexDirection: "row",
+		borderColor: Colors.bgSecondaryLight,
+		borderWidth: 0.5,
 	},
 	deliveryAddsContainer: {
 		flex: 1,
 		borderRightWidth: 1,
-		borderColor: Colors.bgSemiTransparent,
-		paddingRight: ScalePerctFullWidth(4),
+		borderColor: Colors.bodySecondaryDark,
+		paddingRight: 10,
 	},
 	detailContainer: {
 		flex: 1,
-		paddingLeft: ScalePerctFullWidth(4),
+		paddingLeft: 10,
 	},
 	addressTitleText: {
 		color: Colors.bodySecondaryDark,
@@ -102,27 +103,29 @@ const styles = StyleSheet.create({
 	},
 	addressText: {
 		fontSize: 13,
+		color: Colors.bodySemiTransparent,
 	},
 	phoneNoText: {
 		fontSize: 13,
 	},
 	logContainer: {
-		backgroundColor: "white",
+		borderColor: Colors.bgSecondaryLight,
+		borderWidth: 0.5,
 		borderRadius: 8,
 		elevation: 2,
 		flexDirection: "row",
-		padding: ScalePerctFullWidth(2),
+		padding: 5,
 		justifyContent: "space-between",
-		marginTop: ScalePerctFullWidth(1),
+		marginTop: 2,
 	},
 	logbyText: {
 		color: Colors.bodySecondaryDark,
 		fontSize: 13,
 	},
 	logdateText: {
-		color: Colors.bodySecondaryDark,
+		color: Colors.bodySemiTransparent,
 		fontSize: 13,
-		paddingLeft: ScalePerctFullWidth(4),
+		paddingLeft: 10,
 	},
 	listcontainer: {},
 });

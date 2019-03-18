@@ -6,6 +6,7 @@
  */
 
 const Images = {
+	bgImg: require("./bg.png"),
 	backImg: require("./back.png"),
 	addImg: require("./add.png"),
 	adminImg: require("./admin.png"),
@@ -18,6 +19,8 @@ const Images = {
 	billImg: require("./bill.png"),
 	doneImg: require("./wright.png"),
 	cancelImg: require("./wrong.png"),
+	closeImg: require("./close.png"),
+	stockListImg: require("./storage.png"),
 };
 
 export default Images;

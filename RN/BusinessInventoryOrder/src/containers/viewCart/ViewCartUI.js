@@ -1,8 +1,9 @@
 import React, { PureComponent } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import { Header } from "../header";
 import SelectedUI from "./ViewSelectedUI";
 import { CustomerItemUI } from "../../components";
+import { ScalePerctFullWidth, ScalePerctFullHeight, Images } from "../../asset";
 
 type Props = {
 	navigation: any,
@@ -18,6 +19,7 @@ export default class CartUI extends PureComponent<Props> {
 		const { navigation, orderData } = this.props;
 		return (
 			<View style={styles.container}>
+				<Image source={Images.bgImg} style={styles.fullContainer} resizeMode={"stretch"} />
 				<Header
 					title="Order Items"
 					navigation={navigation}
@@ -38,5 +40,11 @@ const styles = StyleSheet.create({
 		// position: "absolute",
 		// width: ScalePerctFullWidth(100),
 		// height: ScalePerctFullHeight(100),
+	},
+	fullContainer: {
+		position: "absolute",
+		width: ScalePerctFullWidth(100),
+		height: ScalePerctFullHeight(100),
+		zIndex: -1,
 	},
 });

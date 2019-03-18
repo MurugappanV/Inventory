@@ -80,32 +80,39 @@ export default function renderListHeaderItem(props: Props) {
 				<Text style={styles.noItemsText}>{noOfItems}</Text>
 				{renderButton("View", onStockPress)}
 			</View>
-			<View style={styles.statusContainer}>
+			{/* <View style={styles.statusContainer}>
 				<Image source={getStatusImage(status)} style={styles.statusImg} />
 				<Text style={styles.statusText}>{status}</Text>
-			</View>
+			</View> */}
 		</TouchableOpacity>
 	);
 }
 
 const styles = StyleSheet.create({
 	cont: {
-		backgroundColor: "white",
+		backgroundColor: Colors.bgSemiTransparent,
 		borderRadius: 16,
 		elevation: 5,
 		flexDirection: "row",
+		borderColor: Colors.bgPrimaryDark,
+		borderWidth: 0.5,
 	},
 	dateContainer: {
 		padding: ScalePerctFullWidth(4),
-		backgroundColor: Colors.bgPrimaryDark,
+		backgroundColor: "rgba(0, 145, 234, 0.5)",
 		borderTopLeftRadius: 16,
 		borderBottomLeftRadius: 16,
 		justifyContent: "center",
+		paddingVertical: 10,
+		paddingRight: 10,
+		paddingLeft: 10,
 	},
 	container: {
 		flex: 1,
 		justifyContent: "center",
-		padding: ScalePerctFullWidth(4),
+		paddingVertical: 10,
+		paddingRight: 5,
+		paddingLeft: 10,
 	},
 	statusContainer: {
 		alignItems: "center",
@@ -136,12 +143,12 @@ const styles = StyleSheet.create({
 	},
 	stockNoText: {
 		color: Colors.bodySecondaryDark,
-		fontSize: 16,
+		fontSize: 14,
 		fontWeight: "bold",
 	},
 	noItemsText: {
 		color: Colors.bodySecondaryDark,
-		fontSize: 14,
+		fontSize: 12,
 		marginBottom: ScalePerctFullWidth(1),
 	},
 	otherDetailText: {
@@ -152,7 +159,8 @@ const styles = StyleSheet.create({
 	otherDetContainer: {
 		paddingVertical: ScalePerctFullWidth(1),
 		borderRadius: 4,
-		backgroundColor: Colors.bodySecondaryDark,
+		borderColor: Colors.bodySecondaryDark,
+		borderWidth: 1,
 		alignSelf: "flex-start",
 		marginHorizontal: 2,
 		marginVertical: 2,

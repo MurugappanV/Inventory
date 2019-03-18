@@ -8,6 +8,7 @@ import {
 	Text,
 	Platform,
 	Keyboard,
+	Image,
 } from "react-native";
 import { ScalePerctFullHeight, ScalePerctFullWidth, Images, Colors } from "../../asset";
 import SelectedItemUI from "./SelectedItemUI";
@@ -38,14 +39,8 @@ export default class renderSelectedUI extends PureComponent<Props> {
 		const { isOpen } = this.state;
 
 		return (
-			<View
-				style={[
-					styles.container,
-					isOpen
-						? { bottom: initialBottom }
-						: { bottom: (ScalePerctFullHeight(100) - 74) * -1 },
-				]}
-			>
+			<View style={[isOpen ? styles.openContainer : styles.closeContainer]}>
+				<Image source={Images.bgImg} style={styles.fullContainer} resizeMode={"cover"} />
 				<View style={styles.headerContainer}>
 					<Text style={styles.headerSelected}>{`Added ${selected.size} item${
 						selected.size > 1 ? "s" : ""
@@ -54,21 +49,29 @@ export default class renderSelectedUI extends PureComponent<Props> {
 						<Text style={styles.headerClose}>{isOpen ? "close" : "open"}</Text>
 					</TouchableOpacity>
 				</View>
-				<FlatList
-					data={Array.from(selected.entries())}
-					renderItem={({ item }) => (
-						<SelectedItemUI data={item} onPress={onItemUnSelected} />
-					)}
-					keyExtractor={(item, index) => item[0].toString() + index}
-					style={styles.listcontainer}
-					// ItemSeparatorComponent={renderSeperator}
-					// ListHeaderComponent={renderHeader}
-					// ListFooterComponent={() => renderFooter(loading)}
-					// ListEmptyComponent={() => renderEmpty(loading, noRecordText)}
-					// onRefresh={onFetchRefresh}
-					// refreshing={refreshing}
-				/>
-				<Button style={styles.orderBtn} title="ADD STOCK" onPress={() => onAddStock()} />
+				{isOpen && (
+					<FlatList
+						data={Array.from(selected.entries())}
+						renderItem={({ item }) => (
+							<SelectedItemUI data={item} onPress={onItemUnSelected} />
+						)}
+						keyExtractor={(item, index) => item[0].toString() + index}
+						style={styles.listcontainer}
+						// ItemSeparatorComponent={renderSeperator}
+						// ListHeaderComponent={renderHeader}
+						// ListFooterComponent={() => renderFooter(loading)}
+						// ListEmptyComponent={() => renderEmpty(loading, noRecordText)}
+						// onRefresh={onFetchRefresh}
+						// refreshing={refreshing}
+					/>
+				)}
+				{isOpen && (
+					<Button
+						style={styles.orderBtn}
+						title="ADD STOCK"
+						onPress={() => onAddStock()}
+					/>
+				)}
 			</View>
 		);
 	}
@@ -97,13 +100,18 @@ const renderEmpty = (loading: boolean, noRecordText: string) => {
 renderSelectedUI.defaultProps = {};
 
 const styles = StyleSheet.create({
-	container: {
+	openContainer: {
+		...StyleSheet.absoluteFill,
+		zIndex: 10,
+		backgroundColor: Colors.bgPrimaryLight,
+		elevation: 15,
+	},
+	closeContainer: {
 		position: "absolute",
 		left: 0,
 		right: 0,
-		width: ScalePerctFullWidth(100),
-		height: ScalePerctFullHeight(100) - 24,
-		zIndex: 1000,
+		bottom: 0,
+		zIndex: 10,
 		backgroundColor: Colors.bgPrimaryLight,
 		elevation: 15,
 	},
@@ -143,11 +151,18 @@ const styles = StyleSheet.create({
 		color: Colors.bodySecondaryVarient,
 	},
 	orderBtn: {
-		alignSelf: "stretch",
-		width: "100%",
+		alignSelf: "center",
+		width: "80%",
+		marginBottom: 10,
 	},
 	btn: {
 		padding: 15,
+	},
+	fullContainer: {
+		position: "absolute",
+		width: ScalePerctFullWidth(100),
+		height: ScalePerctFullHeight(100),
+		zIndex: -1,
 	},
 });
 
