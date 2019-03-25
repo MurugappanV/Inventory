@@ -13,7 +13,7 @@ export default function renderSubGroupList(props: Props) {
 		<FlatList
 			data={sub_groups}
 			renderItem={({ item }) => <SubGroupUI data={item} />}
-			keyExtractor={(item, index) => item.id.toString() + index}
+			keyExtractor={(item, index) => item.id.toString()}
 			style={styles.listcontainer}
 		/>
 	);

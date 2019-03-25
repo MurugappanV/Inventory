@@ -16,7 +16,7 @@ export default class renderSelectedUI extends PureComponent<Props> {
 			<FlatList
 				data={items}
 				renderItem={({ item }) => <SelectedItemUI data={item} onPress={() => {}} />}
-				keyExtractor={(item, index) => `${item.id}${index}`}
+				keyExtractor={(item, index) => `${item.id}`}
 				style={styles.listcontainer}
 				// ItemSeparatorComponent={renderSeperator}
 				// ListHeaderComponent={renderHeader}

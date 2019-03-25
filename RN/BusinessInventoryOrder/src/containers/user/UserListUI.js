@@ -16,7 +16,7 @@ export default function renderCartList(props: Props) {
 		<FlatList
 			data={users}
 			renderItem={({ item }) => <UserItemUI data={item} onPress={onUserTypeChange} />}
-			keyExtractor={(item, index) => item.id.toString() + index}
+			keyExtractor={(item, index) => item.id.toString()}
 			style={styles.listcontainer}
 			// ItemSeparatorComponent={renderSeperator}
 			// ListHeaderComponent={renderHeader}

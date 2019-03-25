@@ -21,7 +21,7 @@ export default function renderAddStockList(props: Props) {
 			renderItem={({ item }) => (
 				<GroupUI data={item} onQtyChanged={onQtyChanged} selected={selected} onAlertOpen={onAlertOpen}/>
 			)}
-			keyExtractor={(item, index) => item.id.toString() + index}
+			keyExtractor={(item, index) => item.id.toString()}
 			style={styles.listcontainer}
 			// ItemSeparatorComponent={renderSeperator}
 			// ListHeaderComponent={renderHeader}

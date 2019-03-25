@@ -24,7 +24,7 @@ export default class SubGroupUI extends PureComponent<Props> {
 				<FlatList
 					data={items}
 					renderItem={({ item }) => <ItemUI data={item} />}
-					keyExtractor={(item, index) => item.id.toString() + index}
+					keyExtractor={(item, index) => item.id.toString()}
 					style={styles.listcontainer}
 				/>
 			</View>

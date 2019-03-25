@@ -18,7 +18,7 @@ export default function renderStockList(props: Props) {
 		<FlatList
 			data={stocks}
 			renderItem={({ item }) => <ListItemUI data={item} {...props} />}
-			keyExtractor={(item, index) => item.id.toString() + index}
+			keyExtractor={(item, index) => item.id.toString()}
 			style={styles.listcontainer}
 			// ItemSeparatorComponent={renderSeperator}
 			// ListHeaderComponent={renderHeader}

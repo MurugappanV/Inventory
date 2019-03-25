@@ -18,7 +18,7 @@ export default function renderSubGroupList(props: Props) {
 			renderItem={({ item }) => (
 				<SubGroupUI data={item} onQtyChanged={onQtyChanged} selected={selected} onAlertOpen={onAlertOpen}/>
 			)}
-			keyExtractor={(item, index) => item.id.toString() + index}
+			keyExtractor={(item, index) => item.id.toString()}
 			style={styles.listcontainer}
 		/>
 	);

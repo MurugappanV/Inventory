@@ -61,7 +61,7 @@ export default class renderSelectedUI extends PureComponent<Props> {
 								onQtyChanged={onQtyChanged}
 							/>
 						)}
-						keyExtractor={(item, index) => item[0].toString() + index}
+						keyExtractor={(item, index) => item[0].toString()}
 						style={styles.listcontainer}
 						// ItemSeparatorComponent={renderSeperator}
 						// ListHeaderComponent={renderHeader}

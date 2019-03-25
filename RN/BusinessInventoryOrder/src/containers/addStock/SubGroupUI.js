@@ -32,7 +32,7 @@ export default class SubGroupUI extends PureComponent<Props> {
 					renderItem={({ item }) => (
 						<ItemUI data={item} onQtyChanged={onQtyChanged} selected={selected} />
 					)}
-					keyExtractor={(item, index) => item.id.toString() + index}
+					keyExtractor={(item, index) => item.id.toString()}
 					style={styles.listcontainer}
 				/>
 			</View>

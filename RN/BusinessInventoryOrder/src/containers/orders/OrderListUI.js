@@ -18,7 +18,7 @@ export default function renderOrderList(props: Props) {
 		<FlatList
 			data={orders}
 			renderItem={({ item }) => <ListItemUI data={item} {...props} />}
-			keyExtractor={(item, index) => item.id.toString() + index}
+			keyExtractor={(item, index) => item.id.toString()}
 			style={styles.listcontainer}
 			// ItemSeparatorComponent={renderSeperator}
 			// ListHeaderComponent={renderHeader}

@@ -19,7 +19,7 @@ export default function renderCartList(props: Props) {
 			renderItem={({ item }) => (
 				<GroupUI data={item} onQtyChanged={onQtyChanged} selected={selected} />
 			)}
-			keyExtractor={(item, index) => item.id.toString() + index}
+			keyExtractor={(item, index) => item.id.toString()}
 			style={styles.listcontainer}
 			// ItemSeparatorComponent={renderSeperator}
 			// ListHeaderComponent={renderHeader}
