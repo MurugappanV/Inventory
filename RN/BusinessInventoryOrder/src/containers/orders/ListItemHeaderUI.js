@@ -84,7 +84,8 @@ export default function renderListHeaderItem(props: Props) {
 		created_date,
 		order_no,
 		status,
-		no_of_items,
+        no_of_items,
+        retailer,
 	} = props;
 	const { day, date, month, year } = getDateJson(created_date);
 	const noOfItems = `${no_of_items} item${no_of_items > 1 ? "s" : ""} `;
@@ -97,8 +98,9 @@ export default function renderListHeaderItem(props: Props) {
 			</View>
 			<View style={styles.container}>
 				<Text ellipsizeMode="head" numberOfLines={1} style={styles.orderNoText}>
-					{order_no}
+					{retailer.name}
 				</Text>
+                <Text style={styles.noItemsText}>{order_no}</Text>
 				<Text style={styles.noItemsText}>{noOfItems}</Text>
 				{renderButtons(props)}
 			</View>

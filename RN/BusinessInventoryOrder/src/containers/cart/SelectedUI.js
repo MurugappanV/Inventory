@@ -43,12 +43,12 @@ export default class renderSelectedUI extends PureComponent<Props> {
 		return (
 			<View style={[isOpen ? styles.openContainer : styles.closeContainer]}>
 				<Image source={Images.bgImg} style={styles.fullContainer} resizeMode={"cover"} />
-				<View style={styles.headerContainer}>
+				<View style={styles.headerContainer}>  
 					<Text style={styles.headerSelected}>{`Selected ${selected.size} item${
 						selected.size > 1 ? "s" : ""
 					}`}</Text>
 					<TouchableOpacity onPress={() => this.toggleOpen()} style={styles.btn}>
-						<Text style={styles.headerClose}>{isOpen ? "close" : "open"}</Text>
+						<Text style={styles.headerClose}>{isOpen ? "open" : "close"}</Text>
 					</TouchableOpacity>
 				</View>
 				{isOpen && (
@@ -72,7 +72,7 @@ export default class renderSelectedUI extends PureComponent<Props> {
 					/>
 				)}
 				{isOpen && (
-					<Button style={styles.orderBtn} title="ORDER" onPress={() => onOrder()} />
+					<Button style={styles.orderBtn} title="SELECT CUSTOMER" onPress={() => onOrder()} />
 				)}
 			</View>
 		);
